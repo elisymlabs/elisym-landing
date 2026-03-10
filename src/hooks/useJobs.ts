@@ -2,7 +2,6 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef, useCallback } from "react";
 import { toast } from "sonner";
 import { fetchRecentJobs, subscribeToEvents } from "~/lib/nostr";
-import { useNetwork } from "~/hooks/useNetwork";
 import {
   KIND_JOB_REQUEST,
   KIND_JOB_RESULT,
@@ -11,11 +10,9 @@ import {
 import type { Job } from "~/types";
 
 export function useJobs() {
-  const { network } = useNetwork();
-
   const query = useQuery<Job[]>({
-    queryKey: ["jobs", network],
-    queryFn: () => fetchRecentJobs(network, 50),
+    queryKey: ["jobs"],
+    queryFn: () => fetchRecentJobs(undefined, 50),
     refetchInterval: 60_000,
     staleTime: 30_000,
   });
@@ -28,20 +25,16 @@ const seenEvents = new Set<string>();
 
 /** Call once in App to subscribe to live events + show toasts. */
 export function useJobSubscription() {
-  const { network } = useNetwork();
   const queryClient = useQueryClient();
   const initialLoadDone = useRef(false);
-  const networkRef = useRef(network);
-  networkRef.current = network;
 
+  // Suppress toasts for a few seconds after mount to skip initial batch
   useEffect(() => {
-    // Mark initial load done after first data arrives
-    const unsub = queryClient.getQueryCache().subscribe(() => {
-      const state = queryClient.getQueryState<Job[]>(["jobs", networkRef.current]);
-      if (state?.data) initialLoadDone.current = true;
-    });
-    return unsub;
-  }, [queryClient]);
+    const timer = setTimeout(() => {
+      initialLoadDone.current = true;
+    }, 5_000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleEvent = useCallback((event: { id: string; kind: number }) => {
     if (seenEvents.has(event.id)) return;

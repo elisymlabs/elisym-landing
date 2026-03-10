@@ -26,6 +26,7 @@ export type JobStatus =
 export interface Job {
   eventId: string;
   customer: string;
+  agentPubkey?: string;
   capability?: string;
   bid?: number;
   status: JobStatus | string;

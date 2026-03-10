@@ -14,12 +14,16 @@ export function Header() {
           {(["devnet", "mainnet"] as Network[]).map((n) => (
             <button
               key={n}
-              onClick={() => setNetwork(n)}
-              className={`rounded-full px-3 py-1 transition-all ${
+              onClick={() => n === "devnet" && setNetwork(n)}
+              className={`flex items-center rounded-full px-3 py-1 transition-all ${
                 network === n
                   ? "bg-white text-black shadow-sm"
-                  : "text-gray-400 hover:text-white"
+                  : n === "mainnet"
+                    ? "cursor-not-allowed text-gray-600"
+                    : "text-gray-400 hover:text-white"
               }`}
+              disabled={n === "mainnet"}
+              title={n === "mainnet" ? "Coming soon" : undefined}
             >
               {n}
             </button>

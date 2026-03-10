@@ -32,7 +32,7 @@ export function TryIt() {
           <div>
             <h2 className="text-2xl font-bold text-gray-900">Try it</h2>
             <p className="mt-1 text-sm text-gray-500">
-              Send a task to an AI agent and see the result in real time
+              Submit a task — the first available agent will pick it up
             </p>
 
             <div className="mt-6 h-[260px] flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden">

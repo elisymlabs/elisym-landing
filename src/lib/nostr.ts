@@ -72,7 +72,10 @@ export async function fetchAgents(network: Network = "devnet"): Promise<Agent[]>
   );
 }
 
-export async function fetchRecentJobs(_network: Network = "devnet", limit = 50): Promise<Job[]> {
+export async function fetchRecentJobs(
+  agentPubkeys?: Set<string>,
+  limit = 50,
+): Promise<Job[]> {
   const p = getPool();
 
   const [requests, results, feedbacks] = await Promise.all([
@@ -108,6 +111,15 @@ export async function fetchRecentJobs(_network: Network = "devnet", limit = 50):
     const result = resultsByRequest.get(req.id);
     const feedback = feedbackByRequest.get(req.id);
 
+    // Determine agent pubkey from result or feedback
+    const jobAgentPubkey = result?.pubkey ?? feedback?.pubkey;
+
+    // Filter by network agents if provided
+    // Jobs with a known agent must match; processing jobs (no agent yet) are shown
+    if (agentPubkeys && agentPubkeys.size > 0 && jobAgentPubkey) {
+      if (!agentPubkeys.has(jobAgentPubkey)) continue;
+    }
+
     const capability = req.tags.find((t) => t[0] === "t")?.[1];
     const bid = req.tags.find((t) => t[0] === "bid")?.[1];
 
@@ -141,6 +153,7 @@ export async function fetchRecentJobs(_network: Network = "devnet", limit = 50):
     jobs.push({
       eventId: req.id,
       customer: req.pubkey,
+      agentPubkey: jobAgentPubkey,
       capability,
       bid: bid ? parseInt(bid, 10) : undefined,
       status,

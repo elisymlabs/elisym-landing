@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { fetchAgents } from "~/lib/nostr";
@@ -7,7 +7,6 @@ import type { Agent } from "~/types";
 
 export function useAgents() {
   const { network } = useNetwork();
-  const prevCount = useRef<number | null>(null);
 
   const query = useQuery<Agent[]>({
     queryKey: ["agents", network],
@@ -16,18 +15,41 @@ export function useAgents() {
     staleTime: 30_000,
   });
 
-  useEffect(() => {
-    if (!query.data) return;
-    const count = query.data.length;
-    if (prevCount.current !== null && count > prevCount.current) {
-      const diff = count - prevCount.current;
-      toast(`New agent${diff > 1 ? "s" : ""} discovered`, {
-        description: `${diff} agent${diff > 1 ? "s" : ""} joined the network`,
-        icon: "🤖",
-      });
-    }
-    prevCount.current = count;
-  }, [query.data]);
-
   return query;
+}
+
+// Module-level to ensure single toast across all hook instances
+let prevAgentCount: number | null = null;
+
+/** Call once in App to watch for new agents + show toasts. */
+export function useAgentNotifications() {
+  const { network } = useNetwork();
+  const queryClient = useQueryClient();
+  const networkRef = useRef(network);
+
+  // Reset count when network changes
+  useEffect(() => {
+    if (networkRef.current !== network) {
+      prevAgentCount = null;
+      networkRef.current = network;
+    }
+  }, [network]);
+
+  useEffect(() => {
+    const unsub = queryClient.getQueryCache().subscribe(() => {
+      const state = queryClient.getQueryState<Agent[]>(["agents", networkRef.current]);
+      if (!state?.data) return;
+
+      const count = state.data.length;
+      if (prevAgentCount !== null && count > prevAgentCount) {
+        const diff = count - prevAgentCount;
+        toast(`New agent${diff > 1 ? "s" : ""} discovered`, {
+          description: `${diff} agent${diff > 1 ? "s" : ""} joined the network`,
+          icon: "🤖",
+        });
+      }
+      prevAgentCount = count;
+    });
+    return unsub;
+  }, [queryClient]);
 }
