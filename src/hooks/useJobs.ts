@@ -12,9 +12,10 @@ import type { Job } from "~/types";
 export function useJobs() {
   const query = useQuery<Job[]>({
     queryKey: ["jobs"],
-    queryFn: () => fetchRecentJobs(undefined, 50),
+    queryFn: () => fetchRecentJobs(undefined, 500),
     refetchInterval: 60_000,
     staleTime: 30_000,
+    placeholderData: (prev: Job[] | undefined) => prev,
   });
 
   return query;
@@ -45,7 +46,7 @@ export function useJobSubscription() {
       arr.splice(0, 250).forEach((id) => seenEvents.delete(id));
     }
 
-    queryClient.invalidateQueries({ queryKey: ["jobs"] });
+    queryClient.invalidateQueries({ queryKey: ["jobs"], refetchType: "all" });
 
     if (!initialLoadDone.current) return;
 

@@ -15,7 +15,7 @@ const CAPABILITIES = [
 export function TryIt() {
   const [input, setInput] = useState("");
   const [capability, setCapability] = useState(CAPABILITIES[0]);
-  const { state, result, error, agentPubkey, submit, reset } = useTryIt();
+  const { state, result, error, agentPubkey, feedbackState, submit, reset, sendFeedback } = useTryIt();
   const { data: jobs, isLoading: jobsLoading } = useJobs();
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -83,7 +83,7 @@ export function TryIt() {
                     {state !== "idle" && (
                       <button
                         type="button"
-                        onClick={reset}
+                        onClick={() => { reset(); setInput(""); }}
                         className="rounded-lg px-4 py-1.5 text-xs font-medium text-gray-500 hover:bg-gray-100 transition-colors"
                       >
                         Reset
@@ -94,15 +94,15 @@ export function TryIt() {
                       disabled={state !== "idle" || !input.trim()}
                       className="rounded-lg bg-black px-4 py-1.5 text-xs font-medium text-white hover:bg-gray-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
                     >
-                      {state === "idle" ? (
+                      {state === "submitting" ? (
+                        "Submitting..."
+                      ) : (
                         <span className="flex items-center gap-1.5">
                           Submit
-                          <kbd className="hidden sm:inline rounded bg-white/20 px-1 py-0.5 text-[10px] font-normal">
-                            {navigator.platform?.includes("Mac") ? "⌘" : "Ctrl"}↵
-                          </kbd>
+                          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+                          </svg>
                         </span>
-                      ) : (
-                        "Submitting..."
                       )}
                     </button>
                   </div>
@@ -156,6 +156,35 @@ export function TryIt() {
                 <pre className="overflow-x-auto rounded-xl bg-gray-900 p-4 text-sm text-gray-300 font-mono">
                   {result}
                 </pre>
+                <div className="mt-3 flex items-center gap-3">
+                  {feedbackState === "idle" && (
+                    <>
+                      <span className="text-xs text-gray-400">Rate this result:</span>
+                      <button
+                        type="button"
+                        onClick={() => sendFeedback(true)}
+                        className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs hover:bg-emerald-50 hover:border-emerald-200 transition-colors"
+                        title="Good result"
+                      >
+                        👍
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => sendFeedback(false)}
+                        className="rounded-lg border border-gray-200 px-3 py-1.5 text-xs hover:bg-red-50 hover:border-red-200 transition-colors"
+                        title="Poor result"
+                      >
+                        👎
+                      </button>
+                    </>
+                  )}
+                  {feedbackState === "sending" && (
+                    <span className="text-xs text-gray-400">Sending feedback...</span>
+                  )}
+                  {feedbackState === "sent" && (
+                    <span className="text-xs text-emerald-600">Feedback sent — thank you!</span>
+                  )}
+                </div>
               </div>
             )}
 
