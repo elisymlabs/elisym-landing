@@ -9,10 +9,40 @@ import {
 } from "~/lib/constants";
 import type { Job } from "~/types";
 
+/** Module-level accumulated jobs — survives refetches. */
+let allJobs = new Map<string, Job>();
+let latestTimestamp = 0;
+let initialFetchDone = false;
+
+function mergeJobs(incoming: Job[]): Job[] {
+  for (const job of incoming) {
+    const existing = allJobs.get(job.eventId);
+    // Incoming wins if it has a more resolved status or is newer
+    if (!existing || job.status !== "processing" || !existing.status || existing.status === "processing") {
+      allJobs.set(job.eventId, job);
+    }
+    if (job.createdAt > latestTimestamp) {
+      latestTimestamp = job.createdAt;
+    }
+  }
+  return [...allJobs.values()].sort((a, b) => b.createdAt - a.createdAt);
+}
+
 export function useJobs() {
   const query = useQuery<Job[]>({
     queryKey: ["jobs"],
-    queryFn: () => fetchRecentJobs(undefined, 500),
+    queryFn: async () => {
+      if (!initialFetchDone) {
+        // First fetch — get everything
+        const jobs = await fetchRecentJobs();
+        initialFetchDone = true;
+        return mergeJobs(jobs);
+      }
+      // Subsequent fetches — only get new jobs since last timestamp
+      const since = latestTimestamp > 0 ? latestTimestamp - 10 : undefined; // -10s overlap buffer
+      const jobs = await fetchRecentJobs(undefined, undefined, since);
+      return mergeJobs(jobs);
+    },
     refetchInterval: 60_000,
     staleTime: 30_000,
     placeholderData: (prev: Job[] | undefined) => prev,

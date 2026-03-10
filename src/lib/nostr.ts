@@ -92,24 +92,54 @@ export async function fetchAgents(network: Network = "devnet"): Promise<Agent[]>
 
 export async function fetchRecentJobs(
   agentPubkeys?: Set<string>,
-  limit = 50,
+  limit?: number,
+  since?: number,
 ): Promise<Job[]> {
   const p = getPool();
 
-  const [requests, results, feedbacks] = await Promise.all([
-    p.querySync(RELAYS, {
-      kinds: [KIND_JOB_REQUEST],
-      limit,
-    } as Filter),
-    p.querySync(RELAYS, {
-      kinds: [KIND_JOB_RESULT],
-      limit,
-    } as Filter),
-    p.querySync(RELAYS, {
-      kinds: [KIND_JOB_FEEDBACK],
-      limit,
-    } as Filter),
-  ]);
+  // 1. Fetch requests first
+  const reqFilter: Filter = {
+    kinds: [KIND_JOB_REQUEST],
+    ...(limit != null && { limit }),
+    ...(since != null && { since }),
+  };
+  const requests = await p.querySync(RELAYS, reqFilter);
+
+  // 2. Fetch results & feedbacks scoped to these request IDs
+  const requestIds = requests.map((r) => r.id);
+
+  let results: Event[] = [];
+  let feedbacks: Event[] = [];
+
+  if (requestIds.length > 0) {
+    // Query in batches to avoid filter size limits
+    const BATCH = 250;
+    const resultBatches: Promise<Event[]>[] = [];
+    const feedbackBatches: Promise<Event[]>[] = [];
+
+    for (let i = 0; i < requestIds.length; i += BATCH) {
+      const batch = requestIds.slice(i, i + BATCH);
+      resultBatches.push(
+        p.querySync(RELAYS, {
+          kinds: [KIND_JOB_RESULT],
+          "#e": batch,
+        } as Filter),
+      );
+      feedbackBatches.push(
+        p.querySync(RELAYS, {
+          kinds: [KIND_JOB_FEEDBACK],
+          "#e": batch,
+        } as Filter),
+      );
+    }
+
+    const [resultArrays, feedbackArrays] = await Promise.all([
+      Promise.all(resultBatches),
+      Promise.all(feedbackBatches),
+    ]);
+    results = resultArrays.flat();
+    feedbacks = feedbackArrays.flat();
+  }
 
   // Index results and feedback by request ID
   const resultsByRequest = new Map<string, Event>();
