@@ -153,14 +153,16 @@ export async function fetchRecentJobs(
     if (pTag?.[1]) targetedAgentByRequest.set(req.id, pTag[1]);
   }
 
-  // Index results and feedback by request ID, preferring targeted agent
+  // Index results and feedback by request ID.
+  // If the request targeted a specific agent (#p tag), ONLY accept
+  // results/feedback from that agent — ignore other DVMs that picked it up.
   const resultsByRequest = new Map<string, Event>();
   for (const r of results) {
     const reqId = resolveRequestId(r);
     if (!reqId) continue;
-    const existing = resultsByRequest.get(reqId);
     const targeted = targetedAgentByRequest.get(reqId);
-    // Prefer result from the targeted agent
+    if (targeted && r.pubkey !== targeted) continue;
+    const existing = resultsByRequest.get(reqId);
     if (!existing || (targeted && r.pubkey === targeted)) {
       resultsByRequest.set(reqId, r);
     }
@@ -170,9 +172,9 @@ export async function fetchRecentJobs(
   for (const f of feedbacks) {
     const reqId = resolveRequestId(f);
     if (!reqId) continue;
-    const existing = feedbackByRequest.get(reqId);
     const targeted = targetedAgentByRequest.get(reqId);
-    // Prefer feedback from the targeted agent
+    if (targeted && f.pubkey !== targeted) continue;
+    const existing = feedbackByRequest.get(reqId);
     if (!existing || (targeted && f.pubkey === targeted)) {
       feedbackByRequest.set(reqId, f);
     }
@@ -221,9 +223,10 @@ export async function fetchRecentJobs(
       if (!result) {
         const statusTag = feedback.tags.find((t) => t[0] === "status");
         if (statusTag?.[1]) {
-          // Ignore payment-required on free (no-bid) jobs
-          if (statusTag[1] === "payment-required" && !bid) {
-            // keep "processing"
+          // Ignore payment-required on broadcast jobs (no targeted agent, no bid)
+          const isTargeted = targetedAgentByRequest.has(req.id);
+          if (statusTag[1] === "payment-required" && !bid && !isTargeted) {
+            // keep "processing" — random DVM asking for payment on a free broadcast
           } else {
             status = statusTag[1] as JobStatus;
           }
