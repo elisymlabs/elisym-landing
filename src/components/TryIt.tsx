@@ -39,7 +39,7 @@ export function TryIt() {
 
             <div className="mt-6 h-[260px] flex flex-col rounded-xl border border-gray-200 bg-white overflow-hidden">
               {/* Capability selector strip */}
-              <div className="flex items-center gap-2 border-b border-gray-100 bg-gray-50/50 px-4 py-3">
+              <div className="flex items-center gap-2 border-b border-gray-100 bg-gray-50/50 px-4 py-3 overflow-x-auto whitespace-nowrap">
                 {CAPABILITIES.map((cap) => (
                   <button
                     key={cap}

@@ -19,7 +19,7 @@ export function Header() {
           <span className="border border-white/20 rounded px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-white/50">
             alpha
           </span>
-          <div className="flex items-center rounded-full bg-white/10 p-0.5 text-xs font-medium">
+          <div className="hidden sm:flex items-center rounded-full bg-white/10 p-0.5 text-xs font-medium">
             {(["devnet", "mainnet"] as Network[]).map((n) => (
               <button
                 key={n}
