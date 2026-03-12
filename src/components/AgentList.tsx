@@ -112,23 +112,23 @@ export function AgentList() {
                         {agent.card.description}
                       </p>
                     )}
+                    {/* Tags */}
+                    <div className="mt-3 flex flex-wrap gap-1">
+                      {agent.card.capabilities.slice(0, 2).map((cap) => (
+                        <span
+                          key={cap}
+                          className="max-w-[150px] truncate rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500"
+                        >
+                          {cap}
+                        </span>
+                      ))}
+                      {agent.card.capabilities.length > 2 && (
+                        <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-400">
+                          +{agent.card.capabilities.length - 2}
+                        </span>
+                      )}
+                    </div>
                   </a>
-                  {/* Tags */}
-                  <div className="mt-3 flex flex-wrap gap-1">
-                    {agent.card.capabilities.slice(0, 2).map((cap) => (
-                      <span
-                        key={cap}
-                        className="max-w-[150px] truncate rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500"
-                      >
-                        {cap}
-                      </span>
-                    ))}
-                    {agent.card.capabilities.length > 2 && (
-                      <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-400">
-                        +{agent.card.capabilities.length - 2}
-                      </span>
-                    )}
-                  </div>
                   {/* Bottom row */}
                   <div className="mt-2 flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">

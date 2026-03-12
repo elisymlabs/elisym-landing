@@ -37,7 +37,14 @@ export type HireStep =
 
 type FeedbackState = "idle" | "sending" | "sent";
 
-export function useHireAgent() {
+export interface HireJobCallbacks {
+  onJobCreated?: (jobEventId: string) => void;
+  onPaymentRequired?: (jobEventId: string, amount: number) => void;
+  onPaymentCompleted?: (jobEventId: string, txSignature: string) => void;
+  onResultReceived?: (jobEventId: string, result: string) => void;
+}
+
+export function useHireAgent(callbacks?: HireJobCallbacks) {
   const [step, setStep] = useState<HireStep>("idle");
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
@@ -161,6 +168,7 @@ export function useHireAgent() {
 
         await Promise.any(pool.publish(RELAYS, jobEvent));
         jobEventIdRef.current = jobEvent.id;
+        callbacks?.onJobCreated?.(jobEvent.id);
 
         // Stay on "submitting" until agent responds with either
         // payment-required or a direct result — avoids backward step jumps.
@@ -180,9 +188,11 @@ export function useHireAgent() {
               if (statusTag?.[1] === "payment-required") {
                 // NIP-90 amount tag: ["amount", lamports, payment_request_json, chain]
                 const amtTag = ev.tags.find((t) => t[0] === "amount");
-                if (amtTag?.[1]) setPaymentAmount(parseInt(amtTag[1], 10));
+                const amt = amtTag?.[1] ? parseInt(amtTag[1], 10) : 0;
+                if (amt) setPaymentAmount(amt);
                 if (amtTag?.[2]) setPaymentRequest(amtTag[2]);
                 setStep("payment-required");
+                callbacks?.onPaymentRequired?.(jobEvent.id, amt);
                 sub.close();
                 if (timeoutRef.current) clearTimeout(timeoutRef.current);
               }
@@ -204,6 +214,7 @@ export function useHireAgent() {
               if (ev.pubkey !== expectedProvider) return;
               setResult(ev.content);
               setStep("success");
+              callbacks?.onResultReceived?.(jobEvent.id, ev.content);
               sub.close();
               sub2.close();
               if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -224,6 +235,7 @@ export function useHireAgent() {
               if (ev.pubkey !== expectedProvider) return;
               setResult(ev.content);
               setStep("success");
+              callbacks?.onResultReceived?.(jobEvent.id, ev.content);
               sub.close();
               sub2.close();
               sub3.close();
@@ -332,6 +344,7 @@ export function useHireAgent() {
         const signature = await sendTransaction(tx, connection);
         await connection.confirmTransaction(signature, "confirmed");
         setTxSignature(signature);
+        callbacks?.onPaymentCompleted?.(jobEventIdRef.current, signature);
 
         // Publish payment-completed feedback with tx hash so the provider
         // (and any observer) can link the job to the on-chain transaction.
@@ -381,6 +394,7 @@ export function useHireAgent() {
               if (expectedProvider && ev.pubkey !== expectedProvider) return;
               setResult(ev.content);
               setStep("success");
+              callbacks?.onResultReceived?.(jobId, ev.content);
               sub.close();
               if (sub2) sub2.close();
               if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -403,6 +417,7 @@ export function useHireAgent() {
                 if (expectedProvider && ev.pubkey !== expectedProvider) return;
                 setResult(ev.content);
                 setStep("success");
+                callbacks?.onResultReceived?.(jobId, ev.content);
                 sub.close();
                 sub2!.close();
                 if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -416,7 +431,7 @@ export function useHireAgent() {
           sub.close();
           if (sub2) sub2.close();
           setStep("error");
-          setError("Payment sent but timed out waiting for result (120s).");
+          setError("Payment sent but timed out waiting for result (120s). Check My Jobs for updates.");
         }, 120_000);
       } catch (err) {
         setStep("error");

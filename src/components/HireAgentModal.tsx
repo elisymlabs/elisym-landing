@@ -1,18 +1,32 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
+import { generateSecretKey, finalizeEvent } from "nostr-tools";
 import Avatar from "boring-avatars";
-import { useHireAgent, type HireStep } from "~/hooks/useHireAgent";
+import { useHireAgent, type HireStep, type HireJobCallbacks } from "~/hooks/useHireAgent";
+import { useJobHistory } from "~/hooks/useJobHistory";
+import { getPool } from "~/lib/nostr";
+import { RELAYS, KIND_JOB_FEEDBACK } from "~/lib/constants";
 import { truncateKey, formatSol } from "~/lib/format";
 import type { Agent } from "~/types";
+import type { StoredJob } from "~/lib/jobHistory";
 import { useNetwork } from "~/hooks/useNetwork";
 
 const AVATAR_COLORS = ["#0a0a0a", "#e5e5e5", "#f87171", "#93c5fd", "#a3a3a3"];
 
-interface Props {
+interface HireProps {
   agent: Agent;
+  storedJob?: undefined;
   onClose: () => void;
 }
+
+interface ResumeProps {
+  agent?: undefined;
+  storedJob: StoredJob;
+  onClose: () => void;
+}
+
+type Props = HireProps | ResumeProps;
 
 const ALL_STEPS: { key: HireStep; label: string }[] = [
   { key: "submitting", label: "Submitting job" },
@@ -31,26 +45,111 @@ function Spinner({ className }: { className?: string }) {
   );
 }
 
-export function HireAgentModal({ agent, onClose }: Props) {
-  const [input, setInput] = useState("");
-  const [capability, setCapability] = useState(agent.card.capabilities[0] ?? "");
+export function HireAgentModal(props: Props) {
+  const { onClose } = props;
+  const isResume = !!props.storedJob;
+
+  // In resume mode, track the stored job reactively via useJobHistory
+  const { jobs, saveJob, updateJob } = useJobHistory();
+  const resumeJob = isResume
+    ? jobs.find((j) => j.jobEventId === props.storedJob!.jobEventId) ?? props.storedJob!
+    : null;
+
+  // Derive agent info from whichever source
+  const agentPubkey = props.agent?.pubkey ?? resumeJob!.agentPubkey;
+  const agentName = props.agent?.card.name ?? resumeJob!.agentName;
+  const capabilities = props.agent?.card.capabilities ?? [resumeJob!.capability];
+
+  const [input, setInput] = useState(resumeJob?.input ?? "");
+  const [capability, setCapability] = useState(
+    resumeJob?.capability ?? (props.agent?.card.capabilities[0] ?? ""),
+  );
   const { connected } = useWallet();
   const { setVisible } = useWalletModal();
   const { network } = useNetwork();
-  const {
-    step,
-    result,
-    error,
-    txSignature,
-    feedbackState,
-    paymentAmount,
-    submitJob,
-    pay,
-    sendFeedback,
-    reset,
-  } = useHireAgent();
 
-  const price = paymentAmount ?? agent.card.payment?.job_price;
+  const paymentAmountRef = useRef<number>(0);
+
+  const callbacks = useMemo<HireJobCallbacks>(() => ({
+    onPaymentRequired(_jobEventId, amount) {
+      paymentAmountRef.current = amount;
+    },
+    onPaymentCompleted(jobEventId, txSig) {
+      saveJob({
+        jobEventId,
+        agentPubkey: props.agent!.pubkey,
+        agentName: props.agent!.card.name,
+        capability,
+        input: input.trim(),
+        status: "paid",
+        txSignature: txSig,
+        paymentAmount: paymentAmountRef.current || undefined,
+        createdAt: Math.floor(Date.now() / 1000),
+      });
+    },
+    onResultReceived(jobEventId, res) {
+      updateJob(jobEventId, {
+        status: "completed",
+        result: res,
+        completedAt: Math.floor(Date.now() / 1000),
+      });
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }), [props.agent, capability, input, saveJob, updateJob]);
+
+  const hire = useHireAgent(isResume ? undefined : callbacks);
+
+  // In resume mode, map storedJob status to HireStep
+  const resumeStep: HireStep | null = resumeJob
+    ? resumeJob.status === "completed" ? "success"
+    : resumeJob.status === "paid" ? "waiting-result"
+    : "idle"
+    : null;
+
+  const step = isResume ? resumeStep! : hire.step;
+  const result = isResume ? (resumeJob!.result ?? "") : hire.result;
+  const txSignature = isResume ? (resumeJob!.txSignature ?? "") : hire.txSignature;
+  const error = isResume ? "" : hire.error;
+
+  // Feedback state — in resume mode we manage it locally
+  const [resumeFeedback, setResumeFeedback] = useState<"idle" | "sending" | "sent">("idle");
+  const feedbackState = isResume ? resumeFeedback : hire.feedbackState;
+
+  const sendFeedback = useCallback(async (positive: boolean) => {
+    if (isResume) {
+      if (!resumeJob) return;
+      setResumeFeedback("sending");
+      try {
+        const sk = generateSecretKey();
+        const pool = getPool();
+        const ev = finalizeEvent(
+          {
+            kind: KIND_JOB_FEEDBACK,
+            created_at: Math.floor(Date.now() / 1000),
+            tags: [
+              ["e", resumeJob.jobEventId],
+              ["p", resumeJob.agentPubkey],
+              ["status", "success"],
+              ["rating", positive ? "1" : "0"],
+              ["t", "elisym"],
+            ],
+            content: positive ? "Good result" : "Poor result",
+          },
+          sk,
+        );
+        await Promise.any(pool.publish(RELAYS, ev));
+        setResumeFeedback("sent");
+      } catch {
+        setResumeFeedback("idle");
+      }
+    } else {
+      hire.sendFeedback(positive);
+    }
+  }, [isResume, resumeJob, hire]);
+
+  const price = isResume
+    ? (resumeJob!.paymentAmount ?? 0)
+    : (hire.paymentAmount ?? props.agent?.card.payment?.job_price);
   const isPaid = price != null && price > 0;
 
   useEffect(() => {
@@ -62,14 +161,19 @@ export function HireAgentModal({ agent, onClose }: Props) {
   }, [onClose]);
 
   const handleSubmit = () => {
-    if (!input.trim()) return;
-    submitJob(input.trim(), capability, agent);
+    if (isResume || !input.trim()) return;
+    hire.submitJob(input.trim(), capability, props.agent!);
   };
   const handlePay = () => {
+    if (isResume) return;
     if (!connected) { setVisible(true); return; }
-    pay(agent);
+    hire.pay(props.agent!);
   };
-  const handleReset = () => { reset(); setInput(""); };
+  const handleReset = () => {
+    if (isResume) return;
+    hire.reset();
+    setInput("");
+  };
 
   const currentStepIdx = ALL_STEPS.findIndex((s) => s.key === step);
   const currentLabel = ALL_STEPS[currentStepIdx]?.label ?? step;
@@ -78,7 +182,7 @@ export function HireAgentModal({ agent, onClose }: Props) {
 
   const isProcessing = step !== "idle" && step !== "online" && step !== "error" && step !== "offline";
   const isSpinning = step === "submitting" || step === "paying" || step === "waiting-result";
-  const isInput = step === "idle" || step === "online";
+  const isInput = !isResume && (step === "idle" || step === "online");
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
@@ -99,23 +203,23 @@ export function HireAgentModal({ agent, onClose }: Props) {
         {/* Header */}
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center gap-3 pr-6">
-            <Avatar size={36} name={agent.pubkey} variant="beam" colors={AVATAR_COLORS} />
+            <Avatar size={36} name={agentPubkey} variant="beam" colors={AVATAR_COLORS} />
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold text-gray-900 truncate">{agent.card.name}</p>
+                <p className="text-sm font-semibold text-gray-900 truncate">{agentName}</p>
                 {isPaid && (
                   <span className="shrink-0 rounded-md bg-violet-50 px-2 py-0.5 text-[11px] font-semibold text-violet-600">
                     {formatSol(price)}
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-gray-400 font-mono">{truncateKey(agent.pubkey)}</p>
+              <p className="text-[11px] text-gray-400 font-mono">{truncateKey(agentPubkey)}</p>
             </div>
           </div>
 
           {/* Capabilities */}
           <div className="mt-3 flex flex-wrap gap-1.5">
-            {agent.card.capabilities.map((cap) => (
+            {capabilities.map((cap) => (
               <button
                 key={cap}
                 type="button"
@@ -245,13 +349,22 @@ export function HireAgentModal({ agent, onClose }: Props) {
         {/* Footer */}
         <div className="flex items-center justify-between border-t border-gray-100 px-5 py-3">
           <div>
-            {!isInput && step !== "error" && (
+            {!isResume && !isInput && step !== "error" && (
               <button
                 type="button"
                 onClick={handleReset}
                 className="text-[11px] font-medium text-gray-400 hover:text-gray-600 transition-colors"
               >
                 Reset
+              </button>
+            )}
+            {isResume && (
+              <button
+                type="button"
+                onClick={onClose}
+                className="text-[11px] font-medium text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                Close
               </button>
             )}
           </div>
@@ -268,7 +381,7 @@ export function HireAgentModal({ agent, onClose }: Props) {
               </button>
             )}
 
-            {step === "payment-required" && (
+            {!isResume && step === "payment-required" && (
               <button
                 type="button"
                 onClick={handlePay}
@@ -278,7 +391,7 @@ export function HireAgentModal({ agent, onClose }: Props) {
               </button>
             )}
 
-            {step === "error" && (
+            {!isResume && step === "error" && (
               <button
                 type="button"
                 onClick={handleReset}

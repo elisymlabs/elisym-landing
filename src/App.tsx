@@ -4,6 +4,7 @@ import { Footer } from "~/components/Layout/Footer";
 import { Hero } from "~/components/Hero";
 import { Stats } from "~/components/Stats";
 import { AgentList } from "~/components/AgentList";
+import { MyJobs } from "~/components/MyJobs";
 import { TryIt } from "~/components/TryIt";
 import { useJobSubscription } from "~/hooks/useJobs";
 import { useAgentNotifications } from "~/hooks/useAgents";
@@ -37,6 +38,7 @@ export function App() {
       <Stats />
       <TryIt />
       <AgentList />
+      <MyJobs />
       <Footer />
     </div>
   );
