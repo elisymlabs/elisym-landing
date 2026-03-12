@@ -47,6 +47,18 @@ export function useTryIt() {
       jobEventIdRef.current = event.id;
       setState("waiting");
 
+      let resolved = false;
+      const onResult = (resultEvent: { id: string; content: string; pubkey: string; tags: string[][] }) => {
+        if (resolved) return;
+        resolved = true;
+        setResult(resultEvent.content);
+        setAgentPubkey(resultEvent.pubkey);
+        setState("success");
+        sub.close();
+        sub2.close();
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      };
+
       const sub = pool.subscribeMany(
         RELAYS,
         {
@@ -57,11 +69,7 @@ export function useTryIt() {
         {
           onevent(resultEvent) {
             if (resultEvent.tags.some((t) => t[0] === "e" && t[1] === event.id)) {
-              setResult(resultEvent.content);
-              setAgentPubkey(resultEvent.pubkey);
-              setState("success");
-              sub.close();
-              if (timeoutRef.current) clearTimeout(timeoutRef.current);
+              onResult(resultEvent);
             }
           },
         },
@@ -76,12 +84,7 @@ export function useTryIt() {
         } satisfies Filter,
         {
           onevent(resultEvent) {
-            setResult(resultEvent.content);
-            setAgentPubkey(resultEvent.pubkey);
-            setState("success");
-            sub.close();
-            sub2.close();
-            if (timeoutRef.current) clearTimeout(timeoutRef.current);
+            onResult(resultEvent);
           },
         },
       );

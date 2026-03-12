@@ -62,6 +62,7 @@ export function useJobHistory() {
 
     const pool = getPool();
     const jobIds = pending.map((j) => j.jobEventId);
+    const seenResultEvents = new Set<string>();
 
     const sub = pool.subscribeMany(
       RELAYS,
@@ -71,6 +72,9 @@ export function useJobHistory() {
       } satisfies Filter,
       {
         onevent(ev) {
+          if (seenResultEvents.has(ev.id)) return;
+          seenResultEvents.add(ev.id);
+
           const eTag = ev.tags.find((t) => t[0] === "e");
           const matchedId = eTag?.[1];
           if (!matchedId) return;

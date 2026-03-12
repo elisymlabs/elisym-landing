@@ -90,6 +90,31 @@ export async function fetchAgents(network: Network = "devnet"): Promise<Agent[]>
     }
   }
 
+  // Update lastSeen from recent job activity (results & feedback published by agents)
+  const agentPubkeys = Array.from(agentMap.keys());
+  if (agentPubkeys.length > 0) {
+    const BATCH = 250;
+    const activitySince = Math.floor(Date.now() / 1000) - 24 * 60 * 60; // last 24 hours
+    const activityBatches: Promise<Event[]>[] = [];
+    for (let i = 0; i < agentPubkeys.length; i += BATCH) {
+      const batch = agentPubkeys.slice(i, i + BATCH);
+      activityBatches.push(
+        p.querySync(RELAYS, {
+          kinds: [KIND_JOB_RESULT, KIND_JOB_FEEDBACK],
+          authors: batch,
+          since: activitySince,
+        } as Filter),
+      );
+    }
+    const activityEvents = (await Promise.all(activityBatches)).flat();
+    for (const ev of activityEvents) {
+      const agent = agentMap.get(ev.pubkey);
+      if (agent && ev.created_at > agent.lastSeen) {
+        agent.lastSeen = ev.created_at;
+      }
+    }
+  }
+
   return Array.from(agentMap.values()).sort(
     (a, b) => b.lastSeen - a.lastSeen,
   );
