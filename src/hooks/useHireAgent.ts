@@ -15,8 +15,6 @@ import {
   KIND_JOB_REQUEST,
   KIND_JOB_RESULT,
   KIND_JOB_FEEDBACK,
-  PROTOCOL_FEE_BPS,
-  PROTOCOL_TREASURY,
 } from "~/lib/constants";
 import { validatePaymentFee } from "~/lib/payment";
 import type { Agent } from "~/types";
@@ -366,7 +364,8 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
               },
               sk,
             );
-            await Promise.any(pool.publish(RELAYS, confirmEv));
+            const confirmPool = getPool();
+            await Promise.any(confirmPool.publish(RELAYS, confirmEv));
           }
         } catch {
           // Best-effort — don't block the flow if confirmation publish fails

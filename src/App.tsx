@@ -27,10 +27,7 @@ export function App() {
             fontWeight: 500,
             boxShadow: "0 4px 24px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06)",
           },
-          descriptionStyle: {
-            color: "#737373",
-            fontWeight: 400,
-          },
+          descriptionClassName: "text-neutral-500 font-normal",
         }}
       />
       <Header />
