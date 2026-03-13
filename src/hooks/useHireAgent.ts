@@ -419,8 +419,9 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
               onevent(ev) {
                 if (expectedProvider && ev.pubkey !== expectedProvider) return;
                 setResult(ev.content);
+                setResultEventId(ev.id);
                 setStep("success");
-                callbacks?.onResultReceived?.(jobId, ev.content);
+                callbacks?.onResultReceived?.(jobId, ev.content, ev.id);
                 sub.close();
                 sub2!.close();
                 if (timeoutRef.current) clearTimeout(timeoutRef.current);

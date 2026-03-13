@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
 import { useJobHistory } from "~/hooks/useJobHistory";
-import { formatSol, timeAgo, truncateKey } from "~/lib/format";
+import { formatSol, timeAgo } from "~/lib/format";
 import { track } from "~/lib/analytics";
 import { HireAgentModal } from "./HireAgentModal";
 import { AgentAvatar } from "./AgentAvatar";
