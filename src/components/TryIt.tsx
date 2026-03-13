@@ -4,6 +4,7 @@ import { useTryIt } from "~/hooks/useTryIt";
 import { useJobs } from "~/hooks/useJobs";
 import { useAgents } from "~/hooks/useAgents";
 import { useNetwork } from "~/hooks/useNetwork";
+import { useAxisLock } from "~/hooks/useAxisLock";
 import { truncateKey, timeAgo, formatSol, statusColor } from "~/lib/format";
 import { track } from "~/lib/analytics";
 import { makeNjumpUrl } from "~/lib/nostr";
@@ -23,6 +24,7 @@ export function TryIt() {
   const { data: jobs, isLoading: jobsLoading } = useJobs();
   const { data: agents } = useAgents();
   const { network } = useNetwork();
+  const jobsScrollRef = useAxisLock<HTMLDivElement>();
 
   const agentPictures = useMemo(() => {
     const map = new Map<string, string>();
@@ -247,7 +249,7 @@ export function TryIt() {
             )}
 
             {jobs && jobs.length > 0 && (
-              <div className="mt-6 h-[260px] overflow-y-auto rounded-xl border border-gray-200 bg-white">
+              <div ref={jobsScrollRef} className="mt-6 h-[260px] overflow-x-auto overflow-y-auto rounded-xl border border-gray-200 bg-white">
                 {jobs.map((job, i) => (
                   <div
                     key={job.eventId}
