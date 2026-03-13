@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import Avatar from "boring-avatars";
 import { useJobHistory } from "~/hooks/useJobHistory";
-import { useNetwork } from "~/hooks/useNetwork";
 import { formatSol, timeAgo, truncateKey } from "~/lib/format";
 import { track } from "~/lib/analytics";
 import { HireAgentModal } from "./HireAgentModal";
+import { AgentAvatar } from "./AgentAvatar";
 import type { StoredJob } from "~/lib/jobHistory";
-
-const AVATAR_COLORS = ["#0a0a0a", "#e5e5e5", "#f87171", "#93c5fd", "#a3a3a3"];
 
 function StatusBadge({ status }: { status: StoredJob["status"] }) {
   const styles: Record<string, string> = {
@@ -40,9 +37,7 @@ function JobCard({
   onRemove: () => void;
   onClick: () => void;
 }) {
-  const { network } = useNetwork();
-  const solscanBase = "https://solscan.io/tx/";
-  const solscanSuffix = network === "mainnet" ? "" : "?cluster=devnet";
+
 
   return (
     <div
@@ -52,7 +47,7 @@ function JobCard({
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
           <div className="shrink-0">
-            <Avatar size={32} name={job.agentPubkey} variant="beam" colors={AVATAR_COLORS} />
+            <AgentAvatar size={32} pubkey={job.agentPubkey} picture={job.agentPicture} />
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
@@ -90,21 +85,6 @@ function JobCard({
 
       {/* Input preview */}
       <p className="mt-2 text-xs text-gray-500 line-clamp-2">{job.input}</p>
-
-      {/* Tx link */}
-      {job.txSignature && (
-        <div className="mt-2">
-          <a
-            href={`${solscanBase}${job.txSignature}${solscanSuffix}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1 text-[11px] font-medium text-blue-500 hover:text-blue-700 transition-colors"
-          >
-            {truncateKey(job.txSignature)} &#8599;
-          </a>
-        </div>
-      )}
 
       {/* Waiting indicator for paid jobs */}
       {job.status === "paid" && (

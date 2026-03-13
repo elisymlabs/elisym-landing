@@ -2,10 +2,12 @@ export interface StoredJob {
   jobEventId: string;
   agentPubkey: string;
   agentName: string;
+  agentPicture?: string;
   capability: string;
   input: string;
   status: "pending" | "paid" | "completed" | "error";
   result?: string;
+  resultEventId?: string;
   txSignature?: string;
   paymentAmount?: number;
   createdAt: number;

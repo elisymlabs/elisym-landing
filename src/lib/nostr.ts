@@ -115,6 +115,40 @@ export async function fetchAgents(network: Network = "devnet"): Promise<Agent[]>
     }
   }
 
+  // Fetch kind:0 metadata to get profile pictures
+  if (agentPubkeys.length > 0) {
+    const BATCH = 250;
+    const metaBatches: Promise<Event[]>[] = [];
+    for (let i = 0; i < agentPubkeys.length; i += BATCH) {
+      const batch = agentPubkeys.slice(i, i + BATCH);
+      metaBatches.push(
+        p.querySync(RELAYS, {
+          kinds: [0],
+          authors: batch,
+        } as Filter),
+      );
+    }
+    const metaEvents = (await Promise.all(metaBatches)).flat();
+    // Keep latest kind:0 per pubkey
+    const latestMeta = new Map<string, Event>();
+    for (const ev of metaEvents) {
+      const prev = latestMeta.get(ev.pubkey);
+      if (!prev || ev.created_at > prev.created_at) {
+        latestMeta.set(ev.pubkey, ev);
+      }
+    }
+    for (const [pubkey, ev] of latestMeta) {
+      const agent = agentMap.get(pubkey);
+      if (!agent) continue;
+      try {
+        const meta = JSON.parse(ev.content);
+        if (meta.picture) agent.picture = meta.picture;
+      } catch {
+        // skip malformed metadata
+      }
+    }
+  }
+
   return Array.from(agentMap.values()).sort(
     (a, b) => b.lastSeen - a.lastSeen,
   );
@@ -271,6 +305,7 @@ export async function fetchRecentJobs(
       bid: bid ? parseInt(bid, 10) : undefined,
       status,
       result: result?.content,
+      resultEventId: result?.id,
       amount,
       txHash,
       createdAt: req.created_at,

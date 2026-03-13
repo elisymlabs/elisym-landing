@@ -39,12 +39,13 @@ export interface HireJobCallbacks {
   onJobCreated?: (jobEventId: string) => void;
   onPaymentRequired?: (jobEventId: string, amount: number) => void;
   onPaymentCompleted?: (jobEventId: string, txSignature: string) => void;
-  onResultReceived?: (jobEventId: string, result: string) => void;
+  onResultReceived?: (jobEventId: string, result: string, resultEventId: string) => void;
 }
 
 export function useHireAgent(callbacks?: HireJobCallbacks) {
   const [step, setStep] = useState<HireStep>("idle");
   const [result, setResult] = useState("");
+  const [resultEventId, setResultEventId] = useState("");
   const [error, setError] = useState("");
   const [txSignature, setTxSignature] = useState("");
   const [feedbackState, setFeedbackState] = useState<FeedbackState>("idle");
@@ -211,8 +212,9 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
             onevent(ev) {
               if (ev.pubkey !== expectedProvider) return;
               setResult(ev.content);
+              setResultEventId(ev.id);
               setStep("success");
-              callbacks?.onResultReceived?.(jobEvent.id, ev.content);
+              callbacks?.onResultReceived?.(jobEvent.id, ev.content, ev.id);
               sub.close();
               sub2.close();
               if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -232,8 +234,9 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
             onevent(ev) {
               if (ev.pubkey !== expectedProvider) return;
               setResult(ev.content);
+              setResultEventId(ev.id);
               setStep("success");
-              callbacks?.onResultReceived?.(jobEvent.id, ev.content);
+              callbacks?.onResultReceived?.(jobEvent.id, ev.content, ev.id);
               sub.close();
               sub2.close();
               sub3.close();
@@ -392,8 +395,9 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
             onevent(ev) {
               if (expectedProvider && ev.pubkey !== expectedProvider) return;
               setResult(ev.content);
+              setResultEventId(ev.id);
               setStep("success");
-              callbacks?.onResultReceived?.(jobId, ev.content);
+              callbacks?.onResultReceived?.(jobId, ev.content, ev.id);
               sub.close();
               if (sub2) sub2.close();
               if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -477,6 +481,7 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
     cleanup();
     setStep("idle");
     setResult("");
+    setResultEventId("");
     setError("");
     setTxSignature("");
     setFeedbackState("idle");
@@ -490,10 +495,12 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
   return {
     step,
     result,
+    resultEventId,
     error,
     txSignature,
     feedbackState,
     paymentAmount,
+    jobEventId: jobEventIdRef.current,
     ping,
     submitJob,
     pay,

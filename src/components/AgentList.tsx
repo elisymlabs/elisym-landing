@@ -1,14 +1,12 @@
 import { useState, useRef } from "react";
-import Avatar from "boring-avatars";
 import { toast } from "sonner";
 import { useAgents } from "~/hooks/useAgents";
 import { pingAgent } from "~/lib/nostr";
 import { track } from "~/lib/analytics";
 import { truncateKey, timeAgo, formatSol } from "~/lib/format";
 import { HireAgentModal } from "./HireAgentModal";
+import { AgentAvatar } from "./AgentAvatar";
 import type { Agent } from "~/types";
-
-const AVATAR_COLORS = ["#0a0a0a", "#e5e5e5", "#f87171", "#93c5fd", "#a3a3a3"];
 
 export function AgentList() {
   const { data: agents, isLoading, error } = useAgents();
@@ -81,7 +79,7 @@ export function AgentList() {
                   className="group flex flex-col justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-all hover:border-gray-200 hover:shadow-md"
                 >
                   <a
-                    href={`https://njump.me/${agent.npub}`}
+                    href={`https://primal.net/p/${agent.npub}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="min-w-0"
@@ -89,11 +87,10 @@ export function AgentList() {
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex items-center gap-3 min-w-0">
                         <div className="shrink-0">
-                          <Avatar
+                          <AgentAvatar
                             size={36}
-                            name={agent.pubkey}
-                            variant="beam"
-                            colors={AVATAR_COLORS}
+                            pubkey={agent.pubkey}
+                            picture={agent.picture}
                           />
                         </div>
                         <div className="min-w-0">

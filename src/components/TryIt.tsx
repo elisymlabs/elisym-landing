@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { nip19 } from "nostr-tools";
 import { useTryIt } from "~/hooks/useTryIt";
 import { useJobs } from "~/hooks/useJobs";
+import { useAgents } from "~/hooks/useAgents";
+import { useNetwork } from "~/hooks/useNetwork";
 import { truncateKey, timeAgo, formatSol, statusColor } from "~/lib/format";
 import { track } from "~/lib/analytics";
 import { makeNjumpUrl } from "~/lib/nostr";
+import { AgentAvatar } from "./AgentAvatar";
 
 const CAPABILITIES = [
   "summarization",
@@ -18,6 +21,20 @@ export function TryIt() {
   const [capability, setCapability] = useState(CAPABILITIES[0]);
   const { state, result, error, agentPubkey, feedbackState, submit, reset, sendFeedback } = useTryIt();
   const { data: jobs, isLoading: jobsLoading } = useJobs();
+  const { data: agents } = useAgents();
+  const { network } = useNetwork();
+
+  const agentPictures = useMemo(() => {
+    const map = new Map<string, string>();
+    if (agents) {
+      for (const a of agents) {
+        if (a.picture) map.set(a.pubkey, a.picture);
+      }
+    }
+    return map;
+  }, [agents]);
+  const solscanBase = "https://solscan.io/tx/";
+  const solscanSuffix = network === "mainnet" ? "" : "?cluster=devnet";
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -145,7 +162,7 @@ export function TryIt() {
                     <span className="text-sm text-gray-400">
                       from{" "}
                       <a
-                        href={`https://njump.me/${nip19.npubEncode(agentPubkey)}`}
+                        href={`https://primal.net/p/${nip19.npubEncode(agentPubkey)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-medium text-blue-500 hover:text-blue-600"
@@ -232,16 +249,26 @@ export function TryIt() {
             {jobs && jobs.length > 0 && (
               <div className="mt-6 h-[260px] overflow-y-auto rounded-xl border border-gray-200 bg-white">
                 {jobs.map((job, i) => (
-                  <a
+                  <div
                     key={job.eventId}
-                    href={makeNjumpUrl(job.eventId)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`group flex items-center gap-3 px-4 py-2.5 transition-colors hover:bg-gray-50 ${
+                    className={`flex items-center gap-2.5 px-4 py-2.5 ${
                       i !== 0 ? "border-t border-gray-100" : ""
                     }`}
                   >
-                    <span className="w-14 shrink-0 text-[11px] text-gray-400">
+                    {job.agentPubkey && job.status === "success" ? (
+                      <a
+                        href={`https://primal.net/p/${nip19.npubEncode(job.agentPubkey)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="shrink-0"
+                        title={truncateKey(job.agentPubkey)}
+                      >
+                        <AgentAvatar size={20} pubkey={job.agentPubkey} picture={agentPictures.get(job.agentPubkey)} />
+                      </a>
+                    ) : (
+                      <div className="w-5 shrink-0" />
+                    )}
+                    <span className="w-12 shrink-0 text-[11px] text-gray-400">
                       {timeAgo(job.createdAt)}
                     </span>
                     <span
@@ -255,20 +282,48 @@ export function TryIt() {
                       </span>
                       {job.capability && (
                         <>
-                          {" · "}
+                          {" "}
+                          <span className="text-gray-300">&middot;</span>{" "}
                           <span className="text-gray-500">{job.capability}</span>
                         </>
                       )}
                     </span>
                     {job.amount != null && job.amount > 0 && (
-                      <span className="shrink-0 text-sm font-medium text-gray-900">
+                      <span className="shrink-0 text-xs font-semibold text-gray-900">
                         {formatSol(job.amount)}
                       </span>
                     )}
-                    <span className="shrink-0 text-gray-300 transition-colors group-hover:text-gray-500">
-                      &#8599;
-                    </span>
-                  </a>
+                    <div className="flex shrink-0 items-center gap-1">
+                      <a
+                        href={makeNjumpUrl(job.eventId)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="rounded-md bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors"
+                      >
+                        request
+                      </a>
+                      {job.resultEventId && (
+                        <a
+                          href={makeNjumpUrl(job.resultEventId)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-colors"
+                        >
+                          result
+                        </a>
+                      )}
+                      {job.txHash && (
+                        <a
+                          href={`${solscanBase}${job.txHash}${solscanSuffix}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="rounded-md bg-violet-50 px-1.5 py-0.5 text-[10px] font-medium text-violet-600 hover:bg-violet-100 hover:text-violet-700 transition-colors"
+                        >
+                          solscan
+                        </a>
+                      )}
+                    </div>
+                  </div>
                 ))}
               </div>
             )}

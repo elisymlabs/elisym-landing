@@ -1,19 +1,17 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useWalletModal } from "@solana/wallet-adapter-react-ui";
-import { generateSecretKey, finalizeEvent } from "nostr-tools";
-import Avatar from "boring-avatars";
+import { generateSecretKey, finalizeEvent, nip19 } from "nostr-tools";
+import { AgentAvatar } from "./AgentAvatar";
 import { useHireAgent, type HireStep, type HireJobCallbacks } from "~/hooks/useHireAgent";
 import { useJobHistory } from "~/hooks/useJobHistory";
-import { getPool } from "~/lib/nostr";
+import { getPool, makeNjumpUrl } from "~/lib/nostr";
 import { RELAYS, KIND_JOB_FEEDBACK } from "~/lib/constants";
 import { truncateKey, formatSol } from "~/lib/format";
 import type { Agent } from "~/types";
 import type { StoredJob } from "~/lib/jobHistory";
 import { useNetwork } from "~/hooks/useNetwork";
 import { track } from "~/lib/analytics";
-
-const AVATAR_COLORS = ["#0a0a0a", "#e5e5e5", "#f87171", "#93c5fd", "#a3a3a3"];
 
 interface HireProps {
   agent: Agent;
@@ -59,6 +57,7 @@ export function HireAgentModal(props: Props) {
   // Derive agent info from whichever source
   const agentPubkey = props.agent?.pubkey ?? resumeJob!.agentPubkey;
   const agentName = props.agent?.card.name ?? resumeJob!.agentName;
+  const agentPicture = props.agent?.picture ?? resumeJob!.agentPicture;
   const capabilities = props.agent?.card.capabilities ?? [resumeJob!.capability];
 
   const [input, setInput] = useState(resumeJob?.input ?? "");
@@ -80,6 +79,7 @@ export function HireAgentModal(props: Props) {
         jobEventId,
         agentPubkey: props.agent!.pubkey,
         agentName: props.agent!.card.name,
+        agentPicture: props.agent!.picture,
         capability,
         input: input.trim(),
         status: "paid",
@@ -88,10 +88,11 @@ export function HireAgentModal(props: Props) {
         createdAt: Math.floor(Date.now() / 1000),
       });
     },
-    onResultReceived(jobEventId, res) {
+    onResultReceived(jobEventId, res, resultEvId) {
       updateJob(jobEventId, {
         status: "completed",
         result: res,
+        resultEventId: resultEvId,
         completedAt: Math.floor(Date.now() / 1000),
       });
     },
@@ -111,6 +112,8 @@ export function HireAgentModal(props: Props) {
   const result = isResume ? (resumeJob!.result ?? "") : hire.result;
   const txSignature = isResume ? (resumeJob!.txSignature ?? "") : hire.txSignature;
   const error = isResume ? "" : hire.error;
+  const resultEventId = isResume ? (resumeJob!.resultEventId ?? "") : hire.resultEventId;
+  const jobEventId = isResume ? resumeJob!.jobEventId : hire.jobEventId;
 
   // Feedback state — in resume mode we manage it locally
   const [resumeFeedback, setResumeFeedback] = useState<"idle" | "sending" | "sent">("idle");
@@ -207,18 +210,23 @@ export function HireAgentModal(props: Props) {
         {/* Header */}
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center gap-3 pr-6">
-            <Avatar size={36} name={agentPubkey} variant="beam" colors={AVATAR_COLORS} />
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-2">
-                <p className="text-sm font-semibold text-gray-900 truncate">{agentName}</p>
-                {isPaid && (
-                  <span className="shrink-0 rounded-md bg-violet-50 px-2 py-0.5 text-[11px] font-semibold text-violet-600">
-                    {formatSol(price)}
-                  </span>
-                )}
+            <a
+              href={`https://primal.net/p/${nip19.npubEncode(agentPubkey)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 min-w-0 group"
+            >
+              <AgentAvatar size={36} pubkey={agentPubkey} picture={agentPicture} />
+              <div className="min-w-0">
+                <p className="text-sm font-semibold text-gray-900 truncate group-hover:text-gray-500 transition-colors">{agentName}</p>
+                <p className="text-[11px] text-gray-400 font-mono">{truncateKey(agentPubkey)}</p>
               </div>
-              <p className="text-[11px] text-gray-400 font-mono">{truncateKey(agentPubkey)}</p>
-            </div>
+            </a>
+            {isPaid && (
+              <span className="shrink-0 rounded-md bg-violet-50 px-2 py-0.5 text-[11px] font-semibold text-violet-600">
+                {formatSol(price)}
+              </span>
+            )}
           </div>
 
           {/* Capabilities */}
@@ -304,18 +312,38 @@ export function HireAgentModal(props: Props) {
           {/* Result */}
           {step === "success" && result && (
             <div>
-              {txSignature && (
-                <div className="mb-3 flex justify-end">
+              <div className="mb-3 flex justify-end gap-1.5">
+                {jobEventId && (
+                  <a
+                    href={makeNjumpUrl(jobEventId)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-md bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-500 hover:bg-gray-200 hover:text-gray-700 transition-colors"
+                  >
+                    request
+                  </a>
+                )}
+                {resultEventId && (
+                  <a
+                    href={makeNjumpUrl(resultEventId)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-600 hover:bg-emerald-100 hover:text-emerald-700 transition-colors"
+                  >
+                    result
+                  </a>
+                )}
+                {txSignature && (
                   <a
                     href={`${solscanBase}${txSignature}${solscanSuffix}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 rounded-md bg-blue-50 px-2.5 py-0.5 text-[11px] font-medium text-blue-600 hover:bg-blue-100 transition-colors"
+                    className="rounded-md bg-violet-50 px-2 py-0.5 text-[10px] font-medium text-violet-600 hover:bg-violet-100 hover:text-violet-700 transition-colors"
                   >
-                    Solscan &#8599;
+                    solscan
                   </a>
-                </div>
-              )}
+                )}
+              </div>
               <pre className="overflow-x-auto rounded-xl bg-gray-950 p-4 text-[13px] leading-relaxed text-gray-300 font-mono whitespace-pre-wrap">
                 {result}
               </pre>

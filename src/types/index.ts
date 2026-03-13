@@ -19,6 +19,7 @@ export interface Agent {
   eventId: string;
   supportedKinds: number[];
   lastSeen: number;
+  picture?: string;
 }
 
 export type JobStatus =
@@ -37,6 +38,7 @@ export interface Job {
   bid?: number;
   status: JobStatus | string;
   result?: string;
+  resultEventId?: string;
   amount?: number;
   txHash?: string;
   createdAt: number;

@@ -83,9 +83,15 @@ export function useJobHistory() {
           if (!job) return;
           if (job.agentPubkey && ev.pubkey !== job.agentPubkey) return;
 
+          // Check current status from storage — the HireAgent flow may have
+          // already marked this job as completed via its own subscription.
+          const fresh = loadJobs(wallet).find((j) => j.jobEventId === matchedId);
+          if (fresh?.status === "completed") return;
+
           const updated = patchJob(wallet, matchedId, {
             status: "completed",
             result: ev.content,
+            resultEventId: ev.id,
             completedAt: ev.created_at,
           });
 
