@@ -155,7 +155,7 @@ export function TryIt() {
                     </span>
                   )}
                 </div>
-                <pre className="overflow-x-auto rounded-xl bg-gray-900 p-4 text-sm text-gray-300 font-mono">
+                <pre className="max-h-[300px] overflow-y-auto whitespace-pre-wrap break-words rounded-xl bg-gray-900 p-4 text-sm text-gray-300 font-mono">
                   {result}
                 </pre>
                 <div className="mt-3 flex items-center gap-3">

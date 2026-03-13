@@ -4,6 +4,7 @@ import { Footer } from "~/components/Layout/Footer";
 import { Hero } from "~/components/Hero";
 import { Stats } from "~/components/Stats";
 import { AgentList } from "~/components/AgentList";
+import { BecomeProvider } from "~/components/BecomeProvider";
 import { MyJobs } from "~/components/MyJobs";
 import { TryIt } from "~/components/TryIt";
 export function App() {
@@ -29,6 +30,7 @@ export function App() {
       <Hero />
       <Stats />
       <TryIt />
+      <BecomeProvider />
       <AgentList />
       <MyJobs />
       <Footer />
