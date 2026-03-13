@@ -255,7 +255,7 @@ export function TryIt() {
                       i !== 0 ? "border-t border-gray-100" : ""
                     }`}
                   >
-                    {job.agentPubkey && job.status === "success" ? (
+                    {job.agentPubkey ? (
                       <a
                         href={`https://primal.net/p/${nip19.npubEncode(job.agentPubkey)}`}
                         target="_blank"
@@ -266,7 +266,7 @@ export function TryIt() {
                         <AgentAvatar size={20} pubkey={job.agentPubkey} picture={agentPictures.get(job.agentPubkey)} />
                       </a>
                     ) : (
-                      <div className="w-5 shrink-0" />
+                      <div className="w-5 shrink-0 h-5 rounded-full bg-[#f9f9f9] text-xs inline-flex items-center justify-center pointer-events-none">?</div>
                     )}
                     <span className="w-12 shrink-0 text-[11px] text-gray-400">
                       {timeAgo(job.createdAt)}
