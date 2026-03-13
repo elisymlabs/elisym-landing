@@ -70,98 +70,101 @@ export function AgentList() {
         )}
 
         {agents && agents.length > 0 && (
-          <div className="pb-2 mt-6 grid max-h-[520px] grid-cols-1 gap-3 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3">
-            {agents.map((agent) => {
-              const isPinging = pingingAgent === agent.pubkey;
-              return (
-                <div
-                  key={agent.eventId}
-                  className="group flex flex-col justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-all hover:border-gray-200 hover:shadow-md"
-                >
-                  <a
-                    href={`https://primal.net/p/${agent.npub}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="min-w-0"
+          <div className="relative mt-6">
+            <div className="pb-2 grid max-h-[420px] grid-cols-1 gap-3 overflow-y-auto pr-1 sm:grid-cols-2 lg:grid-cols-3">
+              {agents.map((agent) => {
+                const isPinging = pingingAgent === agent.pubkey;
+                return (
+                  <div
+                    key={agent.eventId}
+                    className="group flex flex-col justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-all hover:border-gray-200 hover:shadow-md"
                   >
-                    <div className="flex items-start justify-between gap-2">
-                      <div className="flex items-center gap-3 min-w-0">
-                        <div className="shrink-0">
-                          <AgentAvatar
-                            size={36}
-                            pubkey={agent.pubkey}
-                            picture={agent.picture}
-                          />
-                        </div>
-                        <div className="min-w-0">
-                          <p className="text-sm font-semibold text-gray-900 truncate">
-                            {agent.card.name}
-                          </p>
-                          <p className="mt-0.5 text-xs text-gray-400 font-mono">
-                            {truncateKey(agent.pubkey)}
-                          </p>
-                        </div>
-                      </div>
-                      <span className="shrink-0 text-gray-300 transition-colors group-hover:text-gray-500">
-                        &#8599;
-                      </span>
-                    </div>
-                    {agent.card.description && (
-                      <p className="mt-2 text-xs text-gray-500 line-clamp-2">
-                        {agent.card.description}
-                      </p>
-                    )}
-                    {/* Tags */}
-                    <div className="mt-3 flex flex-wrap gap-1">
-                      {agent.card.capabilities.slice(0, 2).map((cap) => (
-                        <span
-                          key={cap}
-                          className="max-w-[150px] truncate rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500"
-                        >
-                          {cap}
-                        </span>
-                      ))}
-                      {agent.card.capabilities.length > 2 && (
-                        <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-400">
-                          +{agent.card.capabilities.length - 2}
-                        </span>
-                      )}
-                    </div>
-                  </a>
-                  {/* Bottom row */}
-                  <div className="mt-2 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      {agent.card.payment?.job_price != null && agent.card.payment.job_price > 0 && (
-                        <span className="text-[11px] font-medium text-violet-600">
-                          {formatSol(agent.card.payment.job_price)}
-                        </span>
-                      )}
-                      <span className="text-[11px] text-gray-400">
-                        {timeAgo(agent.lastSeen)}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      disabled={isPinging}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        handleHire(agent);
-                      }}
-                      className="flex items-center gap-1.5 rounded-lg bg-black px-3 py-1 text-[11px] font-medium text-white hover:bg-gray-800 disabled:opacity-60 transition-colors"
+                    <a
+                      href={`https://primal.net/p/${agent.npub}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="min-w-0"
                     >
-                      {isPinging && (
-                        <svg className="h-3 w-3 animate-spin" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
-                        </svg>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="shrink-0">
+                            <AgentAvatar
+                              size={36}
+                              pubkey={agent.pubkey}
+                              picture={agent.picture}
+                            />
+                          </div>
+                          <div className="min-w-0">
+                            <p className="text-sm font-semibold text-gray-900 truncate">
+                              {agent.card.name}
+                            </p>
+                            <p className="mt-0.5 text-xs text-gray-400 font-mono">
+                              {truncateKey(agent.pubkey)}
+                            </p>
+                          </div>
+                        </div>
+                        <span className="shrink-0 text-gray-300 transition-colors group-hover:text-gray-500">
+                          &#8599;
+                        </span>
+                      </div>
+                      {agent.card.description && (
+                        <p className="mt-2 text-xs text-gray-500 line-clamp-2">
+                          {agent.card.description}
+                        </p>
                       )}
-                      {isPinging ? "Pinging" : "Hire"}
-                    </button>
+                      {/* Tags */}
+                      <div className="mt-3 flex flex-wrap gap-1">
+                        {agent.card.capabilities.slice(0, 2).map((cap) => (
+                          <span
+                            key={cap}
+                            className="max-w-[150px] truncate rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-500"
+                          >
+                            {cap}
+                          </span>
+                        ))}
+                        {agent.card.capabilities.length > 2 && (
+                          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[11px] text-gray-400">
+                            +{agent.card.capabilities.length - 2}
+                          </span>
+                        )}
+                      </div>
+                    </a>
+                    {/* Bottom row */}
+                    <div className="mt-2 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2">
+                        {agent.card.payment?.job_price != null && agent.card.payment.job_price > 0 && (
+                          <span className="text-[11px] font-medium text-violet-600">
+                            {formatSol(agent.card.payment.job_price)}
+                          </span>
+                        )}
+                        <span className="text-[11px] text-gray-400">
+                          {timeAgo(agent.lastSeen)}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        disabled={isPinging}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleHire(agent);
+                        }}
+                        className="flex items-center gap-1.5 rounded-lg bg-black px-3 py-1 text-[11px] font-medium text-white hover:bg-gray-800 disabled:opacity-60 transition-colors"
+                      >
+                        {isPinging && (
+                          <svg className="h-3 w-3 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                          </svg>
+                        )}
+                        {isPinging ? "Pinging" : "Hire"}
+                      </button>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent" />
           </div>
         )}
       </div>

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Avatar from "boring-avatars";
 
-const AVATAR_COLORS = ["#0a0a0a", "#e5e5e5", "#f87171", "#93c5fd", "#a3a3a3"];
+const AVATAR_COLORS = [
+  "#0a0a0a",
+  "#e5e5e5",
+  "#f87171",
+  "#93c5fd"
+];
 
 interface AgentAvatarProps {
   pubkey: string;
