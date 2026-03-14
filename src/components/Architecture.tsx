@@ -10,16 +10,6 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "payment", label: "Payment" },
 ];
 
-function ArrowDown({ className = "" }: { className?: string }) {
-  return (
-    <div className={`flex justify-center ${className}`}>
-      <svg width="20" height="32" viewBox="0 0 20 32" fill="none">
-        <path d="M10 0 L10 24 M4 18 L10 26 L16 18" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </div>
-  );
-}
-
 function ArrowBidi({ className = "" }: { className?: string }) {
   return (
     <div className={`flex justify-center ${className}`}>
@@ -34,14 +24,6 @@ function ArrowRight() {
   return (
     <svg width="32" height="20" viewBox="0 0 32 20" fill="none" className="mx-1 shrink-0">
       <path d="M0 10 L24 10 M18 4 L26 10 L18 16" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function ArrowBidiH() {
-  return (
-    <svg width="32" height="20" viewBox="0 0 32 20" fill="none" className="mx-1 shrink-0">
-      <path d="M4 10 L28 10 M22 4 L28 10 L22 16 M10 4 L4 10 L10 16" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
