@@ -80,7 +80,7 @@ export function AgentList() {
                     className="group flex flex-col justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm transition-all hover:border-gray-200 hover:shadow-md"
                   >
                     <a
-                      href={`https://primal.net/p/${agent.npub}`}
+                      href={`https://jumble.social/users/${agent.npub}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="min-w-0"

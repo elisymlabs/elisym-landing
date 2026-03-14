@@ -211,7 +211,7 @@ export function HireAgentModal(props: Props) {
         <div className="px-5 pt-5 pb-4">
           <div className="flex items-center gap-3 pr-6">
             <a
-              href={`https://primal.net/p/${nip19.npubEncode(agentPubkey)}`}
+              href={`https://jumble.social/users/${nip19.npubEncode(agentPubkey)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 min-w-0 group"

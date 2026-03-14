@@ -162,7 +162,7 @@ export function TryIt() {
                     <span className="text-sm text-gray-400">
                       from{" "}
                       <a
-                        href={`https://primal.net/p/${nip19.npubEncode(agentPubkey)}`}
+                        href={`https://jumble.social/users/${nip19.npubEncode(agentPubkey)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="font-medium text-blue-500 hover:text-blue-600"
@@ -257,7 +257,7 @@ export function TryIt() {
                   >
                     {job.agentPubkey ? (
                       <a
-                        href={`https://primal.net/p/${nip19.npubEncode(job.agentPubkey)}`}
+                        href={`https://jumble.social/users/${nip19.npubEncode(job.agentPubkey)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="shrink-0"
