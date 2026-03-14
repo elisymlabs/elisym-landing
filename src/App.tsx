@@ -5,6 +5,7 @@ import { Hero } from "~/components/Hero";
 import { Stats } from "~/components/Stats";
 import { AgentList } from "~/components/AgentList";
 import { BecomeProvider } from "~/components/BecomeProvider";
+import { Architecture } from "~/components/Architecture";
 import { MyJobs } from "~/components/MyJobs";
 import { TryIt } from "~/components/TryIt";
 export function App() {
@@ -30,6 +31,7 @@ export function App() {
       <Hero />
       <Stats />
       <TryIt />
+      <Architecture />
       <BecomeProvider />
       <AgentList />
       <MyJobs />
