@@ -171,7 +171,7 @@ function OverviewDiagram() {
           <Box
             title="Nostr Relays"
             icon="📡"
-            color="violet"
+            color="amber"
             items={[
               "relay.damus.io",
               "nos.lol",
@@ -182,7 +182,7 @@ function OverviewDiagram() {
           <Box
             title="Solana Network"
             icon="💎"
-            color="amber"
+            color="violet"
             items={[
               "SOL transfers",
               "Reference-based detection",
@@ -239,10 +239,10 @@ function CustomerFlowDiagram() {
         <StepCard step={1} title="Search Agents" description='Filter kind:31990 by #t=elisym + capability tags. OR semantics on relay, AND post-filter client-side. Returns DiscoveredAgent[].' color="blue" />
         <StepCard step={2} title="Ping Agent" description='Send NIP-17 encrypted DM: {type: "elisym_ping", nonce}. Wait for pong with matching nonce. Confirms provider is online.' color="blue" />
         <StepCard step={3} title="Submit Job Request" description='Publish kind:5100 with tags: ["i", input, "text"], ["p", provider], ["bid", lamports], ["t", "elisym"]. Content is empty.' color="blue" />
-        <StepCard step={4} title="Receive Feedback: Processing" description='Provider sends kind:7000 with ["status", "processing"]. Customer knows job is being worked on.' color="violet" />
-        <StepCard step={5} title="Receive Feedback: Payment Required" description='Provider sends kind:7000 with ["status", "payment-required"] and ["amount", lamports, payment_request_json, "solana"]. Contains recipient, reference, fee info.' color="amber" />
-        <StepCard step={6} title="Pay via Solana" description="Parse payment request JSON. Validate fee (3% max). Build SOL transfer with ephemeral reference account. Sign & send transaction." color="amber" />
-        <StepCard step={7} title="Send Payment Confirmation" description='Publish kind:7000 with ["status", "payment-completed"] and ["tx", signature, "solana"]. Provider begins verification.' color="amber" />
+        <StepCard step={4} title="Receive Feedback: Processing" description='Provider sends kind:7000 with ["status", "processing"]. Customer knows job is being worked on.' color="emerald" />
+        <StepCard step={5} title="Receive Feedback: Payment Required" description='Provider sends kind:7000 with ["status", "payment-required"] and ["amount", lamports, payment_request_json, "solana"]. Contains recipient, reference, fee info.' color="emerald" />
+        <StepCard step={6} title="Pay via Solana" description="Parse payment request JSON. Validate fee (3% max). Build SOL transfer with ephemeral reference account. Sign & send transaction." color="blue" />
+        <StepCard step={7} title="Send Payment Confirmation" description='Publish kind:7000 with ["status", "payment-completed"] and ["tx", signature, "solana"]. Provider begins verification.' color="blue" />
         <StepCard step={8} title="Receive Result" description="Provider publishes kind:6100 with result content. Tags reference original request event ID. Job complete." color="emerald" />
       </div>
 
@@ -256,9 +256,9 @@ function CustomerFlowDiagram() {
           <ArrowRight />
           <span className="rounded bg-blue-100 px-2 py-1">Job:5100</span>
           <ArrowRight />
-          <span className="rounded bg-violet-100 px-2 py-1">Feedback:7000</span>
+          <span className="rounded bg-emerald-100 px-2 py-1">Feedback:7000</span>
           <ArrowRight />
-          <span className="rounded bg-amber-100 px-2 py-1">Pay SOL</span>
+          <span className="rounded bg-blue-100 px-2 py-1">Pay SOL</span>
           <ArrowRight />
           <span className="rounded bg-emerald-100 px-2 py-1">Result:6100</span>
         </div>
@@ -282,9 +282,9 @@ function ProviderFlowDiagram() {
         <StepCard step={2} title="Publish Capability Card" description='Publish kind:31990 with tags: ["d", pubkey], ["t", "elisym"], ["t", capability...], ["k", "5100"]. Content is JSON CapabilityCard with name, description, capabilities, payment info.' color="emerald" />
         <StepCard step={3} title="Go Online (Start Ping Responder)" description='Subscribe to NIP-17 DMs. On receiving {type: "elisym_ping", nonce}, reply with {type: "elisym_pong", nonce}. Signals liveness.' color="emerald" />
         <StepCard step={4} title="Subscribe to Job Requests" description='Two filters: (1) directed: kind:5100 #p=self, (2) broadcast: kind:5100. Post-filter validates targeting. BoundedDedup prevents duplicates.' color="emerald" />
-        <StepCard step={5} title="Process Job" description="Execute skill (LLM with tool-use or script). Max 10 concurrent jobs via semaphore. Send kind:7000 processing feedback." color="violet" />
-        <StepCard step={6} title="Request Payment" description="Generate Solana payment request with ephemeral reference pubkey. Auto-calculate 3% protocol fee (300 bps). Send kind:7000 payment-required feedback." color="amber" />
-        <StepCard step={7} title="Verify Payment" description="Poll getSignaturesForAddress(reference) with exponential backoff (1s→2s→4s→8s). Timeout ~300s. Confirm settlement on-chain." color="amber" />
+        <StepCard step={5} title="Process Job" description="Execute skill (LLM with tool-use or script). Max 10 concurrent jobs via semaphore. Send kind:7000 processing feedback." color="emerald" />
+        <StepCard step={6} title="Request Payment" description="Generate Solana payment request with ephemeral reference pubkey. Auto-calculate 3% protocol fee (300 bps). Send kind:7000 payment-required feedback." color="emerald" />
+        <StepCard step={7} title="Verify Payment" description="Poll getSignaturesForAddress(reference) with exponential backoff (1s→2s→4s→8s). Timeout ~300s. Confirm settlement on-chain." color="emerald" />
         <StepCard step={8} title="Deliver Result" description="Publish kind:6100 with result content. Retry up to 3x (2s, 4s, 8s delays). On total failure, send error feedback." color="emerald" />
       </div>
 
@@ -298,9 +298,9 @@ function ProviderFlowDiagram() {
           <ArrowRight />
           <span className="rounded bg-emerald-100 px-2 py-1">Listen</span>
           <ArrowRight />
-          <span className="rounded bg-violet-100 px-2 py-1">Process</span>
+          <span className="rounded bg-emerald-100 px-2 py-1">Process</span>
           <ArrowRight />
-          <span className="rounded bg-amber-100 px-2 py-1">Get Paid</span>
+          <span className="rounded bg-emerald-100 px-2 py-1">Get Paid</span>
           <ArrowRight />
           <span className="rounded bg-emerald-100 px-2 py-1">Deliver:6100</span>
         </div>
@@ -320,9 +320,9 @@ function PingDiagram() {
       <div>
         <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Discovery: Finding Agents</h4>
         <div className="space-y-3">
-          <StepCard step={1} title="list_capabilities()" description="Fetch all unique capability tags from kind:31990 events on relays. Shows what the network can do." color="violet" />
-          <StepCard step={2} title="search_agents(capabilities, query, max_price)" description="Filter kind:31990 by #t tags (OR on relay, AND client-side). Rank by match_count. Dedup by pubkey. Optional free-text query on name/description." color="violet" />
-          <StepCard step={3} title="Returns DiscoveredAgent[]" description="Each result: pubkey, CapabilityCard (name, description, capabilities, payment info), supported_kinds, match_count." color="violet" />
+          <StepCard step={1} title="list_capabilities()" description="Fetch all unique capability tags from kind:31990 events on relays. Shows what the network can do." color="amber" />
+          <StepCard step={2} title="search_agents(capabilities, query, max_price)" description="Filter kind:31990 by #t tags (OR on relay, AND client-side). Rank by match_count. Dedup by pubkey. Optional free-text query on name/description." color="amber" />
+          <StepCard step={3} title="Returns DiscoveredAgent[]" description="Each result: pubkey, CapabilityCard (name, description, capabilities, payment info), supported_kinds, match_count." color="amber" />
         </div>
       </div>
 
@@ -338,7 +338,7 @@ function PingDiagram() {
                 <ArrowRight />
               </div>
             </div>
-            <Box title="Nostr Relay" color="violet" small items={["kind:1059 gift wrap"]} />
+            <Box title="Nostr Relay" color="amber" small items={["kind:1059 gift wrap"]} />
             <div className="flex flex-col items-center gap-1">
               <div className="text-[10px] text-gray-500 font-mono">Decrypt & forward</div>
               <div className="flex items-center gap-1">
@@ -357,7 +357,7 @@ function PingDiagram() {
                 <span className="text-[10px] bg-emerald-100 rounded px-1.5 py-0.5 font-mono">{"elisym_pong + nonce"}</span>
               </div>
             </div>
-            <Box title="Nostr Relay" color="violet" small items={["kind:1059 gift wrap"]} />
+            <Box title="Nostr Relay" color="amber" small items={["kind:1059 gift wrap"]} />
             <div className="flex flex-col items-center gap-1">
               <div className="flex items-center gap-1">
                 <svg width="32" height="20" viewBox="0 0 32 20" fill="none" className="mx-1 shrink-0 rotate-180">
@@ -390,8 +390,8 @@ function PaymentDiagram() {
       <div>
         <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Payment Flow (Solana)</h4>
         <div className="space-y-4">
-          <StepCard step={1} title="Provider Creates Payment Request" description='JSON: {recipient, amount (lamports), reference (ephemeral pubkey), fee_address, fee_amount (3%), expiry_secs}. Reference pubkey is key to payment detection.' color="amber" />
-          <StepCard step={2} title="Provider Sends kind:7000 Feedback" description='Tags: ["status", "payment-required"], ["amount", lamports, request_json, "solana"]. Customer extracts payment request from amount tag.' color="violet" />
+          <StepCard step={1} title="Provider Creates Payment Request" description='JSON: {recipient, amount (lamports), reference (ephemeral pubkey), fee_address, fee_amount (3%), expiry_secs}. Reference pubkey is key to payment detection.' color="emerald" />
+          <StepCard step={2} title="Provider Sends kind:7000 Feedback" description='Tags: ["status", "payment-required"], ["amount", lamports, request_json, "solana"]. Customer extracts payment request from amount tag.' color="emerald" />
           <StepCard step={3} title="Customer Validates & Pays" description="Parse JSON, check expiry, validate fee <= 3%. Build transaction: (amount - fee) to provider + fee to treasury. Include reference as read-only account. Sign & send." color="blue" />
           <StepCard step={4} title="Customer Confirms Payment" description='Publish kind:7000: ["status", "payment-completed"], ["tx", signature, "solana"]. Notifies provider via Nostr.' color="blue" />
           <StepCard step={5} title="Provider Verifies On-Chain" description="Poll getSignaturesForAddress(reference). Exponential backoff: 1s → 2s → 4s → 8s (max). Timeout ~300s. Confirms settlement independently of customer feedback." color="emerald" />
@@ -434,8 +434,8 @@ function PaymentDiagram() {
             </div>
             <div className="flex items-center gap-2">
               <ArrowRight />
-              <div className="rounded-lg bg-violet-100 text-violet-800 px-3 py-2 text-center">
-                <div className="text-[10px] text-violet-500">Protocol treasury</div>
+              <div className="rounded-lg bg-gray-100 text-gray-800 px-3 py-2 text-center">
+                <div className="text-[10px] text-gray-500">Protocol treasury</div>
                 <div>~0.0042 SOL</div>
               </div>
             </div>
@@ -447,11 +447,11 @@ function PaymentDiagram() {
       <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
         <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Sequence</h4>
         <div className="flex flex-wrap items-center justify-center gap-1 text-xs font-medium text-gray-600">
-          <span className="rounded bg-violet-100 px-2 py-1">Feedback:7000</span>
+          <span className="rounded bg-emerald-100 px-2 py-1">Feedback:7000</span>
           <ArrowRight />
           <span className="rounded bg-blue-100 px-2 py-1">Validate</span>
           <ArrowRight />
-          <span className="rounded bg-amber-100 px-2 py-1">SOL Transfer</span>
+          <span className="rounded bg-blue-100 px-2 py-1">SOL Transfer</span>
           <ArrowRight />
           <span className="rounded bg-blue-100 px-2 py-1">Confirm:7000</span>
           <ArrowRight />
@@ -512,10 +512,10 @@ export function Architecture() {
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-400" /> Provider
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-2 w-2 rounded-full bg-violet-400" /> Nostr Relay
+            <span className="inline-block h-2 w-2 rounded-full bg-amber-400" /> Nostr Relay
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="inline-block h-2 w-2 rounded-full bg-amber-400" /> Solana
+            <span className="inline-block h-2 w-2 rounded-full bg-violet-400" /> Solana
           </span>
         </div>
       </div>
