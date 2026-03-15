@@ -354,8 +354,15 @@ export function makeNjumpUrl(eventId: string, relays: string[] = RELAYS): string
   return `https://njump.me/${nevent}`;
 }
 
-/** Ping an agent via NIP-17 DM. Resolves true if online, false if offline. */
-export function pingAgent(agentPubkey: string, timeoutMs = 15_000): Promise<boolean> {
+/** Result of a ping attempt. */
+export interface PingResult {
+  online: boolean;
+  /** The secret key used for the ping session — reuse for job submission so pubkeys match. */
+  sk: Uint8Array | null;
+}
+
+/** Ping an agent via NIP-17 DM. Returns the session key on success so it can be reused for job submission. */
+export function pingAgent(agentPubkey: string, timeoutMs = 15_000): Promise<PingResult> {
   return new Promise((resolve) => {
     const sk = generateSecretKey();
     const pk = getPublicKey(sk);
@@ -370,7 +377,7 @@ export function pingAgent(agentPubkey: string, timeoutMs = 15_000): Promise<bool
       resolved = true;
       clearTimeout(timer);
       sub.close();
-      resolve(online);
+      resolve({ online, sk: online ? sk : null });
     };
 
     const sub = p.subscribeMany(

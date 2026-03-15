@@ -15,6 +15,7 @@ import { track } from "~/lib/analytics";
 
 interface HireProps {
   agent: Agent;
+  sessionSk?: Uint8Array | null;
   storedJob?: undefined;
   onClose: () => void;
 }
@@ -99,7 +100,8 @@ export function HireAgentModal(props: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [props.agent, capability, input, saveJob, updateJob]);
 
-  const hire = useHireAgent(isResume ? undefined : callbacks);
+  const sessionSk = "sessionSk" in props ? props.sessionSk : undefined;
+  const hire = useHireAgent(isResume ? undefined : callbacks, sessionSk);
 
   // In resume mode, map storedJob status to HireStep
   const resumeStep: HireStep | null = resumeJob

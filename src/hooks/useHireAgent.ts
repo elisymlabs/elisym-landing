@@ -42,7 +42,7 @@ export interface HireJobCallbacks {
   onResultReceived?: (jobEventId: string, result: string, resultEventId: string) => void;
 }
 
-export function useHireAgent(callbacks?: HireJobCallbacks) {
+export function useHireAgent(callbacks?: HireJobCallbacks, initialSk?: Uint8Array | null) {
   const [step, setStep] = useState<HireStep>("idle");
   const [result, setResult] = useState("");
   const [resultEventId, setResultEventId] = useState("");
@@ -55,7 +55,7 @@ export function useHireAgent(callbacks?: HireJobCallbacks) {
   const { connection } = useConnection();
   const { publicKey, sendTransaction } = useWallet();
 
-  const skRef = useRef<Uint8Array | null>(null);
+  const skRef = useRef<Uint8Array | null>(initialSk ?? null);
   const jobEventIdRef = useRef("");
   const agentPubkeyRef = useRef("");
   const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);

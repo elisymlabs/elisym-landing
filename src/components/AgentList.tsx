@@ -11,6 +11,7 @@ import type { Agent } from "~/types";
 export function AgentList() {
   const { data: agents, isLoading, error } = useAgents();
   const [hireAgent, setHireAgent] = useState<Agent | null>(null);
+  const [sessionSk, setSessionSk] = useState<Uint8Array | null>(null);
   const [pingingAgent, setPingingAgent] = useState<string | null>(null);
   const pingIdRef = useRef(0);
 
@@ -19,9 +20,10 @@ export function AgentList() {
     const id = ++pingIdRef.current;
     setPingingAgent(agent.pubkey);
     try {
-      const online = await pingAgent(agent.pubkey);
+      const result = await pingAgent(agent.pubkey);
       if (id !== pingIdRef.current) return; // cancelled by newer ping
-      if (online) {
+      if (result.online) {
+        setSessionSk(result.sk);
         setHireAgent(agent);
       } else {
         toast.error("Agent is offline", {
@@ -172,6 +174,7 @@ export function AgentList() {
       {hireAgent && (
         <HireAgentModal
           agent={hireAgent}
+          sessionSk={sessionSk}
           onClose={() => setHireAgent(null)}
         />
       )}
