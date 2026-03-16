@@ -21,7 +21,7 @@ export function TryIt() {
   const [capability, setCapability] = useState(CAPABILITIES[0]);
   const { state, result, error, agentPubkey, feedbackState, submit, reset, sendFeedback } = useTryIt();
   const { data: jobs, isLoading: jobsLoading } = useJobs();
-  const { data: agents } = useAgents();
+  const { data: agents, isLoading: agentsLoading } = useAgents();
   const { network } = useNetwork();
 
   const agentPictures = useMemo(() => {
@@ -259,15 +259,19 @@ export function TryIt() {
                     }`}
                   >
                     {job.agentPubkey ? (
-                      <a
-                        href={`https://jumble.social/users/${nip19.npubEncode(job.agentPubkey)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="shrink-0"
-                        title={truncateKey(job.agentPubkey)}
-                      >
-                        <AgentAvatar size={20} pubkey={job.agentPubkey} picture={agentPictures.get(job.agentPubkey)} />
-                      </a>
+                      agentsLoading ? (
+                        <div className="w-5 h-5 shrink-0 animate-pulse rounded-full bg-gray-200" />
+                      ) : (
+                        <a
+                          href={`https://jumble.social/users/${nip19.npubEncode(job.agentPubkey)}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="shrink-0"
+                          title={truncateKey(job.agentPubkey)}
+                        >
+                          <AgentAvatar size={20} pubkey={job.agentPubkey} picture={agentPictures.get(job.agentPubkey)} />
+                        </a>
+                      )
                     ) : (
                       <div className="w-5 shrink-0 h-5 rounded-full bg-[#f9f9f9] text-xs inline-flex items-center justify-center pointer-events-none">?</div>
                     )}
