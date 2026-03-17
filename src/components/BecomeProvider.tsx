@@ -46,7 +46,7 @@ export function BecomeProvider() {
         {/* CTA buttons */}
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <a
-            href="https://github.com/elisymprotocol/elisym-client/blob/main/README.md"
+            href="https://github.com/elisymprotocol/elisym-client/blob/main/GUIDE.md"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
