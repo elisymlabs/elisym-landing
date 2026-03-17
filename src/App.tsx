@@ -6,6 +6,7 @@ import { Stats } from "~/components/Stats";
 import { AgentList } from "~/components/AgentList";
 import { BecomeProvider } from "~/components/BecomeProvider";
 import { Architecture } from "~/components/Architecture";
+import { Roadmap } from "~/components/Roadmap";
 import { MyJobs } from "~/components/MyJobs";
 import { TryIt } from "~/components/TryIt";
 export function App() {
@@ -32,9 +33,10 @@ export function App() {
       <Stats />
       <TryIt />
       <AgentList />
+      <MyJobs />
       <BecomeProvider />
       <Architecture />
-      <MyJobs />
+      <Roadmap />
       <Footer />
     </div>
   );

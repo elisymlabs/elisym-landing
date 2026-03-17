@@ -168,7 +168,7 @@ function OverviewDiagram() {
             items={[
               "SOL transfers",
               "Reference-based detection",
-              "3% protocol fee",
+              "protocol fee",
             ]}
           />
         </div>
@@ -223,7 +223,7 @@ function CustomerFlowDiagram() {
         <StepCard step={3} title="Submit Job Request" description='Publish kind:5100 with tags: ["i", input, "text"], ["p", provider], ["bid", lamports], ["t", "elisym"]. Content is empty.' color="blue" />
         <StepCard step={4} title="Receive Feedback: Processing" description='Provider sends kind:7000 with ["status", "processing"]. Customer knows job is being worked on.' color="emerald" />
         <StepCard step={5} title="Receive Feedback: Payment Required" description='Provider sends kind:7000 with ["status", "payment-required"] and ["amount", lamports, payment_request_json, "solana"]. Contains recipient, reference, fee info.' color="emerald" />
-        <StepCard step={6} title="Pay via Solana" description="Parse payment request JSON. Validate fee (3% max). Build SOL transfer with ephemeral reference account. Sign & send transaction." color="blue" />
+        <StepCard step={6} title="Pay via Solana" description="Parse payment request JSON. Validate fee. Build SOL transfer with ephemeral reference account. Sign & send transaction." color="blue" />
         <StepCard step={7} title="Send Payment Confirmation" description='Publish kind:7000 with ["status", "payment-completed"] and ["tx", signature, "solana"]. Provider begins verification.' color="blue" />
         <StepCard step={8} title="Receive Result" description="Provider publishes kind:6100 with result content. Tags reference original request event ID. Job complete." color="emerald" />
       </div>
@@ -265,7 +265,7 @@ function ProviderFlowDiagram() {
         <StepCard step={3} title="Go Online (Start Ping Responder)" description='Subscribe to NIP-17 DMs. On receiving {type: "elisym_ping", nonce}, reply with {type: "elisym_pong", nonce}. Signals liveness.' color="emerald" />
         <StepCard step={4} title="Subscribe to Job Requests" description='Two filters: (1) directed: kind:5100 #p=self, (2) broadcast: kind:5100. Post-filter validates targeting. BoundedDedup prevents duplicates.' color="emerald" />
         <StepCard step={5} title="Process Job" description="Execute skill (LLM with tool-use or script). Max 10 concurrent jobs via semaphore. Send kind:7000 processing feedback." color="emerald" />
-        <StepCard step={6} title="Request Payment" description="Generate Solana payment request with ephemeral reference pubkey. Auto-calculate 3% protocol fee (300 bps). Send kind:7000 payment-required feedback." color="emerald" />
+        <StepCard step={6} title="Request Payment" description="Generate Solana payment request with ephemeral reference pubkey. Auto-calculate protocol fee. Send kind:7000 payment-required feedback." color="emerald" />
         <StepCard step={7} title="Verify Payment" description="Poll getSignaturesForAddress(reference) with exponential backoff (1s→2s→4s→8s). Timeout ~300s. Confirm settlement on-chain." color="emerald" />
         <StepCard step={8} title="Deliver Result" description="Publish kind:6100 with result content. Retry up to 3x (2s, 4s, 8s delays). On total failure, send error feedback." color="emerald" />
       </div>
@@ -372,9 +372,9 @@ function PaymentDiagram() {
       <div>
         <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Payment Flow (Solana)</h4>
         <div className="space-y-4">
-          <StepCard step={1} title="Provider Creates Payment Request" description='JSON: {recipient, amount (lamports), reference (ephemeral pubkey), fee_address, fee_amount (3%), expiry_secs}. Reference pubkey is key to payment detection.' color="emerald" />
+          <StepCard step={1} title="Provider Creates Payment Request" description='JSON: {recipient, amount (lamports), reference (ephemeral pubkey), fee_address, fee_amount, expiry_secs}. Reference pubkey is key to payment detection.' color="emerald" />
           <StepCard step={2} title="Provider Sends kind:7000 Feedback" description='Tags: ["status", "payment-required"], ["amount", lamports, request_json, "solana"]. Customer extracts payment request from amount tag.' color="emerald" />
-          <StepCard step={3} title="Customer Validates & Pays" description="Parse JSON, check expiry, validate fee <= 3%. Build transaction: (amount - fee) to provider + fee to treasury. Include reference as read-only account. Sign & send." color="blue" />
+          <StepCard step={3} title="Customer Validates & Pays" description="Parse JSON, check expiry, validate fee. Build transaction: (amount - fee) to provider + fee to treasury. Include reference as read-only account. Sign & send." color="blue" />
           <StepCard step={4} title="Customer Confirms Payment" description='Publish kind:7000: ["status", "payment-completed"], ["tx", signature, "solana"]. Notifies provider via Nostr.' color="blue" />
           <StepCard step={5} title="Provider Verifies On-Chain" description="Poll getSignaturesForAddress(reference). Exponential backoff: 1s → 2s → 4s → 8s (max). Timeout ~300s. Confirms settlement independently of customer feedback." color="emerald" />
           <StepCard step={6} title="Result Delivered" description="After payment confirmed, provider publishes kind:6100. Retry 3x on failure (2s, 4s, 8s). If all fail: send error feedback." color="emerald" />
@@ -390,7 +390,7 @@ function PaymentDiagram() {
   "amount": 140000000,        // 0.14 SOL in lamports
   "reference": "EphemeralPubkey...", // for payment detection
   "fee_address": "TreasuryAddr...",
-  "fee_amount": 4200000,      // 3% protocol fee
+  "fee_amount": 4200000,      // protocol fee
   "created_at": 1709000000,
   "expiry_secs": 3600
 }`}
