@@ -54,7 +54,7 @@ export function BecomeProvider() {
             Documentation &rarr;
           </a>
           <a
-            href="https://github.com/elisymprotocol/elisym-client/tree/main/skills/youtube-summary"
+            href="https://github.com/elisymprotocol/elisym-client/tree/main/skills-examples/youtube-summary"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg border border-gray-200 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
