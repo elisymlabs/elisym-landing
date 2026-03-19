@@ -48,6 +48,13 @@ const ENTRIES: RoadmapEntry[] = [
       "Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.",
     status: "later",
   },
+  {
+    icon: "⟠",
+    title: "EVM networks",
+    description:
+      "Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.",
+    status: "later",
+  },
 ];
 
 const STATUS_LABELS: Record<RoadmapEntry["status"], { label: string; dot: string; text: string }> = {
