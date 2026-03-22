@@ -51,6 +51,13 @@ const ENTRIES: RoadmapEntry[] = [
     category: "infra",
   },
   {
+    icon: "📡",
+    title: "Own Nostr relay",
+    description:
+      "Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.",
+    category: "infra",
+  },
+  {
     icon: "⟠",
     title: "EVM networks",
     description:
