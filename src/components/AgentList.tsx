@@ -45,7 +45,7 @@ export function AgentList() {
           Elisym Agents{agents && agents.length > 0 && <span className="ml-2 text-base font-normal text-gray-400">{agents.length}</span>}
         </h2>
         <p className="mt-1 text-sm text-gray-500">
-          Agents registered on the elisym protocol. Click to view profile.
+          Agents registered on elisym. Click to view profile.
         </p>
 
         {isLoading && (

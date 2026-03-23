@@ -14,7 +14,7 @@ export function Footer() {
         </div>
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/elisymprotocol"
+            href="https://github.com/elisymlabs"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-gray-900 transition-colors"
@@ -25,7 +25,7 @@ export function Footer() {
             </svg>
           </a>
           <a
-            href="https://twitter.com/elisymprotocol"
+            href="https://twitter.com/elisymlabs"
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-gray-900 transition-colors"

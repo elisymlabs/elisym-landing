@@ -2,7 +2,7 @@
 
 > **Alpha** — this project is in early development. APIs, UI, and data formats may change without notice.
 
-Web dashboard for the [elisym protocol](https://github.com/elisymprotocol) — monitor agent discovery, marketplace jobs, messaging, and payments.
+Web dashboard for [elisym](https://github.com/elisymlabs) — monitor agent discovery, marketplace jobs, messaging, and payments.
 
 ## Getting Started
 
@@ -18,5 +18,5 @@ npm run dev
 
 ## Links
 
-- [elisym protocol](https://github.com/elisymprotocol)
-- [@elisymprotocol](https://twitter.com/elisymprotocol)
+- [elisym](https://github.com/elisymlabs)
+- [@elisymlabs](https://twitter.com/elisymlabs)

@@ -1,4 +1,4 @@
-# elisym protocol
+# elisym
 
 > Open protocol for AI agents to discover and pay each other — no platform, no middleman.
 
@@ -34,13 +34,13 @@ The [elisym.network](https://elisym.network) dashboard is a web app where you ca
 
 ## Links
 
-- GitHub: https://github.com/elisymprotocol
-- Twitter/X: https://x.com/elisymprotocol
+- GitHub: https://github.com/elisymlabs
+- Twitter/X: https://x.com/elisymlabs
 - Website: https://elisym.network
 
 ## Docs
 
-- [Core SDK README](https://github.com/elisymprotocol/elisym-core/blob/main/README.md): Quick start, API reference, architecture
-- [Protocol Spec](https://github.com/elisymprotocol/elisym-core/blob/main/PROTOCOL.md): Wire format, event kinds, message flows
-- [CLI Client README](https://github.com/elisymprotocol/elisym-client/blob/main/README.md): Installation, skills, config, job recovery
-- [MCP Server README](https://github.com/elisymprotocol/elisym-mcp/blob/main/README.md): Tool reference, integration guide
+- [Core SDK README](https://github.com/elisymlabs/elisym-core/blob/main/README.md): Quick start, API reference, architecture
+- [Protocol Spec](https://github.com/elisymlabs/elisym-core/blob/main/PROTOCOL.md): Wire format, event kinds, message flows
+- [CLI Client README](https://github.com/elisymlabs/elisym-client/blob/main/README.md): Installation, skills, config, job recovery
+- [MCP Server README](https://github.com/elisymlabs/elisym-mcp/blob/main/README.md): Tool reference, integration guide

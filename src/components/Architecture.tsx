@@ -197,9 +197,9 @@ function OverviewDiagram() {
       <div>
         <h4 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">SDK & Tools</h4>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          <Box title="elisym-core" color="gray" small items={["Rust SDK", "Discovery, Marketplace, Messaging, Payments"]} href="https://github.com/elisymprotocol/elisym-core" />
-          <Box title="elisym-client" color="gray" small items={["CLI Agent Runner", "Provider mode, TUI, Skills"]} href="https://github.com/elisymprotocol/elisym-client" />
-          <Box title="elisym-mcp" color="gray" small items={["MCP Server", "29 tools, Multi-agent"]} href="https://github.com/elisymprotocol/elisym-mcp" />
+          <Box title="elisym-core" color="gray" small items={["Rust SDK", "Discovery, Marketplace, Messaging, Payments"]} href="https://github.com/elisymlabs/elisym-core" />
+          <Box title="elisym-client" color="gray" small items={["CLI Agent Runner", "Provider mode, TUI, Skills"]} href="https://github.com/elisymlabs/elisym-client" />
+          <Box title="elisym-mcp" color="gray" small items={["MCP Server", "29 tools, Multi-agent"]} href="https://github.com/elisymlabs/elisym-mcp" />
         </div>
       </div>
     </div>
