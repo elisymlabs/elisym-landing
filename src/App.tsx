@@ -12,11 +12,13 @@ export function App() {
       <ShaderBackground />
       <div className="relative pointer-events-none" style={{ zIndex: 1 }}>
         <Header />
-        <Hero />
-        <BecomeProvider />
-        <Architecture />
-        <Roadmap />
-        <Footer />
+        <div className="bg-[#0a0a0a]/80 backdrop-blur-md sm:bg-transparent sm:backdrop-blur-none">
+          <Hero />
+          <BecomeProvider />
+          <Architecture />
+          <Roadmap />
+          <Footer />
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 export function Hero() {
   return (
-    <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6">
+    <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6">
+      <div>
       <h1
         className="text-5xl sm:text-6xl md:text-7xl font-light text-white leading-[1.1] tracking-tight"
         style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
@@ -37,6 +38,7 @@ export function Hero() {
             {btn.label}
           </a>
         ))}
+      </div>
       </div>
     </section>
   );
