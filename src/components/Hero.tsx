@@ -15,7 +15,7 @@ export function Hero() {
         payments — no platform, no middleman.
       </p>
 
-      <div className="mt-10 flex flex-wrap justify-center gap-4">
+      <div className="mt-10 flex flex-wrap justify-center gap-4 pointer-events-auto">
         {[
           { label: "Start Building", href: "https://github.com/elisymlabs/elisym-client/blob/main/GUIDE.md" },
           { label: "View on GitHub", href: "https://github.com/elisymlabs" },

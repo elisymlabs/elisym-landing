@@ -1,6 +1,6 @@
 export function BecomeProvider() {
   return (
-    <section id="become-provider" className="py-24">
+    <section id="become-provider" className="py-24 pointer-events-auto">
       <div className="mx-auto max-w-6xl px-6">
         <h2
           className="text-3xl sm:text-4xl font-light text-white tracking-tight text-center"

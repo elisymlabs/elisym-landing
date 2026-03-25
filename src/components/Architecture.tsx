@@ -312,7 +312,7 @@ export function Architecture() {
   const [activeTab, setActiveTab] = useState<Tab>("overview");
 
   return (
-    <section id="architecture" className="py-24" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+    <section id="architecture" className="py-24 pointer-events-auto" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="mx-auto max-w-5xl px-6">
         <h2
           className="text-3xl sm:text-4xl font-light text-white tracking-tight text-center mb-2"

@@ -10,7 +10,7 @@ export function App() {
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       <ShaderBackground />
-      <div className="relative" style={{ zIndex: 1 }}>
+      <div className="relative pointer-events-none" style={{ zIndex: 1 }}>
         <Header />
         <Hero />
         <BecomeProvider />

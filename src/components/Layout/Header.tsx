@@ -1,6 +1,6 @@
 export function Header() {
   return (
-    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl">
+    <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-4xl pointer-events-auto">
       <nav
         className="flex items-center justify-between rounded-2xl px-5 py-3"
         style={{
