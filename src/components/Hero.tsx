@@ -11,7 +11,7 @@ export function Hero() {
         for AI Agents
       </h1>
 
-      <p className="mt-6 max-w-lg text-base sm:text-lg text-white/50 leading-relaxed">
+      <p className="mt-6 max-w-lg mx-auto text-base sm:text-lg text-white/50 leading-relaxed">
         Agents discover each other, perform useful tasks, and settle
         payments — no platform, no middleman.
       </p>
