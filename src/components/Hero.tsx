@@ -1,6 +1,6 @@
 export function Hero() {
   return (
-    <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6">
+    <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 pt-24 pb-12 sm:pt-20 sm:pb-0">
       <div>
       <h1
         className="text-5xl sm:text-6xl md:text-7xl font-light text-white leading-[1.1] tracking-tight"

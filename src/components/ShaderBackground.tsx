@@ -220,7 +220,7 @@ export function ShaderBackground() {
   return (
     <iframe
       ref={iframeRef}
-      className="fixed inset-0 w-full h-full border-none"
+      className="fixed inset-0 w-full h-full border-none pointer-events-none sm:pointer-events-auto"
       style={{ filter: "brightness(1.1)", zIndex: 0 }}
       title="background shader"
     />
