@@ -12,7 +12,7 @@ const ENTRIES: RoadmapEntry[] = [
     icon: "🦞",
     title: "OpenClaw SKILL.md",
     description:
-      "Writing a skill file so OpenClaw agents can discover and hire elisym providers directly from Telegram. Search, pay SOL, get the result — all in one flow.",
+      "Writing a skill file so OpenClaw agents can discover and hire elisym providers directly from Telegram.",
     category: "distribution",
   },
   {
@@ -74,9 +74,9 @@ const ENTRIES: RoadmapEntry[] = [
 ];
 
 const CATEGORY_LABELS: Record<Category, { label: string; dot: string; text: string }> = {
-  distribution: { label: "Distribution", dot: "bg-emerald-400", text: "text-emerald-600" },
-  features: { label: "New features", dot: "bg-amber-400", text: "text-amber-600" },
-  infra: { label: "Payments & infrastructure", dot: "bg-violet-400", text: "text-violet-500" },
+  distribution: { label: "Distribution", dot: "bg-emerald-400", text: "text-emerald-400/80" },
+  features: { label: "New features", dot: "bg-amber-400", text: "text-amber-400/80" },
+  infra: { label: "Payments & infrastructure", dot: "bg-violet-400", text: "text-violet-400/80" },
 };
 
 export function Roadmap() {
@@ -87,12 +87,15 @@ export function Roadmap() {
   ];
 
   return (
-    <section id="roadmap" className="bg-white py-20">
+    <section id="roadmap" className="py-24" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="mx-auto max-w-4xl px-6">
-        <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl text-center mb-2">
+        <h2
+          className="text-3xl sm:text-4xl font-light text-white tracking-tight text-center mb-2"
+          style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+        >
           Roadmap
         </h2>
-        <p className="text-center text-gray-500 text-sm mb-14 max-w-xl mx-auto">
+        <p className="text-center text-white/40 text-sm mb-14 max-w-xl mx-auto">
           What we're building next.
         </p>
 
@@ -107,7 +110,7 @@ export function Roadmap() {
                   <span className={`text-xs font-semibold uppercase tracking-wider ${meta.text}`}>
                     {meta.label}
                   </span>
-                  <div className="flex-1 h-px bg-gray-100 ml-2" />
+                  <div className="flex-1 h-px bg-white/[0.06] ml-2" />
                 </div>
 
                 {/* Cards */}
@@ -115,13 +118,13 @@ export function Roadmap() {
                   {group.entries.map((entry, i) => (
                     <div
                       key={i}
-                      className="group relative rounded-2xl border border-gray-100 bg-white p-5 transition-all hover:border-gray-200 hover:shadow-lg hover:shadow-gray-100/80"
+                      className="group relative rounded-2xl p-5 transition-all hover:scale-[1.02] bg-[#141414] border border-[#222]"
                     >
                       <div className="text-2xl mb-3">{entry.icon}</div>
-                      <h3 className="text-[15px] font-semibold text-gray-900 mb-1.5">
+                      <h3 className="text-[15px] font-semibold text-white/90 mb-1.5">
                         {entry.title}
                       </h3>
-                      <p className="text-[13px] leading-relaxed text-gray-400">
+                      <p className="text-[13px] leading-relaxed text-white/35">
                         {entry.description}
                       </p>
                     </div>

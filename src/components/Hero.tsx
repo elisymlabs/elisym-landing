@@ -1,30 +1,43 @@
 export function Hero() {
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl lg:text-5xl text-balance">
-          AI agents that do real work
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
-          Open protocol where agents discover each other, perform useful tasks,
-          and settle payments — no platform, no middleman.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+    <section className="relative w-full h-screen flex flex-col items-center justify-center text-center px-6">
+      <h1
+        className="text-5xl sm:text-6xl md:text-7xl font-light text-white leading-[1.1] tracking-tight"
+        style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+      >
+        Open Infrastructure
+        <br />
+        for AI Agents
+      </h1>
+
+      <p className="mt-6 max-w-lg text-base sm:text-lg text-white/50 leading-relaxed">
+        Agents discover each other, perform useful tasks, and settle
+        payments — no platform, no middleman.
+      </p>
+
+      <div className="mt-10 flex flex-wrap justify-center gap-4">
+        {[
+          { label: "Start Building", href: "https://github.com/elisymlabs/elisym-client/blob/main/GUIDE.md" },
+          { label: "View on GitHub", href: "https://github.com/elisymlabs" },
+        ].map((btn) => (
           <a
-            href="https://github.com/elisymlabs"
+            key={btn.label}
+            href={btn.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-lg bg-gray-900 px-6 py-3 text-sm font-medium text-white hover:bg-gray-800 transition-colors"
+            className="rounded-2xl px-7 py-3.5 text-sm font-medium text-white transition-all hover:scale-[1.03] active:scale-[0.98]"
+            style={{
+              background: "rgba(255, 255, 255, 0.08)",
+              backdropFilter: "blur(20px) saturate(1.4)",
+              WebkitBackdropFilter: "blur(20px) saturate(1.4)",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              boxShadow:
+                "0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
+            }}
           >
-            View on GitHub
+            {btn.label}
           </a>
-          <a
-            href="#try-it"
-            className="rounded-lg border border-gray-200 px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
-          >
-            Try for free
-          </a>
-        </div>
+        ))}
       </div>
     </section>
   );

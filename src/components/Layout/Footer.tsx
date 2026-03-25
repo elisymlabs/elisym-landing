@@ -1,23 +1,16 @@
-import { useNetwork } from "~/hooks/useNetwork";
-
 export function Footer() {
-  const { network } = useNetwork();
-
   return (
-    <footer className="border-t border-gray-100 bg-white py-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-gray-500 sm:flex-row">
+    <footer className="py-8" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-white/40 sm:flex-row">
         <div className="flex items-center gap-1">
-          <img src="/logo-black.png" alt="elisym" className="h-5" />
-          <span className='inline-flex mt-[2px]'>
-            on Solana {network === "mainnet" ? "Mainnet" : "Devnet"}
-          </span>
+          <img src="/logo.png" alt="elisym" className="h-5 opacity-60" />
         </div>
         <div className="flex items-center gap-3">
           <a
             href="https://github.com/elisymlabs"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-gray-900 transition-colors"
+            className="text-white/30 hover:text-white/70 transition-colors"
             title="GitHub"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -28,7 +21,7 @@ export function Footer() {
             href="https://twitter.com/elisymlabs"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-gray-900 transition-colors"
+            className="text-white/30 hover:text-white/70 transition-colors"
             title="X (Twitter)"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
