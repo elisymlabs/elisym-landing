@@ -53,12 +53,15 @@ const SHADER_HTML = `<!DOCTYPE html>
   }
 
   var mouseDown=false;
+  var isMobile='ontouchstart' in window||navigator.maxTouchPoints>0;
   canvas.addEventListener('mousedown',function(e){mouseDown=true;injectMouseImpulse(e.clientX,e.clientY)});
   canvas.addEventListener('mousemove',function(e){if(mouseDown)injectMouseImpulse(e.clientX,e.clientY)});
   canvas.addEventListener('mouseup',function(){mouseDown=false});
-  canvas.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;injectMouseImpulse(e.touches[0].clientX,e.touches[0].clientY)},{passive:false});
-  canvas.addEventListener('touchmove',function(e){e.preventDefault();if(mouseDown)injectMouseImpulse(e.touches[0].clientX,e.touches[0].clientY)},{passive:false});
-  canvas.addEventListener('touchend',function(){mouseDown=false});
+  if(!isMobile){
+    canvas.addEventListener('touchstart',function(e){e.preventDefault();mouseDown=true;injectMouseImpulse(e.touches[0].clientX,e.touches[0].clientY)},{passive:false});
+    canvas.addEventListener('touchmove',function(e){e.preventDefault();if(mouseDown)injectMouseImpulse(e.touches[0].clientX,e.touches[0].clientY)},{passive:false});
+    canvas.addEventListener('touchend',function(){mouseDown=false});
+  }
 
   function injectMouseImpulse(mx,my){
     var strength=18*IMPULSE_STRENGTH,radius=4;
