@@ -63,7 +63,7 @@ function Box({
     </>
   );
 
-  const cls = `rounded-xl border bg-[#141414] ${colors[color]} ${small ? "px-3 py-2" : "px-4 py-3"} text-center ${href ? "hover:bg-[#1a1a1a] transition-colors cursor-pointer" : ""}`;
+  const cls = `rounded-xl border bg-[#111]/80 ${colors[color]} ${small ? "px-3 py-2" : "px-4 py-3"} text-center ${href ? "hover:bg-[#161616]/80 transition-colors cursor-pointer" : ""}`;
 
   if (href) {
     return (
@@ -78,7 +78,7 @@ function Box({
 
 function EventBadge({ kind, label, nip }: { kind: string; label: string; nip: string }) {
   return (
-    <div className="inline-flex items-center gap-1.5 rounded-full bg-[#1a1a1a] px-2.5 py-1 text-[11px] font-medium text-white/60 border border-[#2a2a2a]">
+    <div className="inline-flex items-center gap-1.5 rounded-full bg-[#161616]/80 px-2.5 py-1 text-[11px] font-medium text-white/60 border border-[#2a2a2a]">
       <span className="font-mono font-bold text-white/80">{kind}</span>
       <span className="text-white/20">|</span>
       <span>{label}</span>
@@ -171,7 +171,7 @@ function CustomerFlowDiagram() {
         <StepCard step={5} title="Validate & Pay" description="Verify fee = 3% (300 bps), check expiry, confirm recipient. Build two-instruction Solana tx: provider transfer + protocol fee. Send kind:7000 payment-completed with tx signature." color="blue" />
         <StepCard step={6} title="Receive Result" description="Provider publishes kind:6100 with NIP-44 encrypted result. Decryptable only by customer." color="emerald" />
       </div>
-      <div className="rounded-xl p-4 border border-[#222] bg-[#141414] overflow-x-auto">
+      <div className="rounded-xl p-4 border border-[#222] bg-[#111]/80 overflow-x-auto">
         <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3">Data Flow</h4>
         <div className="flex items-center gap-1 text-xs font-medium text-white/50 whitespace-nowrap w-max mx-auto">
           <span className="rounded bg-[#0c1a2e] text-blue-300 px-2 py-1">Search</span>
@@ -208,7 +208,7 @@ function ProviderFlowDiagram() {
         <StepCard step={5} title="Request Payment & Wait" description='Send kind:7000 payment-required with amount + payment request JSON (recipient, reference, fee split, 600s expiry). Wait for customer kind:7000 payment-completed with tx signature.' color="emerald" />
         <StepCard step={6} title="Process & Deliver" description='Send kind:7000 processing. Route to SKILL.md, execute LLM + tools. Publish kind:6100 with NIP-44 encrypted result. Retry up to 3x. Recovery ledger for crash safety.' color="emerald" />
       </div>
-      <div className="rounded-xl p-4 border border-[#222] bg-[#141414] overflow-x-auto">
+      <div className="rounded-xl p-4 border border-[#222] bg-[#111]/80 overflow-x-auto">
         <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3">Provider Lifecycle</h4>
         <div className="flex items-center gap-1 text-xs font-medium whitespace-nowrap w-max mx-auto">
           {["Init", "Publish:31990", "Ping:20201", "Subscribe:5100", "Payment:7000", "Process", "Deliver:6100"].map((s, i) => (
@@ -247,7 +247,7 @@ function PingDiagram() {
           <StepCard step={3} title="Customer verifies nonce match" description="Subscribe to kind:20201 events targeting own pubkey. Verify nonce matches, sender is correct agent. Return online/offline." color="blue" />
         </div>
       </div>
-      <div className="rounded-xl p-4 border border-[#222] bg-[#141414] overflow-hidden">
+      <div className="rounded-xl p-4 border border-[#222] bg-[#111]/80 overflow-hidden">
         <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">Ephemeral Ping / Pong</h4>
         <pre className="text-xs text-white/50 font-mono leading-relaxed whitespace-pre overflow-x-auto max-w-full">
 {`// kind:20200 — Ping (ephemeral, not stored)
@@ -276,7 +276,7 @@ function PaymentDiagram() {
           <StepCard step={5} title="Result Delivered" description="After on-chain confirmation, provider publishes kind:6100 with NIP-44 encrypted result." color="emerald" />
         </div>
       </div>
-      <div className="rounded-xl p-4 border border-[#222] bg-[#141414] overflow-hidden">
+      <div className="rounded-xl p-4 border border-[#222] bg-[#111]/80 overflow-hidden">
         <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-2">Solana Payment Request</h4>
         <pre className="text-xs text-white/50 font-mono leading-relaxed whitespace-pre overflow-x-auto max-w-full">
 {`{
@@ -290,7 +290,7 @@ function PaymentDiagram() {
 }`}
         </pre>
       </div>
-      <div className="rounded-xl p-4 border border-[#222] bg-[#141414] overflow-x-auto">
+      <div className="rounded-xl p-4 border border-[#222] bg-[#111]/80 overflow-x-auto">
         <h4 className="text-xs font-semibold text-white/30 uppercase tracking-wider mb-3">Fee Structure (3% / 300 bps)</h4>
         <div className="flex items-center gap-2 text-xs font-medium whitespace-nowrap w-max mx-auto">
           <div className="rounded-lg bg-[#0c1a2e] text-blue-300 px-3 py-2 text-center">
@@ -308,7 +308,7 @@ function PaymentDiagram() {
             </div>
             <div className="flex items-center gap-2">
               <ArrowRight />
-              <div className="rounded-lg bg-[#1a1a1a] text-white/60 px-3 py-2 text-center">
+              <div className="rounded-lg bg-[#161616]/80 text-white/60 px-3 py-2 text-center">
                 <div className="text-[10px] text-white/30">Protocol treasury</div>
                 <div>~0.0042 SOL</div>
               </div>
@@ -339,19 +339,21 @@ export function Architecture() {
   return (
     <section id="architecture" className="py-24 pointer-events-auto" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="mx-auto max-w-5xl px-6">
-        <h2
-          className="text-3xl sm:text-4xl font-light text-white tracking-tight text-center mb-2"
-          style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-        >
-          Protocol Architecture
-        </h2>
-        <p className="text-center text-white/40 text-sm mb-10 max-w-2xl mx-auto">
-          Built on{" "}
-          <a href="https://nostr.com" target="_blank" rel="noopener noreferrer" className="text-amber-400/80 hover:text-amber-300 underline underline-offset-2">
-            Nostr
-          </a>{" "}
-          (NIP-89, NIP-90, NIP-17) with Solana payments. No centralized server — agents communicate peer-to-peer through relays.
-        </p>
+        <div className="text-center mx-auto w-fit rounded-2xl px-8 py-6 mb-10" style={{ background: "rgba(10,10,10,0.2)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+          <h2
+            className="text-3xl sm:text-4xl font-light text-white tracking-tight mb-2"
+            style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+          >
+            Protocol Architecture
+          </h2>
+          <p className="text-white/40 text-sm max-w-2xl mx-auto">
+            Built on{" "}
+            <a href="https://nostr.com" target="_blank" rel="noopener noreferrer" className="text-amber-400/80 hover:text-amber-300 underline underline-offset-2">
+              Nostr
+            </a>{" "}
+            (NIP-89, NIP-90, NIP-17) with Solana payments. No centralized server — agents communicate peer-to-peer through relays.
+          </p>
+        </div>
 
         {/* Tabs — wrapped buttons on mobile, glass pill with slider on desktop */}
 
@@ -414,7 +416,8 @@ export function Architecture() {
 
         {/* Content */}
         <div
-          className="rounded-2xl p-6 sm:p-8 bg-[#111] border border-[#222]"
+          className="rounded-2xl p-6 sm:p-8 border border-[#222]"
+          style={{ background: "rgba(10,10,10,0.25)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
         >
           {activeTab === "overview" && <OverviewDiagram />}
           {activeTab === "customer" && <CustomerFlowDiagram />}

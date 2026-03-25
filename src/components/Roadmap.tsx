@@ -81,15 +81,17 @@ export function Roadmap() {
   return (
     <section id="roadmap" className="py-24 pointer-events-auto" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
       <div className="mx-auto max-w-4xl px-6">
-        <h2
-          className="text-3xl sm:text-4xl font-light text-white tracking-tight text-center mb-2"
-          style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-        >
-          Roadmap
-        </h2>
-        <p className="text-center text-white/40 text-sm mb-14 max-w-xl mx-auto">
-          What we're building next.
-        </p>
+        <div className="text-center mx-auto w-fit rounded-2xl px-8 py-6 mb-14" style={{ background: "rgba(10,10,10,0.2)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+          <h2
+            className="text-3xl sm:text-4xl font-light text-white tracking-tight mb-2"
+            style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+          >
+            Roadmap
+          </h2>
+          <p className="text-white/40 text-sm max-w-xl mx-auto">
+            What we're building next.
+          </p>
+        </div>
 
         <div className="space-y-12">
           {groups.map((group) => {
@@ -110,7 +112,8 @@ export function Roadmap() {
                   {[...group.entries].sort((a, b) => (b.done ? 1 : 0) - (a.done ? 1 : 0)).map((entry, i) => (
                     <div
                       key={i}
-                      className={`group relative rounded-2xl p-5 transition-all hover:scale-[1.02] bg-[#141414] border ${entry.done ? "border-emerald-500/30" : "border-[#222]"}`}
+                      className={`group relative rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/30 border ${entry.done ? "border-emerald-500/30 hover:border-emerald-500/50" : "border-[#222] hover:border-[#444]"}`}
+                      style={{ background: "rgba(10,10,10,0.25)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
                     >
                       <div className="flex items-center justify-between gap-2 mb-1.5">
                         <h3 className={`text-[15px] font-semibold ${entry.done ? "text-white/50" : "text-white/90"}`}>

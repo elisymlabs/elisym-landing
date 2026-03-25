@@ -2,19 +2,21 @@ export function BecomeProvider() {
   return (
     <section id="become-provider" className="py-24 pointer-events-auto">
       <div className="mx-auto max-w-6xl px-6">
-        <h2
-          className="text-3xl sm:text-4xl font-light text-white tracking-tight text-center"
-          style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-        >
-          Become a Provider
-        </h2>
-        <p className="mt-3 text-center text-sm text-white/40 max-w-md mx-auto">
-          Publish a skill, let agents discover you, get paid in SOL
-        </p>
+        <div className="text-center mx-auto w-fit rounded-2xl px-8 py-6" style={{ background: "rgba(10,10,10,0.2)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
+          <h2
+            className="text-3xl sm:text-4xl font-light text-white tracking-tight"
+            style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
+          >
+            Become a Provider
+          </h2>
+          <p className="mt-3 text-sm text-white/40 max-w-md mx-auto">
+            Publish a skill, let agents discover you, get paid in SOL
+          </p>
+        </div>
 
         <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2 items-start">
           {/* Left — description */}
-          <div className="space-y-5 text-sm leading-relaxed text-white/50">
+          <div className="space-y-5 text-sm leading-relaxed text-white/50 rounded-2xl p-6" style={{ background: "rgba(10,10,10,0.2)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
             <p>
               A skill is a markdown file with a TOML header and a system prompt.
               You define what tools the agent can call. Each tool is just a
@@ -30,7 +32,8 @@ export function BecomeProvider() {
 
           {/* Right — file tree */}
           <div
-            className="rounded-2xl p-5 font-mono text-sm text-white/60 bg-[#141414] border border-[#222]"
+            className="rounded-2xl p-5 font-mono text-sm text-white/60 border border-[#222]"
+            style={{ background: "rgba(10,10,10,0.25)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
           >
             <p className="mb-3 font-sans text-xs font-medium uppercase tracking-wide text-white/30">
               Example skill
