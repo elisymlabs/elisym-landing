@@ -141,10 +141,24 @@ const SHADER_HTML = `<!DOCTYPE html>
     out[offset]=r+0.5|0;out[offset+1]=g+0.5|0;out[offset+2]=b+0.5|0;
   }
 
+  var perfFrameCount=0,perfStartTime=0,perfChecked=false,fadeOut=0;
+
   function render(now){
     if(!running)return;
     var time=now*0.001,dt=lastTime===0?0.016:(time-lastTime);
     if(dt>0.1)dt=0.016;lastTime=time;
+
+    if(!perfChecked){
+      perfFrameCount++;
+      if(perfFrameCount===1)perfStartTime=time;
+      if(perfFrameCount===90){
+        perfChecked=true;
+        var elapsed=time-perfStartTime;
+        var avgFps=89/elapsed;
+        if(avgFps<30){fadeOut=1;canvas.style.transition='opacity 0.8s ease-out';canvas.style.opacity='0';setTimeout(function(){running=false},900);return}
+      }
+    }
+    if(fadeOut)return;
     timeSinceImpulse+=dt;impulseInterval=1.8/IMPULSE_RATE;
     if(timeSinceImpulse>=impulseInterval){injectImpulse();timeSinceImpulse-=impulseInterval;timeSinceImpulse-=Math.random()*impulseInterval*0.3}
     simulate(dt);
