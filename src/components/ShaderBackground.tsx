@@ -83,7 +83,7 @@ const SHADER_HTML = `<!DOCTYPE html>
   }
 
   function injectMouseImpulse(mx,my){
-    var strength=5*IMPULSE_STRENGTH,radius=2.5;
+    var strength=5*IMPULSE_STRENGTH,radius=3;
     for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
       var i=idx(c,r),dx=restX[i]-mx,dy=restY[i]-my;
       var dist=Math.sqrt(dx*dx+dy*dy);
