@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Header } from "~/components/Layout/Header";
 import { Footer } from "~/components/Layout/Footer";
 import { ShaderBackground } from "~/components/ShaderBackground";
@@ -7,6 +8,15 @@ import { Architecture } from "~/components/Architecture";
 import { Roadmap } from "~/components/Roadmap";
 
 export function App() {
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, []);
   return (
     <div className="min-h-screen bg-[#0a0a0a]">
       <ShaderBackground />
