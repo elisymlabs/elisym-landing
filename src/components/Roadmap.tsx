@@ -1,139 +1,183 @@
-type Category = "distribution" | "features" | "infra";
-
 interface RoadmapEntry {
   title: string;
   description: string;
-  category: Category;
   done?: boolean;
 }
 
-const ENTRIES: RoadmapEntry[] = [
+interface RoadmapGroup {
+  label: string;
+  icon: string;
+  entries: RoadmapEntry[];
+}
+
+const GROUP_ICONS: Record<string, JSX.Element> = {
+  distribution: (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+    </svg>
+  ),
+  features: (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+    </svg>
+  ),
+  payments: (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+    </svg>
+  ),
+};
+
+const GROUPS: RoadmapGroup[] = [
   {
-    title: "OpenClaw SKILL.md",
-    description:
-      "Writing a skill file so OpenClaw agents can discover and hire elisym providers directly from Telegram.",
-    category: "distribution",
+    label: "DISTRIBUTION",
+    icon: "distribution",
+    entries: [
+      {
+        title: "Web app for hiring agents",
+        description:
+          "Building a full browser UI to discover, hire, and pay agents. Wallet connect, job history, live status.",
+        done: true,
+      },
+      {
+        title: "MCP server",
+        description:
+          "Connect Claude, Cursor, or Windsurf to the Elisym network with a single command. Discover and hire agents from your IDE.",
+        done: true,
+      },
+      {
+        title: "OpenClaw SKILL.md",
+        description:
+          "Writing a skill file so OpenClaw agents can discover and hire elisym providers directly from Telegram.",
+      },
+    ],
   },
   {
-    title: "Web app for hiring agents",
-    description:
-      "Building a full browser UI to discover, hire, and pay agents. Wallet connect, job history, live status.",
-    category: "distribution",
-    done: true,
+    label: "NEW FEATURES",
+    icon: "features",
+    entries: [
+      {
+        title: "Transparent LLM logs",
+        description:
+          "Adding real-time visibility into what the LLM does during a job — every tool call, reasoning step, and cost breakdown.",
+      },
+      {
+        title: "File inputs & outputs",
+        description:
+          "Adding support for files in jobs — send images, documents, audio.",
+      },
+      {
+        title: "Agent reviews & ratings",
+        description:
+          "On-chain reputation system — rate agents after each job. Verified reviews help customers find reliable providers.",
+      },
+    ],
   },
   {
-    title: "Transparent LLM logs",
-    description:
-      "Adding real-time visibility into what the LLM does during a job — every tool call, reasoning step, and cost breakdown.",
-    category: "features",
-  },
-  {
-    title: "File inputs & outputs",
-    description:
-      "Adding support for files in jobs — send images, documents, audio.",
-    category: "features",
-  },
-  {
-    title: "USDC payments",
-    description:
-      "Adding USDC as a payment option alongside SOL. Providers pick what they accept, customers pay in what they have.",
-    category: "infra",
-  },
-  {
-    title: "Solana mainnet",
-    description:
-      "Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.",
-    category: "infra",
-  },
-  {
-    title: "Own Nostr relay",
-    description:
-      "Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.",
-    category: "infra",
-  },
-  {
-    title: "Bitcoin payments",
-    description:
-      "Adding Bitcoin as a payment rail — Lightning invoices for instant settlement, on-chain fallback for larger jobs.",
-    category: "infra",
-  },
-  {
-    title: "EVM networks",
-    description:
-      "Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.",
-    category: "infra",
+    label: "PAYMENTS & INFRASTRUCTURE",
+    icon: "payments",
+    entries: [
+      {
+        title: "USDC payments",
+        description:
+          "Adding USDC as a payment option alongside SOL. Providers pick what they accept, customers pay in what they have.",
+      },
+      {
+        title: "Solana mainnet",
+        description:
+          "Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.",
+      },
+      {
+        title: "Own Nostr relay",
+        description:
+          "Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.",
+      },
+      {
+        title: "Bitcoin payments",
+        description:
+          "Adding Bitcoin as a payment rail — Lightning invoices for instant settlement, on-chain fallback for larger jobs.",
+      },
+      {
+        title: "EVM networks",
+        description:
+          "Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.",
+      },
+    ],
   },
 ];
 
-const CATEGORY_LABELS: Record<Category, { label: string; dot: string }> = {
-  distribution: { label: "Distribution", dot: "bg-sky-400" },
-  features: { label: "New features", dot: "bg-lime-400" },
-  infra: { label: "Payments & infrastructure", dot: "bg-orange-400" },
-};
-
 export function Roadmap() {
-  const groups: { category: Category; entries: RoadmapEntry[] }[] = [
-    { category: "distribution", entries: ENTRIES.filter((e) => e.category === "distribution") },
-    { category: "features", entries: ENTRIES.filter((e) => e.category === "features") },
-    { category: "infra", entries: ENTRIES.filter((e) => e.category === "infra") },
-  ];
-
   return (
-    <section id="roadmap" className="py-24 pointer-events-auto" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-      <div className="mx-auto max-w-4xl px-6">
-        <div className="text-center mx-auto w-fit rounded-2xl px-8 py-6 mb-14" style={{ background: "rgba(10,10,10,0.2)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}>
-          <h2
-            className="text-3xl sm:text-4xl font-light text-white tracking-tight mb-2"
-            style={{ fontFamily: "'Georgia', 'Times New Roman', serif" }}
-          >
-            Roadmap
-          </h2>
-          <p className="text-white/40 text-sm max-w-xl mx-auto">
-            What we're building next.
-          </p>
+    <section id="roadmap" className="py-[100px] px-6 pointer-events-auto" style={{ scrollMarginTop: "100px" }}>
+      <div className="mx-auto max-w-[1320px]">
+        <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">
+          ROADMAP
         </div>
+        <h2
+          className="text-[40px] text-white mb-3"
+          style={{ fontFamily: "Georgia, serif" }}
+        >
+          What we&rsquo;re building next
+        </h2>
+        <p className="text-base text-[#888] mb-14">
+          From devnet to mainnet — here&rsquo;s what&rsquo;s shipping.
+        </p>
 
-        <div className="space-y-12">
-          {groups.map((group) => {
-            const meta = CATEGORY_LABELS[group.category];
-            return (
-              <div key={group.category}>
-                {/* Group label */}
-                <div className="flex items-center gap-2 mb-4 pl-1">
-                  <span className={`h-2 w-2 rounded-full ${meta.dot}`} />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-white/40">
-                    {meta.label}
-                  </span>
-                  <div className="flex-1 h-px bg-white/[0.06] ml-2" />
-                </div>
-
-                {/* Cards — done items first */}
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                  {[...group.entries].sort((a, b) => (b.done ? 1 : 0) - (a.done ? 1 : 0)).map((entry, i) => (
-                    <div
-                      key={i}
-                      className={`group relative rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/30 border ${entry.done ? "border-emerald-500/30 hover:border-emerald-500/50" : "border-[#222] hover:border-[#444]"}`}
-                      style={{ background: "rgba(10,10,10,0.25)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)" }}
-                    >
-                      <div className="flex items-center justify-between gap-2 mb-1.5">
-                        <h3 className={`text-[15px] font-semibold ${entry.done ? "text-white/50" : "text-white/90"}`}>
-                          {entry.title}
-                        </h3>
-                        {entry.done && (
-                          <span className="shrink-0 rounded-full bg-emerald-500/15 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
-                            Done
-                          </span>
-                        )}
-                      </div>
-                      <p className={`text-[13px] leading-relaxed ${entry.done ? "text-white/25" : "text-white/35"}`}>
-                        {entry.description}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+        <div className="flex flex-col gap-14">
+          {GROUPS.map((group) => (
+            <div key={group.label}>
+              {/* Group header */}
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-[#888]">
+                  {GROUP_ICONS[group.icon]}
+                </span>
+                <span className="text-[11px] font-medium tracking-[0.1em] text-[#888]">
+                  {group.label}
+                </span>
+                <div className="flex-1 h-px bg-white/[0.06]" />
               </div>
-            );
-          })}
+
+              {/* Cards grid */}
+              <div
+                className="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                {group.entries.map((entry) => (
+                  <div
+                    key={entry.title}
+                    className="rounded-[16px] px-7 py-9 flex flex-col"
+                    style={{
+                      background: "#151517",
+                      border: "1px solid rgba(255,255,255,0.06)",
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-3 mb-3">
+                      <h3
+                        className="text-[19px] font-semibold text-white/90"
+                        style={{ fontFamily: "'Inter', sans-serif" }}
+                      >
+                        {entry.title}
+                      </h3>
+                      {entry.done && (
+                        <span
+                          className="shrink-0 rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
+                          style={{
+                            color: "#1D9E75",
+                            background: "rgba(29,158,117,0.1)",
+                            border: "1px solid rgba(29,158,117,0.2)",
+                          }}
+                        >
+                          Done
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[14px] text-[#666] leading-[1.7]">
+                      {entry.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

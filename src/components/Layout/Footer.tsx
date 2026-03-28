@@ -1,16 +1,16 @@
 export function Footer() {
   return (
     <footer className="py-8 pointer-events-auto" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 text-sm text-white/40 sm:flex-row">
+      <div className="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-4 px-6 text-sm text-white/40 sm:flex-row">
         <div className="flex items-center gap-1">
-          <img src="/logo.png" alt="elisym" className="h-5 opacity-60" />
+          <img src="/logo.png" alt="elisym" className="h-6 opacity-60" />
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-5">
           <a
             href="https://github.com/elisymlabs"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/30 hover:text-white/70 transition-colors"
+            className="text-white/40 hover:text-white/70 transition-colors"
             title="GitHub"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -21,7 +21,7 @@ export function Footer() {
             href="https://twitter.com/elisymlabs"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white/30 hover:text-white/70 transition-colors"
+            className="text-white/40 hover:text-white/70 transition-colors"
             title="X (Twitter)"
           >
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
