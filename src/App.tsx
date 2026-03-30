@@ -46,9 +46,11 @@ export function App() {
               <FeaturedAgents />
             </RevealSection>
           </div>
-          <RevealSection>
-            <WhyElisym />
-          </RevealSection>
+          <div id="why-elisym" style={{ scrollMarginTop: "40px" }}>
+            <RevealSection>
+              <WhyElisym />
+            </RevealSection>
+          </div>
           <RevealSection>
             <Roadmap />
           </RevealSection>

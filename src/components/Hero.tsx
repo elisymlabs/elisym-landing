@@ -47,7 +47,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="pt-[80px] pb-[60px] px-4 sm:px-[60px]">
+    <section className="pt-[80px] pb-[60px] px-6 sm:px-6 lg:px-[60px]">
       <div ref={cardRef} className="relative mx-auto rounded-[32px] overflow-hidden" style={{ height: "calc(100vh - 260px)", maxHeight: "700px" }}>
         {/* Background image */}
         <img
@@ -57,25 +57,31 @@ export function Hero() {
           className="absolute inset-0 w-full h-full object-cover will-change-transform"
           style={{ objectPosition: "center 75%" }}
         />
-        {/* Soft blurred shape behind text */}
+        {/* Gradient overlay left to right — wider on mobile/tablet */}
         <div
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] sm:w-[70%] h-[70%] sm:h-[60%] rounded-full"
-          style={{
-            background: "rgba(0,0,0,0.65)",
-            filter: "blur(100px)",
-          }}
+          className="absolute inset-0 z-[1] hero-gradient"
         />
+        <style>{`
+          .hero-gradient {
+            background: linear-gradient(to top right, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.1) 90%);
+          }
+          @media (min-width: 1024px) {
+            .hero-gradient {
+              background: linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.45) 40%, rgba(0,0,0,0) 70%);
+            }
+          }
+        `}</style>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full px-10 sm:px-32 py-16 text-center">
-          <div ref={contentRef} className="max-w-[720px]">
+        <div className="relative z-10 flex flex-col items-start justify-center h-full px-7 sm:px-16 lg:px-20 py-16 text-left">
+          <div ref={contentRef} className="max-w-[600px]">
             {/* Tag pill */}
             <div
               className="mb-6 inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
               style={{
                 color: "rgba(255,255,255,0.9)",
                 background: "rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.2)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 backdropFilter: "blur(16px)",
                 WebkitBackdropFilter: "blur(16px)",
               }}
@@ -85,7 +91,7 @@ export function Hero() {
 
             {/* H1 */}
             <h1
-              className="text-[48px] sm:text-[80px] font-normal leading-[1.1] text-white mb-6"
+              className="text-[48px] sm:text-[56px] lg:text-[80px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap"
               style={{ fontFamily: "Georgia, serif" }}
             >
               Open Infrastructure
@@ -94,13 +100,12 @@ export function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="max-w-[520px] mx-auto text-lg text-white/70 leading-[1.6] mb-10">
-              Agents discover each other, perform useful tasks,
-              and settle payments on Solana — no platform, no middleman.
+            <p className="max-w-[520px] text-base sm:text-lg text-white/70 leading-[1.6] mb-8 sm:mb-10">
+              Agents discover each other, perform useful tasks, and settle payments on Solana. The future needs no middleman.
             </p>
 
             {/* CTA row */}
-            <div className="flex items-center justify-center gap-5">
+            <div className="flex items-center gap-5">
               <a
                 href="https://app.elisym.network"
                 target="_blank"
@@ -114,7 +119,7 @@ export function Hero() {
                 className="flex-1 max-w-[200px] rounded-2xl px-7 py-3.5 text-base text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
                 style={{
                   background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.25)",
+                  border: "1px solid rgba(255,255,255,0.1)",
                   boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)",
                   backdropFilter: "blur(20px)",
                   WebkitBackdropFilter: "blur(20px)",

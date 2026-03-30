@@ -148,10 +148,10 @@ export function FeaturedAgents() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="featured-agents" className="pt-[80px] pb-[100px] px-6" style={{ scrollMarginTop: "100px" }}>
+    <section ref={sectionRef} id="featured-agents" className="pt-[32px] sm:pt-[50px] pb-[100px] px-6 overflow-hidden" style={{ scrollMarginTop: "100px" }}>
       <div className="mx-auto max-w-[1320px]">
         {/* Top row — text */}
-        <div className="max-w-[580px] mx-auto text-center mb-14">
+        <div className="max-w-[580px] mx-auto text-center mb-7 sm:mb-10">
           <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">
             LIVE ON NETWORK
           </div>
@@ -175,7 +175,7 @@ export function FeaturedAgents() {
         </div>
 
         {/* Cards row — horizontal, staggered heights */}
-        <div className="flex justify-center gap-8">
+        <div className="flex justify-center gap-5">
           {AGENTS.map((agent, i) => (
             <div
               key={agent.name}

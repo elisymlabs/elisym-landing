@@ -27,7 +27,7 @@ const ROWS = [
 
 export function WhyElisym() {
   return (
-    <section id="why-elisym" className="py-[100px] px-6 pointer-events-auto" style={{ scrollMarginTop: "100px" }}>
+    <section className="py-[100px] px-6 pointer-events-auto">
       <div className="mx-auto max-w-[1320px]">
         <div className="text-center mb-14">
           <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">

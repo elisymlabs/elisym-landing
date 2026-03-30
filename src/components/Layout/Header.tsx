@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from "react";
 
 export function Header() {
   const [onLight, setOnLight] = useState(false);
+  const [menuOnLight, setMenuOnLight] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = headerRef.current;
@@ -27,16 +29,23 @@ export function Header() {
       if (!whiteBlock) return;
       const rect = whiteBlock.getBoundingClientRect();
       setOnLight(rect.top < 48 && rect.bottom > 48);
+
+      // Check if dropdown menu overlaps with white block
+      // Use a fixed estimate: menu starts ~70px from top of viewport
+      const menuTop = 70;
+      const menuBottom = menuTop + 400;
+      const menuMid = (menuTop + menuBottom) / 2;
+      setMenuOnLight(rect.top < menuMid && rect.bottom > menuMid);
     }
     window.addEventListener("scroll", check, { passive: true });
     check();
     return () => window.removeEventListener("scroll", check);
-  }, []);
+  }, [menuOpen]);
 
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
       {/* Outer shell — always full width, provides the "stage" */}
-      <div className="pointer-events-auto px-4 sm:px-[60px]">
+      <div className="pointer-events-auto px-4 sm:px-6 lg:px-[60px]">
         {/* Inner container that morphs */}
         <div
           style={{
@@ -90,7 +99,7 @@ export function Header() {
             </a>
 
             {/* Nav links */}
-            <div className="hidden sm:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2">
               {[
                 { label: "Mission", href: "#mission" },
                 { label: "How it works", href: "#how-it-works" },
@@ -188,7 +197,7 @@ export function Header() {
                       }
                     : {
                         background: "rgba(255, 255, 255, 0.08)",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
+                        border: "1px solid rgba(255, 255, 255, 0.08)",
                         boxShadow: "inset 0 1px 0 rgba(255, 255, 255, 0.08)",
                         backdropFilter: "blur(20px)",
                         WebkitBackdropFilter: "blur(20px)",
@@ -201,20 +210,16 @@ export function Header() {
               {/* Burger button — mobile only */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className={`sm:hidden flex items-center justify-center w-9 h-9 rounded-xl cursor-pointer transition-colors ${
-                  onLight ? "text-black/60" : "text-white/60"
+                className={`lg:hidden flex items-center justify-center w-9 h-9 cursor-pointer transition-colors ${
+                  onLight ? "text-black/70" : "text-white/70"
                 }`}
-                style={{
-                  background: onLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.08)",
-                  border: onLight ? "1px solid rgba(0,0,0,0.08)" : "1px solid rgba(255,255,255,0.1)",
-                }}
               >
                 {menuOpen ? (
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 ) : (
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <svg className="w-5.5 h-5.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
                   </svg>
                 )}
@@ -222,68 +227,84 @@ export function Header() {
             </div>
           </nav>
 
-          {/* Mobile menu */}
-          <div
-            className="sm:hidden overflow-hidden"
-            style={{
-              maxHeight: menuOpen ? "400px" : "0",
-              opacity: menuOpen ? 1 : 0,
-              transition: "max-height 0.4s cubic-bezier(0.4, 0, 0, 1), opacity 0.3s ease",
-              ...(menuOpen
-                ? {
-                    background: onLight ? "rgba(255,255,255,0.85)" : "rgba(20,20,22,0.9)",
-                    backdropFilter: "blur(24px) saturate(1.5)",
-                    WebkitBackdropFilter: "blur(24px) saturate(1.5)",
-                    borderTop: onLight ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.08)",
-                    marginTop: "4px",
-                    borderRadius: "0 0 20px 20px",
-                  }
-                : {}),
-            }}
-          >
-            <div className="flex flex-col gap-1 px-4 pb-4 pt-2">
-              {[
-                { label: "Mission", href: "#mission" },
-                { label: "How it works", href: "#how-it-works" },
-                { label: "Agents", href: "#featured-agents" },
-                { label: "Why Elisym", href: "#why-elisym" },
-                { label: "Roadmap", href: "#roadmap" },
-              ].map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className={`rounded-xl px-4 py-2.5 text-[15px] transition-colors ${
-                    onLight
-                      ? "text-black/70 hover:bg-black/5"
-                      : "text-white/70 hover:bg-white/5"
-                  }`}
-                >
-                  {link.label}
-                </a>
-              ))}
-              <div className="flex gap-3 px-4 pt-2">
-                <a
-                  href="https://github.com/elisymlabs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-colors ${onLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
-                >
-                  <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
-                    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
-                  </svg>
-                </a>
-                <a
-                  href="https://twitter.com/elisymlabs"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`transition-colors ${onLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
-                >
-                  <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                  </svg>
-                </a>
-              </div>
+        </div>
+      </div>
+
+      {/* Mobile dropdown menu — separate panel below header */}
+      <div
+        ref={menuRef}
+        className="lg:hidden pointer-events-auto px-4"
+        style={{
+          marginTop: "8px",
+          visibility: menuOpen ? "visible" : "hidden",
+          transform: menuOpen ? "translateY(0) scale(1)" : "translateY(-8px) scale(0.97)",
+          pointerEvents: menuOpen ? "auto" : "none",
+          transition: menuOpen
+            ? "transform 0.25s cubic-bezier(0.4, 0, 0, 1), visibility 0s"
+            : "none",
+        }}
+      >
+        <div
+          className="rounded-2xl"
+          style={{
+            ...(menuOnLight
+              ? {
+                  background: "rgba(255, 255, 255, 0.8)",
+                  border: "1px solid rgba(0, 0, 0, 0.06)",
+                  boxShadow: "0 2px 20px rgba(0, 0, 0, 0.06), 0 0 0 0.5px rgba(0, 0, 0, 0.04)",
+                }
+              : {
+                  background: "rgba(255, 255, 255, 0.05)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  boxShadow: "0 2px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+                }),
+            backdropFilter: "blur(24px) saturate(1.5)",
+            WebkitBackdropFilter: "blur(24px) saturate(1.5)",
+            transition: "background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
+          }}
+        >
+          <div className="flex flex-col gap-2 px-4 pb-5 pt-4">
+            {[
+              { label: "Mission", href: "#mission" },
+              { label: "How it works", href: "#how-it-works" },
+              { label: "Agents", href: "#featured-agents" },
+              { label: "Why Elisym", href: "#why-elisym" },
+              { label: "Roadmap", href: "#roadmap" },
+            ].map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className={`rounded-xl px-4 py-2.5 text-[15px] transition-colors ${
+                  menuOnLight
+                    ? "text-black/70 hover:bg-black/5"
+                    : "text-white/70 hover:bg-white/5"
+                }`}
+              >
+                {link.label}
+              </a>
+            ))}
+            <div className="flex gap-3 px-4 pt-5 mt-3" style={{ borderTop: menuOnLight ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.08)" }}>
+              <a
+                href="https://github.com/elisymlabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`transition-colors ${menuOnLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12Z" />
+                </svg>
+              </a>
+              <a
+                href="https://twitter.com/elisymlabs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`transition-colors ${menuOnLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
             </div>
           </div>
         </div>

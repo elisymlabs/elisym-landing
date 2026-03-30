@@ -277,7 +277,7 @@ export function HowItWorks() {
           {(["app", "cli", "mcp"] as Tab[]).map((t) => (
             <div
               key={t}
-              className={`grid grid-cols-1 md:grid-cols-3 gap-16 ${
+              className={`grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-16 ${
                 activeTab === t ? "" : "pointer-events-none"
               }`}
               style={{

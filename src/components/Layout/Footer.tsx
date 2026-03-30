@@ -1,7 +1,7 @@
 export function Footer() {
   return (
     <footer className="py-8 pointer-events-auto" style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-      <div className="mx-auto flex max-w-[1320px] flex-col items-center justify-between gap-4 px-6 text-sm text-white/40 sm:flex-row">
+      <div className="mx-auto flex flex-row items-center justify-between gap-4 px-4 sm:px-6 lg:px-[60px] text-sm text-white/40">
         <div className="flex items-center gap-1">
           <img src="/logo.png" alt="elisym" className="h-6 opacity-60" />
         </div>

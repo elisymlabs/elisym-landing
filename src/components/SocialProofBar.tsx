@@ -37,6 +37,9 @@ export function SocialProofBar() {
         <div className="flex shrink-0">
           <MarqueeContent />
         </div>
+        <div className="flex shrink-0">
+          <MarqueeContent />
+        </div>
       </div>
     </div>
   );

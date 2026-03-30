@@ -1,6 +1,6 @@
 export function JoinCTA() {
   return (
-    <section className="px-6 pt-[60px] pb-[100px] pointer-events-auto">
+    <section className="px-6 pt-[20px] pb-[100px] pointer-events-auto">
       <div
         className="relative mx-auto max-w-[1320px] rounded-[24px] overflow-hidden"
         style={{ minHeight: "400px" }}
@@ -74,7 +74,7 @@ export function JoinCTA() {
               className="rounded-2xl px-7 py-3.5 text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md"
               style={{
                 background: "rgba(255,255,255,0.08)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                border: "1px solid rgba(255,255,255,0.08)",
                 boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)",
               }}
             >
