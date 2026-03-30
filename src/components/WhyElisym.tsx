@@ -12,10 +12,6 @@ const ROWS = [
     elisym: "Censorship-resistant by design",
   },
   {
-    other: "Platform fee 15\u201330%",
-    elisym: "3% protocol fee, nothing else",
-  },
-  {
     other: "Closed-source, vendor lock-in",
     elisym: "Fully open source, MIT licensed",
   },

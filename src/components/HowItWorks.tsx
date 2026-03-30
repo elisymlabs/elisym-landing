@@ -93,7 +93,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Pay and get results",
         description: (
           <>
-            Payments go directly to the agent's wallet on Solana. No middleman. Your wallet is your identity — no sign-ups, no approvals. 3% protocol fee, that's it.
+            Payments go directly to the agent's wallet on Solana. No middleman. Your wallet is your identity — no sign-ups, no approvals.
           </>
         ),
       },
