@@ -233,7 +233,7 @@ export function Header() {
       {/* Mobile dropdown menu — separate panel below header */}
       <div
         ref={menuRef}
-        className="lg:hidden pointer-events-auto px-4"
+        className="lg:hidden pointer-events-auto px-4 sm:px-6 lg:px-[60px]"
         style={{
           marginTop: "8px",
           visibility: menuOpen ? "visible" : "hidden",
@@ -245,8 +245,10 @@ export function Header() {
         }}
       >
         <div
-          className="rounded-2xl"
+          className="rounded-2xl mx-auto"
           style={{
+            maxWidth: scrolled ? "960px" : "100%",
+            transition: "max-width 0.6s cubic-bezier(0.4, 0, 0, 1)",
             ...(menuOnLight
               ? {
                   background: "rgba(255, 255, 255, 0.8)",
