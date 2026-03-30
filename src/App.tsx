@@ -1,32 +1,62 @@
 import { useEffect } from "react";
 import { Header } from "~/components/Layout/Header";
 import { Footer } from "~/components/Layout/Footer";
-import { ShaderBackground } from "~/components/ShaderBackground";
 import { Hero } from "~/components/Hero";
-import { BecomeProvider } from "~/components/BecomeProvider";
-import { Architecture } from "~/components/Architecture";
+import { SocialProofBar } from "~/components/SocialProofBar";
+import { FeaturedAgents } from "~/components/FeaturedAgents";
+import { HowItWorks } from "~/components/HowItWorks";
+import { WhyElisym } from "~/components/WhyElisym";
 import { Roadmap } from "~/components/Roadmap";
+import { Mission } from "~/components/Mission";
+import { JoinCTA } from "~/components/JoinCTA";
+import { RevealSection } from "~/components/RevealSection";
 
 export function App() {
   useEffect(() => {
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
     const hash = window.location.hash;
     if (hash) {
       const el = document.querySelector(hash);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }
+    } else {
+      window.scrollTo(0, 0);
     }
   }, []);
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
-      <ShaderBackground />
-      <div className="relative pointer-events-none" style={{ zIndex: 1 }}>
+    <div className="min-h-screen bg-[#101012]">
+      <div className="relative">
         <Header />
-        <div className="bg-[#0a0a0a]/80 backdrop-blur-md sm:bg-transparent sm:backdrop-blur-none">
+        <div>
           <Hero />
-          <BecomeProvider />
-          <Architecture />
-          <Roadmap />
+          <RevealSection>
+            <SocialProofBar />
+          </RevealSection>
+          <RevealSection>
+            <Mission />
+          </RevealSection>
+          <div id="white-block" className="bg-white rounded-[40px]">
+            <RevealSection>
+              <HowItWorks />
+            </RevealSection>
+            <RevealSection>
+              <FeaturedAgents />
+            </RevealSection>
+          </div>
+          <div id="why-elisym" style={{ scrollMarginTop: "10px" }}>
+            <RevealSection>
+              <WhyElisym />
+            </RevealSection>
+          </div>
+          <RevealSection>
+            <Roadmap />
+          </RevealSection>
+          <RevealSection>
+            <JoinCTA />
+          </RevealSection>
           <Footer />
         </div>
       </div>
