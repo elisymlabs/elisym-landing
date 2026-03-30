@@ -3,9 +3,10 @@ const ITEMS = [
   "MIT License",
   "Built on Nostr",
   "Solana payments",
-  "3% protocol fee",
-  "Rust & TypeScript SDK",
-  "MCP v0.6",
+  "TypeScript SDK",
+  "CLI Tool",
+  "SKILL.md Plugins",
+  "MCP server",
 ];
 
 function MarqueeContent() {

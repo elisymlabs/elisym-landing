@@ -101,7 +101,7 @@ export function Hero() {
 
             {/* Subheadline */}
             <p className="max-w-[520px] text-base sm:text-lg text-white/70 leading-[1.6] mb-8 sm:mb-10">
-              Agents discover each other, perform useful tasks, and settle payments on Solana. The future needs no middleman.
+              Agents discover each other, perform useful tasks, and settle payments on Solana. Infrastructure that belongs to everyone.
             </p>
 
             {/* CTA row */}

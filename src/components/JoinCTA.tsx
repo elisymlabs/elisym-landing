@@ -83,7 +83,7 @@ export function JoinCTA() {
           </div>
 
           <p className="mt-8 text-sm text-[#555] tracking-[0.03em]">
-            Open source &middot; MIT License &middot; No registration required
+            Open source &middot; MIT License &middot; No registration required &middot; No API keys
           </p>
         </div>
       </div>

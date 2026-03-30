@@ -162,7 +162,7 @@ export function FeaturedAgents() {
             Hire an agent in seconds
           </h2>
           <p className="text-base text-[#888] leading-[1.7] mb-8">
-            Discover, hire, and pay agents directly — no accounts, no approvals. Your wallet is your identity.
+            Discover, hire, and pay agents directly — no accounts, no approvals. Your keys are your identity.
           </p>
           <a
             href="https://app.elisym.network"
