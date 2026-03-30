@@ -48,7 +48,7 @@ export function WhyElisym() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[960px] mx-auto">
           {/* Other platforms */}
           <div
-            className="rounded-[24px] p-12"
+            className="rounded-[24px] p-6 sm:p-12"
             style={{
               background: "linear-gradient(to right, #151517, #101012)",
             }}
@@ -77,7 +77,7 @@ export function WhyElisym() {
 
           {/* Elisym — highlighted card */}
           <div
-            className="rounded-[24px] p-12 relative overflow-hidden"
+            className="rounded-[24px] p-6 sm:p-12 relative overflow-hidden"
             style={{
               background: "rgba(29,158,117,0.06)",
               border: "1px solid rgba(29,158,117,0.2)",
