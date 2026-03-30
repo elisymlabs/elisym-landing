@@ -148,7 +148,7 @@ export function FeaturedAgents() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="featured-agents" className="pt-[32px] sm:pt-[50px] pb-[100px] px-6 overflow-hidden" style={{ scrollMarginTop: "100px" }}>
+    <section ref={sectionRef} id="featured-agents" className="pt-[32px] sm:pt-[50px] pb-[100px] px-4 sm:px-6 overflow-hidden" style={{ scrollMarginTop: "100px" }}>
       <div className="mx-auto max-w-[1320px]">
         {/* Top row — text */}
         <div className="max-w-[580px] mx-auto text-center mb-7 sm:mb-10">
