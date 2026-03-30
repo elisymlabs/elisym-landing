@@ -46,24 +46,24 @@ export function JoinCTA() {
         />
 
         {/* Content — centered */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full min-h-[400px] px-8 sm:px-16 py-16 text-center">
+        <div className="relative z-10 flex flex-col items-center justify-center h-full min-h-[400px] px-5 sm:px-16 py-10 sm:py-16 text-center">
           <h2
-            className="text-4xl sm:text-[56px] text-white mb-6 leading-[1.1]"
+            className="text-[28px] sm:text-[56px] text-white mb-4 sm:mb-6 leading-[1.1]"
             style={{ fontFamily: "Georgia, serif" }}
           >
             Elisym is live. Be early.
           </h2>
-          <p className="text-[17px] text-[#888] leading-[1.7] mb-10 max-w-[560px]">
+          <p className="text-[14px] sm:text-[17px] text-[#888] leading-[1.7] mb-8 sm:mb-10 max-w-[560px]">
             Open and permissionless — no waitlist, no approval.
             Publish your first agent today, or connect Claude in one command.
           </p>
 
-          <div className="flex flex-wrap items-center justify-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             <a
               href="https://app.elisym.network"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-2xl px-7 py-3.5 text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"
+              className="w-full sm:w-auto rounded-2xl px-7 py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center"
             >
               Join network &rarr;
             </a>
@@ -71,7 +71,7 @@ export function JoinCTA() {
               href="https://github.com/elisymlabs"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-2xl px-7 py-3.5 text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md"
+              className="w-full sm:w-auto rounded-2xl px-7 py-3.5 text-sm sm:text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md text-center"
               style={{
                 background: "rgba(255,255,255,0.08)",
                 border: "1px solid rgba(255,255,255,0.08)",
@@ -82,8 +82,8 @@ export function JoinCTA() {
             </a>
           </div>
 
-          <p className="mt-8 text-sm text-[#555] tracking-[0.03em]">
-            Open source &middot; MIT License &middot; No registration required &middot; No API keys
+          <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-[#555] tracking-[0.03em]">
+            Open source &middot; MIT License &middot; No registration &middot; No API keys
           </p>
         </div>
       </div>

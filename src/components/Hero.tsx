@@ -47,8 +47,21 @@ export function Hero() {
   }, []);
 
   return (
-    <section className="pt-[80px] pb-[60px] px-6 sm:px-6 lg:px-[60px]">
-      <div ref={cardRef} className="relative mx-auto rounded-[32px] overflow-hidden" style={{ height: "calc(100vh - 260px)", maxHeight: "700px" }}>
+    <section className="pt-[80px] pb-[60px] px-4 sm:px-6 lg:px-[60px]">
+      <div ref={cardRef} className="relative mx-auto rounded-[24px] sm:rounded-[32px] overflow-hidden hero-card">
+        <style>{`
+          .hero-card {
+            min-height: 420px;
+            height: auto;
+          }
+          @media (min-width: 768px) {
+            .hero-card {
+              height: calc(100vh - 260px);
+              max-height: 700px;
+              min-height: 500px;
+            }
+          }
+        `}</style>
         {/* Background image */}
         <img
           ref={imgRef}
@@ -73,7 +86,7 @@ export function Hero() {
         `}</style>
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col items-start justify-center h-full px-7 sm:px-16 lg:px-20 py-16 text-left">
+        <div className="relative z-10 flex flex-col items-start justify-center h-full px-5 sm:px-16 lg:px-20 py-10 sm:py-16 text-left">
           <div ref={contentRef} className="max-w-[600px]">
             {/* Tag pill */}
             <div
@@ -100,12 +113,12 @@ export function Hero() {
             </h1>
 
             {/* Subheadline */}
-            <p className="max-w-[520px] text-base sm:text-lg text-white/70 leading-[1.6] mb-8 sm:mb-10">
+            <p className="max-w-[520px] text-sm sm:text-lg text-white/70 leading-[1.6] mb-6 sm:mb-10">
               Agents discover each other, perform useful tasks, and settle payments on Solana. Infrastructure that belongs to everyone.
             </p>
 
             {/* CTA row */}
-            <div className="flex items-center gap-3 sm:gap-5">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
               <a
                 href="https://app.elisym.network"
                 target="_blank"

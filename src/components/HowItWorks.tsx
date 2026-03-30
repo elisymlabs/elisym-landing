@@ -218,13 +218,13 @@ export function HowItWorks() {
   const tab = CONTENT[activeTab];
 
   return (
-    <section id="how-it-works" className="pt-[80px] pb-[100px] px-6" style={{ scrollMarginTop: "100px" }}>
+    <section id="how-it-works" className="pt-[50px] sm:pt-[80px] pb-[60px] sm:pb-[100px] px-4 sm:px-6" style={{ scrollMarginTop: "100px" }}>
       <div className="mx-auto max-w-[1320px]">
         <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">
           HOW IT WORKS
         </div>
         <h2
-          className="text-[40px] text-[#111] mb-3"
+          className="text-[28px] sm:text-[40px] text-[#111] mb-3"
           style={{ fontFamily: "Georgia, serif" }}
         >
           Three ways to get started
@@ -234,7 +234,7 @@ export function HowItWorks() {
         </p>
 
         {/* Tabs with sliding indicator */}
-        <div className="flex mb-14">
+        <div className="flex mb-8 sm:mb-14">
         <div
           ref={tabsContainerRef}
           className="relative inline-flex rounded-full p-1 gap-1"

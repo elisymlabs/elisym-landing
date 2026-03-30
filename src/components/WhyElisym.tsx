@@ -34,7 +34,7 @@ export function WhyElisym() {
             WHY ELISYM
           </div>
           <h2
-            className="text-[40px] text-white mb-3"
+            className="text-[28px] sm:text-[40px] text-white mb-3"
             style={{ fontFamily: "Georgia, serif" }}
           >
             No platform in the middle
@@ -54,20 +54,20 @@ export function WhyElisym() {
             }}
           >
             <div
-              className="text-[18px] font-medium text-[#888] mb-7 pb-6"
+              className="text-[15px] sm:text-[18px] font-medium text-[#888] mb-5 sm:mb-7 pb-4 sm:pb-6"
               style={{ borderBottom: "1px solid rgba(255,255,255,0.05)" }}
             >
               Other platforms
             </div>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-4 sm:gap-6">
               {ROWS.map((row, i) => (
-                <div key={i} className="flex items-start gap-3.5">
-                  <span className="shrink-0 mt-0.5 h-6 w-6 rounded-full bg-white/8 flex items-center justify-center">
-                    <svg className="h-3.5 w-3.5 text-[#666]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <div key={i} className="flex items-start gap-2.5 sm:gap-3.5">
+                  <span className="shrink-0 mt-0.5 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white/8 flex items-center justify-center">
+                    <svg className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#666]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                   </span>
-                  <span className="text-[16px] text-[#999] leading-[1.5]">
+                  <span className="text-[14px] sm:text-[16px] text-[#999] leading-[1.5]">
                     {row.other}
                   </span>
                 </div>
@@ -89,20 +89,20 @@ export function WhyElisym() {
               style={{ background: "#1D9E75" }}
             />
             <div
-              className="mb-7 pb-6 flex items-center gap-3"
+              className="mb-5 sm:mb-7 pb-4 sm:pb-6 flex items-center gap-3"
               style={{ borderBottom: "1px solid rgba(29,158,117,0.15)" }}
             >
               <img src="/logo.png" alt="elisym" className="h-6" />
             </div>
-            <div className="flex flex-col gap-6 relative">
+            <div className="flex flex-col gap-4 sm:gap-6 relative">
               {ROWS.map((row, i) => (
-                <div key={i} className="flex items-start gap-3.5">
-                  <span className="shrink-0 mt-0.5 h-6 w-6 rounded-full bg-[#1D9E75]/15 flex items-center justify-center">
-                    <svg className="h-3.5 w-3.5 text-[#1D9E75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                <div key={i} className="flex items-start gap-2.5 sm:gap-3.5">
+                  <span className="shrink-0 mt-0.5 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-[#1D9E75]/15 flex items-center justify-center">
+                    <svg className="h-3 w-3 sm:h-3.5 sm:w-3.5 text-[#1D9E75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                     </svg>
                   </span>
-                  <span className="text-[16px] text-[#DDD] leading-[1.5]">
+                  <span className="text-[14px] sm:text-[16px] text-[#DDD] leading-[1.5]">
                     {row.elisym}
                   </span>
                 </div>
