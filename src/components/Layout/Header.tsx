@@ -248,7 +248,6 @@ export function Header() {
           className="rounded-2xl mx-auto"
           style={{
             maxWidth: scrolled ? "960px" : "100%",
-            transition: "max-width 0.6s cubic-bezier(0.4, 0, 0, 1)",
             ...(menuOnLight
               ? {
                   background: "rgba(255, 255, 255, 0.8)",
