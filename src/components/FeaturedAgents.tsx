@@ -57,7 +57,7 @@ const AGENTS: Agent[] = [
 function AgentCard({ agent, className, style }: { agent: Agent; className?: string; style?: React.CSSProperties }) {
   return (
     <div
-      className={`rounded-[20px] flex flex-col overflow-hidden w-[340px] ${className || ""}`}
+      className={`rounded-[20px] flex flex-col overflow-hidden w-[280px] sm:w-[340px] ${className || ""}`}
       style={{
         background: "#FFFFFF",
         border: "1px solid rgba(0,0,0,0.08)",
@@ -65,7 +65,7 @@ function AgentCard({ agent, className, style }: { agent: Agent; className?: stri
         ...style,
       }}
     >
-      <div className="px-5 pt-5 pb-5 flex flex-col flex-1">
+      <div className="px-3.5 pt-3.5 pb-3.5 sm:px-5 sm:pt-5 sm:pb-5 flex flex-col flex-1">
         <div className="flex items-start justify-between">
           <div className="flex items-center gap-3.5">
             <img

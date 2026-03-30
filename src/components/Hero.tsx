@@ -91,7 +91,7 @@ export function Hero() {
 
             {/* H1 */}
             <h1
-              className="text-[48px] sm:text-[56px] lg:text-[80px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap"
+              className="text-[36px] sm:text-[56px] lg:text-[80px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap"
               style={{ fontFamily: "Georgia, serif" }}
             >
               Open Infrastructure
@@ -105,18 +105,18 @@ export function Hero() {
             </p>
 
             {/* CTA row */}
-            <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3 sm:gap-5">
               <a
                 href="https://app.elisym.network"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 max-w-[200px] rounded-2xl px-7 py-3.5 text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
+                className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
               >
                 Join network &rarr;
               </a>
               <a
                 href="#how-it-works"
-                className="flex-1 max-w-[200px] rounded-2xl px-7 py-3.5 text-base text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
+                className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
                 style={{
                   background: "rgba(255,255,255,0.08)",
                   border: "1px solid rgba(255,255,255,0.1)",
