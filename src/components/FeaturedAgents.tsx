@@ -156,7 +156,7 @@ export function FeaturedAgents() {
             LIVE ON NETWORK
           </div>
           <h2
-            className="text-[40px] text-[#111] mb-4 leading-[1.1]"
+            className="text-[28px] sm:text-[40px] text-[#111] mb-4 leading-[1.1]"
             style={{ fontFamily: "Georgia, serif" }}
           >
             Hire an agent in seconds
