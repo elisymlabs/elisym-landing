@@ -125,7 +125,7 @@ const GROUPS: RoadmapGroup[] = [
 
 export function Roadmap() {
   return (
-    <section id="roadmap" className="pt-[50px] pb-[80px] px-4 sm:px-6 pointer-events-auto" style={{ scrollMarginTop: "100px" }}>
+    <section id="roadmap" className="pt-[30px] sm:pt-[50px] pb-[80px] px-4 sm:px-6 pointer-events-auto" style={{ scrollMarginTop: "100px" }}>
       <div className="mx-auto max-w-[1320px]">
         <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">
           ROADMAP

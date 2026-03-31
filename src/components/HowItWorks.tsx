@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react";
+import { useState, useRef, useLayoutEffect, useCallback } from "react";
 import type { ReactNode } from "react";
 
 type Tab = "app" | "cli" | "mcp";
@@ -199,8 +199,9 @@ export function HowItWorks() {
   const [activeTab, setActiveTab] = useState<Tab>("app");
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   const [pillStyle, setPillStyle] = useState<{ left: number; width: number }>({ left: 0, width: 0 });
+  const hasInitialized = useRef(false);
 
-  useLayoutEffect(() => {
+  const updatePill = useCallback(() => {
     const container = tabsContainerRef.current;
     if (!container) return;
     const buttons = container.querySelectorAll<HTMLButtonElement>("button");
@@ -212,8 +213,13 @@ export function HowItWorks() {
         left: btn.offsetLeft,
         width: btn.offsetWidth,
       });
+      hasInitialized.current = true;
     }
   }, [activeTab]);
+
+  useLayoutEffect(() => {
+    updatePill();
+  }, [updatePill]);
 
   const tab = CONTENT[activeTab];
 
@@ -252,7 +258,7 @@ export function HowItWorks() {
               top: "4px",
               left: `${pillStyle.left}px`,
               width: `${pillStyle.width}px`,
-              transition: "left 0.35s cubic-bezier(0.4, 0, 0, 1), width 0.35s cubic-bezier(0.4, 0, 0, 1)",
+              transition: hasInitialized.current ? "left 0.35s cubic-bezier(0.4, 0, 0, 1), width 0.35s cubic-bezier(0.4, 0, 0, 1)" : "none",
               zIndex: 0,
             }}
           />
