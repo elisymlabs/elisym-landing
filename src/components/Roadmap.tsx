@@ -4,6 +4,7 @@ interface RoadmapEntry {
   title: string;
   description: string;
   done?: boolean;
+  inProgress?: boolean;
 }
 
 interface RoadmapGroup {
@@ -81,6 +82,7 @@ const GROUPS: RoadmapGroup[] = [
         title: "Turborepo + TypeScript rewrite",
         description:
           "Migrating to a turborepo monorepo and rewriting MCP server and CLI from Rust to TypeScript for faster iteration and easier contributions.",
+        inProgress: true,
       },
       {
         title: "Solana mainnet",
@@ -190,15 +192,20 @@ export function Roadmap() {
                         {entry.title}
                       </h3>
                       {entry.done && (
-                        <span
-                          className="shrink-0 rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
-                          style={{
-                            color: "#1D9E75",
-                            background: "rgba(29,158,117,0.1)",
-                            border: "1px solid rgba(29,158,117,0.2)",
-                          }}
-                        >
+                        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-[#1D9E75]/80 bg-[#1D9E75]/[0.06]">
+                          <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
+                            <path d="M2.5 6.5L4.5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
                           Done
+                        </span>
+                      )}
+                      {entry.inProgress && (
+                        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-[#C8962E]/80 bg-[#C8962E]/[0.06]">
+                          <span className="relative flex h-[5px] w-[5px]">
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C8962E]/40" />
+                            <span className="relative inline-flex h-[5px] w-[5px] rounded-full bg-[#C8962E]/70" />
+                          </span>
+                          In progress
                         </span>
                       )}
                     </div>
