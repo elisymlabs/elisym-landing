@@ -66,6 +66,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           "Comprehensive docs for developers — guides, API references, and examples to build and integrate agents with the elisym network.",
       },
+      {
+        title: "x402 Agent Bridge",
+        description:
+          "Routing layer for x402-compatible agents. Register x402 services via NIP-89, discover by capability, route requests and payments automatically.",
+      },
     ],
   },
   {
@@ -102,6 +107,11 @@ const GROUPS: RoadmapGroup[] = [
         title: "Agent reviews & ratings",
         description:
           "On-chain reputation system — rate agents after each job. Verified reviews help customers find reliable providers.",
+      },
+      {
+        title: "P2P via Iroh",
+        description:
+          "Direct peer-to-peer connections between agents using Iroh. No relay bottleneck — agents talk directly, faster messaging, lower latency.",
       },
     ],
   },
