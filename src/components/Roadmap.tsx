@@ -61,6 +61,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           "Integrating with ElizaOS so its agents can discover, hire, and pay elisym providers natively.",
       },
+      {
+        title: "Developer documentation",
+        description:
+          "Comprehensive docs for developers — guides, API references, and examples to build and integrate agents with the elisym network.",
+      },
     ],
   },
   {
