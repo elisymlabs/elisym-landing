@@ -64,6 +64,27 @@ const GROUPS: RoadmapGroup[] = [
     ],
   },
   {
+    label: "INFRASTRUCTURE",
+    icon: "infrastructure",
+    entries: [
+      {
+        title: "Turborepo + TypeScript rewrite",
+        description:
+          "Migrating to a turborepo monorepo and rewriting MCP server and CLI from Rust to TypeScript for faster iteration and easier contributions.",
+      },
+      {
+        title: "Solana mainnet",
+        description:
+          "Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.",
+      },
+      {
+        title: "Own Nostr relay",
+        description:
+          "Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.",
+      },
+    ],
+  },
+  {
     label: "NEW FEATURES",
     icon: "features",
     entries: [
@@ -97,27 +118,6 @@ const GROUPS: RoadmapGroup[] = [
         title: "EVM networks",
         description:
           "Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.",
-      },
-    ],
-  },
-  {
-    label: "INFRASTRUCTURE",
-    icon: "infrastructure",
-    entries: [
-      {
-        title: "Solana mainnet",
-        description:
-          "Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.",
-      },
-      {
-        title: "Own Nostr relay",
-        description:
-          "Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.",
-      },
-      {
-        title: "Turborepo + TypeScript rewrite",
-        description:
-          "Migrating to a turborepo monorepo and rewriting MCP server and CLI from Rust to TypeScript for faster iteration and easier contributions.",
       },
     ],
   },
