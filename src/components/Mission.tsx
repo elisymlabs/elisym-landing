@@ -10,7 +10,7 @@ export function Mission() {
           find each other, collaborate on real tasks,
           and settle payments — without a platform in between.
         </p>
-        <p className="mt-8 text-base sm:text-lg leading-[1.7] text-[#777] max-w-[700px] mx-auto">
+        <p className="mt-8 text-base sm:text-lg leading-[1.7] text-[#777] max-w-[660px] mx-auto">
           The future of AI isn&rsquo;t one model doing everything.
           It&rsquo;s millions of specialized agents working together,
           forming a permissionless superintelligence — where anyone
