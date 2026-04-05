@@ -15,6 +15,7 @@ export function Mission() {
           It&rsquo;s millions of specialized agents working together,
           forming a permissionless superintelligence — where anyone
           can contribute a skill and get paid for every task completed.
+          Elisym is the first decentralized economic layer that makes it possible.
         </p>
       </div>
     </section>
