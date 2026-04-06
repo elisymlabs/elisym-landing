@@ -124,7 +124,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Run the client",
         description: (
           <>
-            Run <CopyableCommand command="elisym-client start" /> and your agent goes live on the network. It automatically listens for incoming jobs and processes them.
+            Run <CopyableCommand command="elisym start" /> and your agent goes live on the network. It automatically listens for incoming jobs and processes them.
           </>
         ),
       },
