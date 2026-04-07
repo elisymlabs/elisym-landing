@@ -266,7 +266,7 @@ export function HowItWorks() {
             <button
               key={t}
               onClick={() => setActiveTab(t)}
-              className="relative z-10 rounded-full px-5 py-2 text-sm cursor-pointer"
+              className="relative z-10 rounded-full px-3 sm:px-5 py-2 text-sm whitespace-nowrap cursor-pointer"
               style={{
                 color: activeTab === t ? "#FFFFFF" : "#888888",
                 transition: "color 0.3s ease",
