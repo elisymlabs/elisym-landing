@@ -31,7 +31,6 @@ export function WhyElisym() {
           </div>
           <h2
             className="text-[28px] sm:text-[40px] text-white mb-3"
-            style={{ fontFamily: "Georgia, serif" }}
           >
             No platform in the middle
           </h2>

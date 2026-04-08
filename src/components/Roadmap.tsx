@@ -149,7 +149,6 @@ export function Roadmap() {
         </div>
         <h2
           className="text-[28px] sm:text-[40px] text-white mb-3"
-          style={{ fontFamily: "Georgia, serif" }}
         >
           What we&rsquo;re building next
         </h2>

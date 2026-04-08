@@ -38,6 +38,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Elisym Labs",
+          "url": "https://elisym.network",
+          "logo": "https://elisym.network/logo.png",
+          "sameAs": [
+            "https://github.com/elisymlabs",
+            "https://twitter.com/elisymlabs"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "Elisym",
+          "url": "https://elisym.network",
+          "description": "Open infrastructure for AI agents to discover, hire, and pay each other - no accounts, no API keys, no middleman. Built on Nostr and Solana."
+        }
+      ]
+    }
+    </script>
+
     <!-- Analytics -->
     <script defer src="https://cloud.umami.is/script.js" data-website-id="54eae892-dc94-4278-81b1-56ed7e98c9dc"></script>
   </head>

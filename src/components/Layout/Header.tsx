@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { config } from "~/config";
 
 export function Header() {
   const [onLight, setOnLight] = useState(false);
@@ -26,7 +27,9 @@ export function Header() {
       setScrolled(window.scrollY > 20);
 
       const whiteBlock = document.getElementById("white-block");
-      if (!whiteBlock) return;
+      if (!whiteBlock) {
+        return;
+      }
       const rect = whiteBlock.getBoundingClientRect();
       setOnLight(rect.top < 48 && rect.bottom > 48);
 
@@ -44,7 +47,7 @@ export function Header() {
 
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
-      {/* Outer shell — always full width, provides the "stage" */}
+      {/* Outer shell - always full width, provides the "stage" */}
       <div className="pointer-events-auto px-4 sm:px-6 lg:px-[60px]">
         {/* Inner container that morphs */}
         <div
@@ -54,29 +57,33 @@ export function Header() {
             marginTop: scrolled ? "16px" : "0",
             transition: "max-width 0.6s cubic-bezier(0.4, 0, 0, 1), margin-top 0.6s cubic-bezier(0.4, 0, 0, 1), border-radius 0.6s cubic-bezier(0.4, 0, 0, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
             borderRadius: scrolled ? "100px" : "0",
-            ...(scrolled
-              ? onLight
-                ? {
-                    background: "rgba(255, 255, 255, 0.8)",
-                    backdropFilter: "blur(24px) saturate(1.5)",
-                    WebkitBackdropFilter: "blur(24px) saturate(1.5)",
-                    border: "1px solid rgba(0, 0, 0, 0.06)",
-                    boxShadow: "0 2px 20px rgba(0, 0, 0, 0.06), 0 0 0 0.5px rgba(0, 0, 0, 0.04)",
-                  }
-                : {
-                    background: "rgba(255, 255, 255, 0.05)",
-                    backdropFilter: "blur(24px) saturate(1.5)",
-                    WebkitBackdropFilter: "blur(24px) saturate(1.5)",
-                    border: "1px solid rgba(255, 255, 255, 0.08)",
-                    boxShadow: "0 2px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
-                  }
-              : {
+            ...(() => {
+              if (!scrolled) {
+                return {
                   background: "transparent",
                   border: "1px solid transparent",
                   boxShadow: "none",
                   backdropFilter: "blur(0px)",
                   WebkitBackdropFilter: "blur(0px)",
-                } as React.CSSProperties),
+                } as React.CSSProperties;
+              }
+              if (onLight) {
+                return {
+                  background: "rgba(255, 255, 255, 0.8)",
+                  backdropFilter: "blur(24px) saturate(1.5)",
+                  WebkitBackdropFilter: "blur(24px) saturate(1.5)",
+                  border: "1px solid rgba(0, 0, 0, 0.06)",
+                  boxShadow: "0 2px 20px rgba(0, 0, 0, 0.06), 0 0 0 0.5px rgba(0, 0, 0, 0.04)",
+                };
+              }
+              return {
+                background: "rgba(255, 255, 255, 0.05)",
+                backdropFilter: "blur(24px) saturate(1.5)",
+                WebkitBackdropFilter: "blur(24px) saturate(1.5)",
+                border: "1px solid rgba(255, 255, 255, 0.08)",
+                boxShadow: "0 2px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06)",
+              };
+            })(),
           }}
         >
           <nav
@@ -125,9 +132,10 @@ export function Header() {
                 </a>
               ))}
               <a
-                href="https://github.com/elisymlabs"
+                href={config.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
                 className={`rounded-full py-1.5 transition-colors duration-300 ${
                   onLight
                     ? "text-black/45 hover:text-black"
@@ -151,9 +159,10 @@ export function Header() {
                 </svg>
               </a>
               <a
-                href="https://twitter.com/elisymlabs"
+                href={config.twitterUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="X (Twitter)"
                 className={`rounded-full py-1.5 transition-colors duration-300 ${
                   onLight
                     ? "text-black/45 hover:text-black"
@@ -181,7 +190,7 @@ export function Header() {
             {/* CTA + burger */}
             <div className="flex items-center gap-2">
               <a
-                href="https://app.elisym.network"
+                href={config.appUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-white hover:scale-[1.03] active:scale-[0.98]"
@@ -207,9 +216,11 @@ export function Header() {
                 Join network
               </a>
 
-              {/* Burger button — mobile only */}
+              {/* Burger button - mobile only */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
+                aria-expanded={menuOpen}
                 className={`lg:hidden flex items-center justify-center w-9 h-9 cursor-pointer transition-colors ${
                   onLight ? "text-black/70" : "text-white/70"
                 }`}
@@ -230,7 +241,7 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile dropdown menu — separate panel below header */}
+      {/* Mobile dropdown menu - separate panel below header */}
       <div
         ref={menuRef}
         className="lg:hidden pointer-events-auto px-4 sm:px-6 lg:px-[60px]"
@@ -287,9 +298,10 @@ export function Header() {
             ))}
             <div className="flex gap-3 px-4 pt-5 mt-3" style={{ borderTop: menuOnLight ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.08)" }}>
               <a
-                href="https://github.com/elisymlabs"
+                href={config.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
                 className={`transition-colors ${menuOnLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
@@ -297,9 +309,10 @@ export function Header() {
                 </svg>
               </a>
               <a
-                href="https://twitter.com/elisymlabs"
+                href={config.twitterUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="X (Twitter)"
                 className={`transition-colors ${menuOnLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
               >
                 <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">

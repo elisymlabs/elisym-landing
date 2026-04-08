@@ -1,4 +1,21 @@
 import { useEffect, useRef } from "react";
+import { config } from "~/config";
+
+const pillStyle: React.CSSProperties = {
+  color: "rgba(255,255,255,0.9)",
+  background: "rgba(255,255,255,0.12)",
+  border: "1px solid rgba(255,255,255,0.08)",
+  backdropFilter: "blur(16px)",
+  WebkitBackdropFilter: "blur(16px)",
+};
+
+const glassButtonStyle: React.CSSProperties = {
+  background: "rgba(255,255,255,0.08)",
+  border: "1px solid rgba(255,255,255,0.1)",
+  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)",
+  backdropFilter: "blur(20px)",
+  WebkitBackdropFilter: "blur(20px)",
+};
 
 export function Hero() {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -9,7 +26,9 @@ export function Hero() {
     const card = cardRef.current;
     const content = contentRef.current;
     const img = imgRef.current;
-    if (!card || !content || !img) return;
+    if (!card || !content || !img) {
+      return;
+    }
 
     // Card entrance
     card.style.opacity = "0";
@@ -28,7 +47,7 @@ export function Hero() {
     }, 200);
 
     // Content children staggered entrance
-    // Skip opacity animation on last child (CTA row) — it contains backdrop-filter buttons
+    // Skip opacity animation on last child (CTA row) - it contains backdrop-filter buttons
     const children = Array.from(content.children) as HTMLElement[];
     const lastIndex = children.length - 1;
     children.forEach((child, i) => {
@@ -40,7 +59,9 @@ export function Hero() {
         child.style.transition = i < lastIndex
           ? "opacity 0.7s cubic-bezier(0.25,0.1,0.25,1), transform 0.7s cubic-bezier(0.25,0.1,0.25,1)"
           : "transform 0.7s cubic-bezier(0.25,0.1,0.25,1)";
-        if (i < lastIndex) child.style.opacity = "1";
+        if (i < lastIndex) {
+          child.style.opacity = "1";
+        }
         child.style.transform = "translateY(0)";
       }, 500 + i * 150);
     });
@@ -63,14 +84,17 @@ export function Hero() {
           }
         `}</style>
         {/* Background image */}
-        <img
-          ref={imgRef}
-          src="/hero-bg.png"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover will-change-transform"
-          style={{ objectPosition: "center 75%" }}
-        />
-        {/* Gradient overlay left to right — wider on mobile/tablet */}
+        <picture>
+          <source srcSet="/hero-bg.webp" type="image/webp" />
+          <img
+            ref={imgRef}
+            src="/hero-bg.png"
+            alt="AI agents network"
+            className="absolute inset-0 w-full h-full object-cover will-change-transform"
+            style={{ objectPosition: "center 75%" }}
+          />
+        </picture>
+        {/* Gradient overlay left to right - wider on mobile/tablet */}
         <div
           className="absolute inset-0 z-[1] hero-gradient"
         />
@@ -91,22 +115,13 @@ export function Hero() {
             {/* Tag pill */}
             <div
               className="mb-6 inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
-              style={{
-                color: "rgba(255,255,255,0.9)",
-                background: "rgba(255,255,255,0.12)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                backdropFilter: "blur(16px)",
-                WebkitBackdropFilter: "blur(16px)",
-              }}
+              style={pillStyle}
             >
               Permissionless &middot; Live on devnet
             </div>
 
             {/* H1 */}
-            <h1
-              className="text-[36px] sm:text-[56px] lg:text-[80px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap"
-              style={{ fontFamily: "Georgia, serif" }}
-            >
+            <h1 className="text-[36px] sm:text-[56px] lg:text-[80px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
               Open Infrastructure
               <br />
               for AI Agents
@@ -120,7 +135,7 @@ export function Hero() {
             {/* CTA row */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
               <a
-                href="https://app.elisym.network"
+                href={config.appUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
@@ -130,13 +145,7 @@ export function Hero() {
               <a
                 href="#how-it-works"
                 className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.1)",
-                  boxShadow: "inset 0 1px 0 rgba(255,255,255,0.1)",
-                  backdropFilter: "blur(20px)",
-                  WebkitBackdropFilter: "blur(20px)",
-                }}
+                style={glassButtonStyle}
               >
                 How to use
               </a>

@@ -1,5 +1,6 @@
 import { useState, useRef, useLayoutEffect, useCallback } from "react";
 import type { ReactNode } from "react";
+import { config } from "~/config";
 
 type Tab = "app" | "cli" | "mcp";
 
@@ -64,7 +65,7 @@ const CONTENT: Record<Tab, TabContent> = {
         description: (
           <>
             Go to{" "}
-            <a href="https://app.elisym.network" target="_blank" rel="noopener noreferrer" className="font-semibold text-[#111] hover:underline">
+            <a href={config.appUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#111] hover:underline">
               app.elisym.network
             </a>
             {" "}— no account needed. Connect your Solana wallet and start browsing agents instantly.
@@ -203,7 +204,9 @@ export function HowItWorks() {
 
   const updatePill = useCallback(() => {
     const container = tabsContainerRef.current;
-    if (!container) return;
+    if (!container) {
+      return;
+    }
     const buttons = container.querySelectorAll<HTMLButtonElement>("button");
     const tabs: Tab[] = ["app", "cli", "mcp"];
     const idx = tabs.indexOf(activeTab);
@@ -231,7 +234,6 @@ export function HowItWorks() {
         </div>
         <h2
           className="text-[28px] sm:text-[40px] text-[#111] mb-3"
-          style={{ fontFamily: "Georgia, serif" }}
         >
           Three ways to get started
         </h2>

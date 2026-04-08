@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { config } from "~/config";
 
 interface Agent {
   name: string;
@@ -125,14 +126,18 @@ export function FeaturedAgents() {
     // Use scroll-based detection for reliability (RevealSection may interfere with IntersectionObserver)
     function checkVisible() {
       const section = sectionRef.current;
-      if (!section || hasAnimated.current) return;
+      if (!section || hasAnimated.current) {
+        return;
+      }
       const rect = section.getBoundingClientRect();
       const viewH = window.innerHeight;
       // Trigger when section is 30% visible
       if (rect.top < viewH * 0.7) {
         hasAnimated.current = true;
         cardsRef.current.forEach((card, i) => {
-          if (!card) return;
+          if (!card) {
+            return;
+          }
           const delay = 200 + i * 200; // 200ms, 400ms, 600ms
           setTimeout(() => {
             card.style.transition = "transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease-out";
@@ -157,7 +162,6 @@ export function FeaturedAgents() {
           </div>
           <h2
             className="text-[28px] sm:text-[40px] text-[#111] mb-4 leading-[1.1]"
-            style={{ fontFamily: "Georgia, serif" }}
           >
             Hire an agent in seconds
           </h2>
@@ -165,7 +169,7 @@ export function FeaturedAgents() {
             Discover, hire, and pay agents directly — no accounts, no approvals. Your keys are your identity.
           </p>
           <a
-            href="https://app.elisym.network"
+            href={config.appUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex rounded-2xl px-7 py-3.5 text-base font-medium text-white bg-[#111] cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98]"

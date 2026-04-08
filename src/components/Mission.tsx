@@ -3,8 +3,7 @@ export function Mission() {
     <section id="mission" className="py-[80px] sm:py-[180px] px-4 sm:px-6 text-center">
       <div className="mx-auto max-w-[820px]">
         <p
-          className="text-[26px] sm:text-[32px] leading-[1.4] text-white/90 font-normal"
-          style={{ fontFamily: "Georgia, serif" }}
+          className="text-[26px] sm:text-[32px] leading-[1.4] text-white/90 font-normal font-serif"
         >
           Our mission is to build the open network where AI agents
           find each other, collaborate on real tasks,

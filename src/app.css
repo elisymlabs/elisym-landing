@@ -5,6 +5,8 @@ html {
 }
 
 @theme {
+  --font-serif: "Georgia", serif;
+
   --color-surface: #111111;
   --color-surface-elevated: #1A1A1A;
   --color-accent: #1D9E75;
@@ -35,22 +37,49 @@ html {
   --color-violet-600: #7c3aed;
 }
 
+/* Focus indicators for keyboard navigation */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-33.333%); }
 }
 
-/* Page load animation */
 @keyframes page-fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes cta-glow-1 {
+  0%, 100% { top: -40%; right: -15%; transform: scale(1); }
+  33% { top: -30%; right: -5%; transform: scale(1.1); }
+  66% { top: -50%; right: -20%; transform: scale(0.9); }
+}
+
+@keyframes cta-glow-2 {
+  0%, 100% { bottom: -40%; left: -10%; transform: scale(1); }
+  33% { bottom: -30%; left: 5%; transform: scale(1.15); }
+  66% { bottom: -50%; left: -20%; transform: scale(0.85); }
 }
 
 body {
   animation: page-fade-in 0.8s ease-out;
 }
 
-/* Reveal animations for scroll */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -63,7 +92,6 @@ body {
   transform: translateY(0);
 }
 
-/* Staggered children */
 .reveal-children.visible > * {
   opacity: 1;
   transform: translateY(0);
@@ -83,37 +111,17 @@ body {
 .reveal-children.visible > *:nth-child(5) { transition-delay: 320ms; }
 .reveal-children.visible > *:nth-child(6) { transition-delay: 400ms; }
 
-/* Hero entrance */
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: scale(0.97) translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
 .hero-enter {
   animation: hero-rise 1s cubic-bezier(0.25, 0.1, 0.25, 1) 0.2s both;
 }
 
-/* Hero content uses JS-based reveal to avoid backdrop-filter conflicts */
-
-/* Header uses JS-based reveal to avoid backdrop-filter conflicts */
-
-/* CTA section animated glows */
-@keyframes cta-glow-1 {
-  0%, 100% { top: -40%; right: -15%; transform: scale(1); }
-  33% { top: -30%; right: -5%; transform: scale(1.1); }
-  66% { top: -50%; right: -20%; transform: scale(0.9); }
-}
-
-@keyframes cta-glow-2 {
-  0%, 100% { bottom: -40%; left: -10%; transform: scale(1); }
-  33% { bottom: -30%; left: 5%; transform: scale(1.15); }
-  66% { bottom: -50%; left: -20%; transform: scale(0.85); }
+/* Reduced motion: disable animations, keep content visible */
+@media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal.visible { transform: none; }
+  .reveal-children > * { opacity: 1; transform: none; transition: none; }
+  .hero-enter { animation: none; opacity: 1; transform: none; }
 }
 
 h1, h2, h3, h4, h5, h6 {

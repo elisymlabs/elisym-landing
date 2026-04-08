@@ -253,7 +253,7 @@ const SHADER_HTML = `<!DOCTYPE html>
     if(document.hidden){running=false}else{running=true;lastTime=0;requestAnimationFrame(render)}
   });
 })();
-<\/script>
+<${"/"}script>
 </body>
 </html>`;
 
@@ -269,6 +269,7 @@ export function ShaderBackground() {
   return (
     <iframe
       ref={iframeRef}
+      sandbox="allow-scripts"
       className="fixed inset-0 w-full h-full border-none pointer-events-none sm:pointer-events-auto"
       style={{ filter: "brightness(1.1)", zIndex: 0 }}
       title="background shader"
