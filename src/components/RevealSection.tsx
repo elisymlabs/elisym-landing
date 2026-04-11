@@ -9,7 +9,7 @@ export function RevealSection({
   className?: string;
   staggerChildren?: boolean;
 }) {
-  const { ref, visible } = useReveal(0.1);
+  const { ref, visible } = useReveal();
 
   return (
     <div

@@ -1,6 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { config } from "~/config";
 
+const NAV_LINKS = [
+  { label: "Mission", href: "#mission" },
+  { label: "How it works", href: "#how-it-works" },
+  { label: "Agents", href: "#featured-agents" },
+  { label: "Why Elisym", href: "#why-elisym" },
+  { label: "Roadmap", href: "#roadmap" },
+] as const;
+
 export function Header() {
   const [onLight, setOnLight] = useState(false);
   const [menuOnLight, setMenuOnLight] = useState(false);
@@ -107,13 +115,7 @@ export function Header() {
 
             {/* Nav links */}
             <div className="hidden lg:flex items-center gap-2">
-              {[
-                { label: "Mission", href: "#mission" },
-                { label: "How it works", href: "#how-it-works" },
-                { label: "Agents", href: "#featured-agents" },
-                { label: "Why Elisym", href: "#why-elisym" },
-                { label: "Roadmap", href: "#roadmap" },
-              ].map((link) => (
+              {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
                   href={link.href}
@@ -276,13 +278,7 @@ export function Header() {
           }}
         >
           <div className="flex flex-col gap-2 px-4 pb-5 pt-4">
-            {[
-              { label: "Mission", href: "#mission" },
-              { label: "How it works", href: "#how-it-works" },
-              { label: "Agents", href: "#featured-agents" },
-              { label: "Why Elisym", href: "#why-elisym" },
-              { label: "Roadmap", href: "#roadmap" },
-            ].map((link) => (
+            {NAV_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}

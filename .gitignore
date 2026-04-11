@@ -29,5 +29,7 @@ dist-ssr
 .env.local
 temp/
 *.log
-CLAUDE.md
 .claude
+.claude/settings.local.json
+.claude/plans/
+.claude/projects/

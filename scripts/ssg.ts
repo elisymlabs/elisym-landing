@@ -6,11 +6,13 @@
  * 3. Injects into the built index.html template
  * 4. Writes individual HTML files (e.g. dist/about/index.html)
  *
- * Usage: bun scripts/ssg.ts (run after `vite build`)
+ * Invoked as part of `npm run build` via `vite-node scripts/ssg.ts`
+ * (runs after `vite build`). Not intended to be executed standalone.
  */
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { render, pages } from '../src/entry-server.js';
+import { config } from '../src/config.js';
 
 const distDir = join(import.meta.dirname, '../dist');
 const template = readFileSync(join(distDir, 'index.html'), 'utf-8');
@@ -32,12 +34,11 @@ for (const route of routes) {
 console.log(`SSG: Generated ${routes.length} page(s)`);
 
 // Generate sitemap.xml
-const siteUrl = 'https://elisym.network';
 const today = new Date().toISOString().split('T')[0];
 const sitemapEntries = routes
   .map(
     (route) =>
-      `  <url>\n    <loc>${siteUrl}${route === '/' ? '/' : route}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${route === '/' ? '1.0' : '0.8'}</priority>\n  </url>`,
+      `  <url>\n    <loc>${config.siteUrl}${route === '/' ? '/' : route}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>${route === '/' ? '1.0' : '0.8'}</priority>\n  </url>`,
   )
   .join('\n');
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapEntries}\n</urlset>\n`;
