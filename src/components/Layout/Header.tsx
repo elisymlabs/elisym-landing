@@ -56,7 +56,7 @@ export function Header() {
   return (
     <header ref={headerRef} className="fixed top-0 left-0 right-0 z-50 pointer-events-none">
       {/* Outer shell - always full width, provides the "stage" */}
-      <div className="pointer-events-auto px-4 sm:px-6 lg:px-[60px]">
+      <div className="pointer-events-auto px-4 sm:px-6 lg:px-15">
         {/* Inner container that morphs */}
         <div
           style={{
@@ -246,7 +246,7 @@ export function Header() {
       {/* Mobile dropdown menu - separate panel below header */}
       <div
         ref={menuRef}
-        className="lg:hidden pointer-events-auto px-4 sm:px-6 lg:px-[60px]"
+        className="lg:hidden pointer-events-auto px-4 sm:px-6 lg:px-15"
         style={{
           marginTop: "8px",
           visibility: menuOpen ? "visible" : "hidden",
