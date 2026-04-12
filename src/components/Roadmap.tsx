@@ -61,6 +61,7 @@ const GROUPS: RoadmapGroup[] = [
         title: "ElizaOS plugin",
         description:
           "Integrating with ElizaOS so its agents can discover, hire, and pay elisym providers natively.",
+        inProgress: true,
       },
       {
         title: "Developer documentation",
@@ -82,7 +83,7 @@ const GROUPS: RoadmapGroup[] = [
         title: "Turborepo + TypeScript rewrite",
         description:
           "Migrating to a turborepo monorepo and rewriting MCP server and CLI from Rust to TypeScript for faster iteration and easier contributions.",
-        inProgress: true,
+        done: true,
       },
       {
         title: "Solana mainnet",
@@ -142,9 +143,9 @@ const GROUPS: RoadmapGroup[] = [
 
 export function Roadmap() {
   return (
-    <section id="roadmap" className="pt-[30px] sm:pt-[50px] pb-[80px] px-4 sm:px-6 pointer-events-auto" style={{ scrollMarginTop: "100px" }}>
-      <div className="mx-auto max-w-[1320px]">
-        <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">
+    <section id="roadmap" className="pt-7.5 sm:pt-12.5 pb-20 px-4 sm:px-6 pointer-events-auto" style={{ scrollMarginTop: "100px" }}>
+      <div className="mx-auto max-w-330">
+        <div className="text-[11px] font-medium tracking-widest text-accent mb-3">
           ROADMAP
         </div>
         <h2
@@ -164,10 +165,10 @@ export function Roadmap() {
                 <span className="text-[#888]">
                   {GROUP_ICONS[group.icon]}
                 </span>
-                <span className="text-[11px] font-medium tracking-[0.1em] text-[#888]">
+                <span className="text-[11px] font-medium tracking-widest text-[#888]">
                   {group.label}
                 </span>
-                <div className="flex-1 h-px bg-white/[0.06]" />
+                <div className="flex-1 h-px bg-white/6" />
               </div>
 
               {/* Cards grid */}
@@ -177,7 +178,7 @@ export function Roadmap() {
                 {[...group.entries].sort((a, b) => (b.done ? 1 : 0) - (a.done ? 1 : 0)).map((entry) => (
                   <div
                     key={entry.title}
-                    className="rounded-[16px] px-7 py-9 flex flex-col"
+                    className="rounded-2xl px-7 py-9 flex flex-col"
                     style={{
                       background: "#151517",
                       border: "1px solid rgba(255,255,255,0.06)",
@@ -191,7 +192,7 @@ export function Roadmap() {
                         {entry.title}
                       </h3>
                       {entry.done && (
-                        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-[#1D9E75]/80 bg-[#1D9E75]/[0.06]">
+                        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-accent/80 bg-accent/6">
                           <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
                             <path d="M2.5 6.5L4.5 8.5L9.5 3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
@@ -199,10 +200,10 @@ export function Roadmap() {
                         </span>
                       )}
                       {entry.inProgress && (
-                        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-[#C8962E]/80 bg-[#C8962E]/[0.06]">
-                          <span className="relative flex h-[5px] w-[5px]">
+                        <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-[#C8962E]/80 bg-[#C8962E]/6">
+                          <span className="relative flex h-1.25 w-1.25">
                             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C8962E]/40" />
-                            <span className="relative inline-flex h-[5px] w-[5px] rounded-full bg-[#C8962E]/70" />
+                            <span className="relative inline-flex h-1.25 w-1.25 rounded-full bg-[#C8962E]/70" />
                           </span>
                           In progress
                         </span>

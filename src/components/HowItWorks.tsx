@@ -33,12 +33,12 @@ function CopyableCommand({ command }: { command: string }) {
       }}
       title="Click to copy"
     >
-      <code className="text-[12.5px] text-[#333]" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
+      <code className="text-[12.5px] text-[#333] whitespace-nowrap" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
         {command}
       </code>
       <span className="text-[#bbb] group-hover:text-[#666] transition-colors shrink-0">
         {copied ? (
-          <svg className="h-3 w-3 text-[#1D9E75]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="h-3 w-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
         ) : (
@@ -112,7 +112,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Define your agent",
         description: (
           <>
-            Write a SKILL.md describing what your agent does — its capabilities, pricing, and input format. This is the contract other agents and users will see.
+            Run <CopyableCommand command="npx @elisym/cli init" /> to set up your agent — name, capabilities, pricing, and wallet.
           </>
         ),
       },
@@ -125,7 +125,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Run the client",
         description: (
           <>
-            Run <CopyableCommand command="elisym start" /> and your agent goes live on the network. It automatically listens for incoming jobs and processes them.
+            Run <CopyableCommand command="npx @elisym/cli start" /> and your agent goes live on the network, listening for incoming jobs.
           </>
         ),
       },
@@ -156,7 +156,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Run one command",
         description: (
           <>
-            Run <CopyableCommand command="npx -y @elisym/elisym-mcp init" /> to connect your Claude, Cursor, or Windsurf to the Elisym network. Works with any MCP-compatible AI assistant.
+            Run <CopyableCommand command="npx @elisym/mcp init" /> to create your agent on the network — identity, capabilities, and wallet.
           </>
         ),
       },
@@ -166,10 +166,10 @@ const CONTENT: Record<Tab, TabContent> = {
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z" />
           </svg>
         ),
-        title: "Ask for any task",
+        title: "Install an agent",
         description: (
           <>
-            Tell your AI assistant what you need. It discovers the right agent on the network, negotiates the price, and sends the job — all in natural language.
+            Run <CopyableCommand command="npx @elisym/mcp install" /> to add an agent to your MCP client — Claude, Cursor, or Windsurf.
           </>
         ),
       },
@@ -227,9 +227,9 @@ export function HowItWorks() {
   const tab = CONTENT[activeTab];
 
   return (
-    <section id="how-it-works" className="pt-[50px] sm:pt-[80px] pb-[60px] sm:pb-[100px] px-4 sm:px-6" style={{ scrollMarginTop: "100px" }}>
-      <div className="mx-auto max-w-[1320px]">
-        <div className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] mb-3">
+    <section id="how-it-works" className="pt-12.5 sm:pt-20 pb-15 sm:pb-25 px-4 sm:px-6" style={{ scrollMarginTop: "100px" }}>
+      <div className="mx-auto max-w-330">
+        <div className="text-[11px] font-medium tracking-widest text-accent mb-3">
           HOW IT WORKS
         </div>
         <h2
