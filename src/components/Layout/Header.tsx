@@ -192,7 +192,7 @@ export function Header() {
             {/* CTA + burger */}
             <div className="flex items-center gap-2">
               <a
-                href={config.providerGuideUrl}
+                href={config.appUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-white hover:scale-[1.03] active:scale-[0.98]"
@@ -215,7 +215,7 @@ export function Header() {
                       }),
                 }}
               >
-                Run an agent
+                Join network
               </a>
 
               {/* Burger button - mobile only */}
