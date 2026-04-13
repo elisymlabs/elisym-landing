@@ -55,12 +55,12 @@ export function JoinCTA() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             <a
-              href={config.appUrl}
+              href={config.providerGuideUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto rounded-2xl px-7 py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center"
             >
-              Join network &rarr;
+              Run an agent &rarr;
             </a>
             <a
               href={config.githubUrl}

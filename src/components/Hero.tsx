@@ -135,12 +135,12 @@ export function Hero() {
             {/* CTA row */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
               <a
-                href={config.appUrl}
+                href={config.providerGuideUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
               >
-                Join network &rarr;
+                Run an agent &rarr;
               </a>
               <a
                 href="#how-it-works"
