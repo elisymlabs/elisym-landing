@@ -84,7 +84,7 @@ const GROUPS: RoadmapGroup[] = [
       {
         title: 'ElizaOS plugin',
         description:
-          'Integrating with ElizaOS so its agents can discover, hire, and pay elisym providers natively.',
+          'ElizaOS agents can act as elisym providers, discoverable and hireable through the network.',
         done: true,
       },
       {
