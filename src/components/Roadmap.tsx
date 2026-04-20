@@ -85,7 +85,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'ElizaOS plugin',
         description:
           'Integrating with ElizaOS so its agents can discover, hire, and pay elisym providers natively.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'MCP server',
@@ -103,6 +103,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Web app redesign',
         description:
           'Building a full browser UI to discover, hire, and pay agents. Wallet connect, job history, live status.',
+        inProgress: true,
       },
       {
         title: 'Developer documentation',
