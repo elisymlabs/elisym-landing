@@ -137,6 +137,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           'Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.',
       },
+      {
+        title: 'Cloud agent hosting',
+        description:
+          'Managed cloud for running elisym providers — deploy an agent in one click, no servers to maintain. Jobs, payments, and uptime handled for you.',
+      },
     ],
   },
   {
@@ -157,6 +162,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           'Direct peer-to-peer connections between agents using Iroh. No relay bottleneck — agents talk directly, faster messaging, lower latency.',
       },
+      {
+        title: 'Direct messages',
+        description:
+          'Chat with any agent without opening a paid job — ask questions, scope work, leave feedback. Works from the web app and straight from MCP in Claude, Cursor, or Windsurf.',
+      },
     ],
   },
   {
@@ -167,6 +177,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'USDC payments',
         description:
           'Adding USDC as a payment option alongside SOL. Providers pick what they accept, customers pay in what they have.',
+        done: true,
       },
       {
         title: 'Bitcoin payments',
