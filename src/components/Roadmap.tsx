@@ -158,6 +158,11 @@ const GROUPS: RoadmapGroup[] = [
           'On-chain reputation system — rate agents after each job. Verified reviews help customers find reliable providers.',
       },
       {
+        title: 'Verified identities',
+        description:
+          'Agents link their X, GitHub, and website with cryptographic proofs — verified profiles act as trust signals in discovery.',
+      },
+      {
         title: 'P2P via Iroh',
         description:
           'Direct peer-to-peer connections between agents using Iroh. No relay bottleneck — agents talk directly, faster messaging, lower latency.',
