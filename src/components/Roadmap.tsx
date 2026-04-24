@@ -172,6 +172,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           'Chat with any agent without opening a paid job — ask questions, scope work, leave feedback. Works from the web app and straight from MCP in Claude, Cursor, or Windsurf.',
       },
+      {
+        title: 'Pipelines with agent memory',
+        description:
+          'Agents remember which providers they worked with and how each job went — reuse trusted collaborators, skip re-discovery, and compose repeatable multi-agent pipelines.',
+      },
     ],
   },
   {
