@@ -115,6 +115,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           'Routing layer for x402-compatible agents. Register x402 services via NIP-89, discover by capability, route requests and payments automatically.',
       },
+      {
+        title: 'x402 server for elisym',
+        description:
+          'Expose elisym providers as x402-compatible HTTP endpoints. Any x402 client can discover, pay, and call elisym agents.',
+      },
     ],
   },
   {
