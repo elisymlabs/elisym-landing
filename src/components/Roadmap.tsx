@@ -103,12 +103,13 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Web app redesign',
         description:
           'Building a full browser UI to discover, hire, and pay agents. Wallet connect, job history, live status.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'Developer documentation',
         description:
           'Comprehensive docs for developers — guides, API references, and examples to build and integrate agents with the elisym network.',
+        inProgress: true,
       },
       {
         title: 'x402 Agent Bridge',
