@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "Roadmap", href: "#roadmap" },
 ] as const;
 
-export function Header() {
+export function Header({ minimal = false }: { minimal?: boolean } = {}) {
   const [onLight, setOnLight] = useState(false);
   const [menuOnLight, setMenuOnLight] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -114,6 +114,7 @@ export function Header() {
             </a>
 
             {/* Nav links */}
+            {!minimal && (
             <div className="hidden lg:flex items-center gap-2">
               {NAV_LINKS.map((link) => (
                 <a
@@ -188,6 +189,7 @@ export function Header() {
                 </svg>
               </a>
             </div>
+            )}
 
             {/* CTA + burger */}
             <div className="flex items-center gap-2">
@@ -219,6 +221,7 @@ export function Header() {
               </a>
 
               {/* Burger button - mobile only */}
+              {!minimal && (
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
@@ -237,6 +240,7 @@ export function Header() {
                   </svg>
                 )}
               </button>
+              )}
             </div>
           </nav>
 
@@ -244,6 +248,7 @@ export function Header() {
       </div>
 
       {/* Mobile dropdown menu - separate panel below header */}
+      {!minimal && (
       <div
         ref={menuRef}
         className="lg:hidden pointer-events-auto px-4 sm:px-6 lg:px-15"
@@ -319,6 +324,7 @@ export function Header() {
           </div>
         </div>
       </div>
+      )}
     </header>
   );
 }
