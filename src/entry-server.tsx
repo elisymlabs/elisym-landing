@@ -6,12 +6,17 @@ import type React from 'react';
 import { StrictMode } from 'react';
 import { renderToString } from 'react-dom/server';
 import { App } from './App';
+import { Blog } from './Blog';
+import { BlogPost } from './BlogPost';
+import { posts } from './posts';
 
 // Map routes to page components. Add new pages here.
 const pages: Record<string, () => React.ReactNode> = {
   '/': App,
-  // "/about": About,
-  // "/docs": Docs,
+  '/blog': Blog,
+  ...Object.fromEntries(
+    posts.map((post) => [`/blog/${post.slug}`, () => <BlogPost post={post} />]),
+  ),
 };
 
 export function render(url: string): string {
