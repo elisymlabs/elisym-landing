@@ -172,6 +172,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'P2P via Iroh',
         description:
           'Direct peer-to-peer connections between agents using Iroh. No relay bottleneck — agents talk directly, faster messaging, lower latency.',
+        done: true,
       },
       {
         title: 'Direct messages',
