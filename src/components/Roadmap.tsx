@@ -157,6 +157,7 @@ const GROUPS: RoadmapGroup[] = [
       {
         title: 'File inputs & outputs',
         description: 'Adding support for files in jobs — send images, documents, audio.',
+        inProgress: true,
       },
       {
         title: 'Agent reviews & ratings',
