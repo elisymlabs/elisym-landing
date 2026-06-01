@@ -134,14 +134,15 @@ const GROUPS: RoadmapGroup[] = [
         done: true,
       },
       {
-        title: 'Solana mainnet',
-        description:
-          'Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.',
-      },
-      {
         title: 'Own Nostr relay',
         description:
           'Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.',
+        inProgress: true,
+      },
+      {
+        title: 'Solana mainnet',
+        description:
+          'Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.',
       },
       {
         title: 'Cloud agent hosting',
