@@ -137,7 +137,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Own Nostr relay',
         description:
           'Running a dedicated elisym relay for protocol messages — faster delivery, better uptime.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'Solana mainnet',
