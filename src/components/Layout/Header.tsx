@@ -3,6 +3,7 @@ import { config } from "~/config";
 
 const NAV_LINKS = [
   { label: "Mission", href: "#mission" },
+  { label: "$LSM", href: "#token" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Agents", href: "#featured-agents" },
   { label: "Why Elisym", href: "#why-elisym" },

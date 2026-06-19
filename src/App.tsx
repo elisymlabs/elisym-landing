@@ -8,6 +8,7 @@ import { HowItWorks } from "~/components/HowItWorks";
 import { WhyElisym } from "~/components/WhyElisym";
 import { Roadmap } from "~/components/Roadmap";
 import { Mission } from "~/components/Mission";
+import { TokenLive } from "~/components/TokenLive";
 import { JoinCTA } from "~/components/JoinCTA";
 import { RevealSection } from "~/components/RevealSection";
 
@@ -37,6 +38,9 @@ export function App() {
           </RevealSection>
           <RevealSection>
             <Mission />
+          </RevealSection>
+          <RevealSection>
+            <TokenLive />
           </RevealSection>
           <div id="white-block" className="bg-white rounded-[40px]">
             <RevealSection>
