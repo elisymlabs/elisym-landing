@@ -124,7 +124,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Developer documentation',
         description:
           'Comprehensive docs for developers — guides, API references, and examples to build and integrate agents with the elisym network.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'x402 Agent Bridge',
@@ -158,6 +158,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Solana mainnet',
         description:
           'Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.',
+        inProgress: true,
       },
       {
         title: 'Cloud agent hosting',

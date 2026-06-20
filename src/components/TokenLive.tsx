@@ -143,10 +143,11 @@ export function TokenLive() {
                   Contract
                 </span>
                 <span
-                  className="text-[13px] sm:text-[14px] text-white/80 truncate"
+                  className="text-[13px] sm:text-[15px] text-white/80 truncate"
                   style={{ fontFamily: monoFont }}
                 >
-                  {shortMint(config.tokenMint)}
+                  <span className="sm:hidden">{shortMint(config.tokenMint)}</span>
+                  <span className="hidden sm:inline">{config.tokenMint}</span>
                 </span>
               </div>
               <button
@@ -197,18 +198,33 @@ export function TokenLive() {
                 href={buyUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center"
+                className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-2xl px-6 py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center"
               >
                 Buy on pump.fun &rarr;
               </a>
               <a
-                href={config.twitterUrl}
+                href={config.dexscreenerUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center rounded-2xl px-6 py-3.5 text-sm sm:text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md text-center"
+                className="flex-1 inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3.5 text-sm sm:text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md text-center"
                 style={glassButtonStyle}
               >
-                Follow for updates
+                <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.5l5.25-5.25 3.75 3.75L21 4.5m0 0h-5.25M21 4.5v5.25" />
+                </svg>
+                DexScreener
+              </a>
+              <a
+                href={config.tokenTelegramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-2xl px-6 py-3.5 text-sm sm:text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md text-center"
+                style={glassButtonStyle}
+              >
+                <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M21.94 4.9 18.6 19.2c-.25 1.1-.92 1.37-1.86.86l-5.14-3.79-2.48 2.39c-.27.27-.5.5-1.03.5l.37-5.23 9.52-8.6c.41-.37-.09-.57-.64-.2L5.07 12.4l-5.07-1.59c-1.1-.34-1.12-1.1.23-1.63l19.8-7.63c.92-.34 1.72.2 1.42 1.62z"/>
+                </svg>
+                Telegram
               </a>
             </div>
 

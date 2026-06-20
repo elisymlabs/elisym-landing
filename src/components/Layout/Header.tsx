@@ -6,7 +6,6 @@ const NAV_LINKS = [
   { label: "$LSM", href: "#token" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Agents", href: "#featured-agents" },
-  { label: "Why Elisym", href: "#why-elisym" },
   { label: "Roadmap", href: "#roadmap" },
 ] as const;
 
@@ -134,6 +133,33 @@ export function Header() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href={config.docsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Docs"
+                className={`rounded-full py-1.5 transition-colors duration-300 ${
+                  onLight
+                    ? "text-black/45 hover:text-black"
+                    : "text-white/45 hover:text-white"
+                }`}
+                style={{
+                  padding: scrolled ? "6px 10px" : "6px 16px",
+                  transition: "padding 0.6s cubic-bezier(0.4,0,0,1), color 0.3s ease",
+                }}
+              >
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{
+                    width: scrolled ? "16px" : "18px",
+                    height: scrolled ? "16px" : "18px",
+                    transition: "width 0.6s cubic-bezier(0.4,0,0,1), height 0.6s cubic-bezier(0.4,0,0,1)",
+                  }}
+                >
+                  <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
+                </svg>
+              </a>
               <a
                 href={config.githubUrl}
                 target="_blank"
@@ -294,6 +320,17 @@ export function Header() {
               </a>
             ))}
             <div className="flex gap-3 px-4 pt-5 mt-3" style={{ borderTop: menuOnLight ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(255,255,255,0.08)" }}>
+              <a
+                href={config.docsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Docs"
+                className={`transition-colors ${menuOnLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+                  <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
+                </svg>
+              </a>
               <a
                 href={config.githubUrl}
                 target="_blank"

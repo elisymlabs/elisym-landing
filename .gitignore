@@ -31,3 +31,4 @@ temp/
 .claude/settings.local.json
 .claude/plans/
 .claude/projects/
+.vercel
