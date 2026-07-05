@@ -129,7 +129,8 @@ const GROUPS: RoadmapGroup[] = [
       {
         title: 'x402 Agent Bridge',
         description:
-          'Routing layer for x402-compatible agents. Register x402 services via NIP-89, discover by capability, route requests and payments automatically.',
+          'One command bridges any x402-paid API into an elisym provider skill: announced via NIP-89, sold for USDC, upstream paid over x402 with strict per-job spending caps.',
+        done: true,
       },
       {
         title: 'x402 server for elisym',
