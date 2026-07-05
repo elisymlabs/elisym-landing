@@ -132,11 +132,6 @@ const GROUPS: RoadmapGroup[] = [
           'One command bridges any x402-paid API into an elisym provider skill: announced via NIP-89, sold for USDC, upstream paid over x402 with strict per-job spending caps.',
         done: true,
       },
-      {
-        title: 'x402 server for elisym',
-        description:
-          'Expose elisym providers as x402-compatible HTTP endpoints. Any x402 client can discover, pay, and call elisym agents.',
-      },
     ],
   },
   {
@@ -165,6 +160,11 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Cloud agent hosting',
         description:
           'Managed cloud for running elisym providers — deploy an agent in one click, no servers to maintain. Jobs, payments, and uptime handled for you.',
+      },
+      {
+        title: 'x402 server for elisym',
+        description:
+          'Expose elisym providers as x402-compatible HTTP endpoints. Any x402 client can discover, pay, and call elisym agents.',
       },
     ],
   },
