@@ -39,7 +39,7 @@ export function App() {
           <RevealSection>
             <Mission />
           </RevealSection>
-          <div id="white-block" className="bg-white rounded-[40px]">
+          <div data-light-block className="bg-white rounded-[40px]">
             <RevealSection>
               <HowItWorks />
             </RevealSection>

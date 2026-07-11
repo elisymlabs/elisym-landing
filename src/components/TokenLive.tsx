@@ -45,8 +45,13 @@ export function TokenLive() {
   return (
     <section
       id="token"
-      style={{ scrollMarginTop: "100px" }}
-      className="pt-[20px] pb-[60px] sm:pb-[100px] px-4 sm:px-6 pointer-events-auto"
+      style={{
+        scrollMarginTop: "100px",
+        background: "rgba(255,255,255,0.02)",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}
+      className="py-15 sm:py-25 px-4 sm:px-6 pointer-events-auto"
     >
       <div className="mx-auto max-w-[1320px]">
         {/* Section header - matches WhyElisym / HowItWorks */}

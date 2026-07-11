@@ -34,19 +34,25 @@ export function Header() {
     function check() {
       setScrolled(window.scrollY > 20);
 
-      const whiteBlock = document.getElementById("white-block");
-      if (!whiteBlock) {
-        return;
-      }
-      const rect = whiteBlock.getBoundingClientRect();
-      setOnLight(rect.top < 48 && rect.bottom > 48);
-
-      // Check if dropdown menu overlaps with white block
+      const lightBlocks = document.querySelectorAll<HTMLElement>("[data-light-block]");
+      // Check if dropdown menu overlaps with a light block
       // Use a fixed estimate: menu starts ~70px from top of viewport
       const menuTop = 70;
       const menuBottom = menuTop + 400;
       const menuMid = (menuTop + menuBottom) / 2;
-      setMenuOnLight(rect.top < menuMid && rect.bottom > menuMid);
+      let headerOnLight = false;
+      let dropdownOnLight = false;
+      for (const block of lightBlocks) {
+        const rect = block.getBoundingClientRect();
+        if (rect.top < 48 && rect.bottom > 48) {
+          headerOnLight = true;
+        }
+        if (rect.top < menuMid && rect.bottom > menuMid) {
+          dropdownOnLight = true;
+        }
+      }
+      setOnLight(headerOnLight);
+      setMenuOnLight(dropdownOnLight);
     }
     window.addEventListener("scroll", check, { passive: true });
     check();
