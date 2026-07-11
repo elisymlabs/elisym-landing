@@ -3,10 +3,10 @@ import { config } from "~/config";
 
 const NAV_LINKS = [
   { label: "Mission", href: "#mission" },
-  { label: "$LSM", href: "#token" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Agents", href: "#featured-agents" },
   { label: "Roadmap", href: "#roadmap" },
+  { label: "$LSM", href: "#token" },
 ] as const;
 
 export function Header() {

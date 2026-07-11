@@ -46,7 +46,7 @@ export function TokenLive() {
     <section
       id="token"
       style={{ scrollMarginTop: "100px" }}
-      className="pt-0 pb-[60px] sm:pb-[100px] px-4 sm:px-6 pointer-events-auto"
+      className="pt-[20px] pb-[60px] sm:pb-[100px] px-4 sm:px-6 pointer-events-auto"
     >
       <div className="mx-auto max-w-[1320px]">
         {/* Section header - matches WhyElisym / HowItWorks */}

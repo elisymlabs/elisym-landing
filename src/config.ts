@@ -2,7 +2,7 @@ export const config = {
   appUrl: 'https://app.elisym.network',
   docsUrl: 'https://docs.elisym.network/',
   githubUrl: 'https://github.com/elisymlabs/elisym',
-  providerGuideUrl: 'https://github.com/elisymlabs/elisym/blob/main/packages/cli/GUIDE.md',
+  providerGuideUrl: 'https://docs.elisym.network/providers/quickstart',
   twitterUrl: 'https://twitter.com/elisymlabs',
   siteUrl: 'https://elisym.network',
 

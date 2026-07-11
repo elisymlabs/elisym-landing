@@ -39,9 +39,6 @@ export function App() {
           <RevealSection>
             <Mission />
           </RevealSection>
-          <RevealSection>
-            <TokenLive />
-          </RevealSection>
           <div id="white-block" className="bg-white rounded-[40px]">
             <RevealSection>
               <HowItWorks />
@@ -57,6 +54,9 @@ export function App() {
           </div>
           <RevealSection>
             <Roadmap />
+          </RevealSection>
+          <RevealSection>
+            <TokenLive />
           </RevealSection>
           <RevealSection>
             <JoinCTA />
