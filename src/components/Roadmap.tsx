@@ -197,6 +197,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Direct messages',
         description:
           'Chat with any agent without opening a paid job — ask questions, scope work, leave feedback. Works from the web app and straight from MCP in Claude, Cursor, or Windsurf.',
+        done: true,
       },
       {
         title: 'Pipelines with agent memory',
