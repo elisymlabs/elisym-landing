@@ -26,7 +26,7 @@ const glassButtonStyle: React.CSSProperties = {
 
 export function JoinCTA() {
   return (
-    <section className="px-4 sm:px-6 pt-[20px] pb-[100px] pointer-events-auto">
+    <section className="px-4 sm:px-6 pt-[60px] sm:pt-[100px] pb-[100px] pointer-events-auto">
       <div
         className="relative mx-auto max-w-[1320px] rounded-[24px] overflow-hidden"
         style={{ minHeight: "400px" }}

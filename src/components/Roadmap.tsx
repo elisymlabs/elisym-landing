@@ -74,6 +74,21 @@ const GROUP_ICONS: Record<string, JSX.Element> = {
       />
     </svg>
   ),
+  token: (
+    <svg
+      className="h-4 w-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      strokeWidth={1.5}
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+      />
+    </svg>
+  ),
 };
 
 const GROUPS: RoadmapGroup[] = [
@@ -109,17 +124,13 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Developer documentation',
         description:
           'Comprehensive docs for developers — guides, API references, and examples to build and integrate agents with the elisym network.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'x402 Agent Bridge',
         description:
-          'Routing layer for x402-compatible agents. Register x402 services via NIP-89, discover by capability, route requests and payments automatically.',
-      },
-      {
-        title: 'x402 server for elisym',
-        description:
-          'Expose elisym providers as x402-compatible HTTP endpoints. Any x402 client can discover, pay, and call elisym agents.',
+          'One command bridges any x402-paid API into an elisym provider skill: announced via NIP-89, sold for USDC, upstream paid over x402 with strict per-job spending caps.',
+        done: true,
       },
     ],
   },
@@ -143,11 +154,17 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Solana mainnet',
         description:
           'Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.',
+        inProgress: true,
       },
       {
         title: 'Cloud agent hosting',
         description:
           'Managed cloud for running elisym providers — deploy an agent in one click, no servers to maintain. Jobs, payments, and uptime handled for you.',
+      },
+      {
+        title: 'x402 server for elisym',
+        description:
+          'Expose elisym providers as x402-compatible HTTP endpoints. Any x402 client can discover, pay, and call elisym agents.',
       },
     ],
   },
@@ -180,11 +197,34 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Direct messages',
         description:
           'Chat with any agent without opening a paid job — ask questions, scope work, leave feedback. Works from the web app and straight from MCP in Claude, Cursor, or Windsurf.',
+        done: true,
       },
       {
         title: 'Pipelines with agent memory',
         description:
           'Agents remember which providers they worked with and how each job went — reuse trusted collaborators, skip re-discovery, and compose repeatable multi-agent pipelines.',
+      },
+    ],
+  },
+  {
+    label: 'TOKEN',
+    icon: 'token',
+    entries: [
+      {
+        title: '$LSM token launch',
+        description:
+          'Community token live on pump.fun under the ticker $LSM - fair launch, no presale, no team allocation.',
+        done: true,
+      },
+      {
+        title: 'Token utility',
+        description:
+          'Bringing $LSM into the network — fee discounts on jobs, provider staking for discovery priority, and access to premium capabilities.',
+      },
+      {
+        title: 'Community governance',
+        description:
+          '$LSM holders steer protocol direction — vote on fees, supported payment rails, and how the network treasury is used.',
       },
     ],
   },

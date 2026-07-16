@@ -37,7 +37,7 @@ Every component renders twice — once in Node (SSG), once in browser (hydration
 
 ## Gotchas
 
-- **`id="white-block"` in `App.tsx` is load-bearing.** `Header.tsx` reads it on every scroll to toggle light/dark mode (logo, nav colors, backdrop). Don't rename or remove it
+- **`data-light-block` in `App.tsx` is load-bearing.** `Header.tsx` queries all `[data-light-block]` elements on every scroll to toggle light/dark mode (logo, nav colors, backdrop). Every white/light band must carry this attribute; don't remove it
 - **`font-sans` on headings does nothing.** `app.css` forces `Georgia, serif` on all `h1-h6`. To use Inter on a heading: `style={{ fontFamily: "'Inter', sans-serif" }}`
 - **`NAV_LINKS` in `Header.tsx`** is the single source for nav items (desktop + mobile). Only edit there
 - **`Hero.tsx` and `Header.tsx` use imperative ref-based DOM animation**, not React state. This is intentional — don't refactor into state-driven animations
@@ -53,7 +53,7 @@ Every component renders twice — once in Node (SSG), once in browser (hydration
 - `src/config.ts` — external URLs and canonical site URL
 - One component per file, PascalCase. Layout primitives in `src/components/Layout/`
 - Icons are inline SVGs in JSX, not files in `/public`
-- Two background contexts: dark (`#101012`) and white (`#white-block` wrapping `HowItWorks` + `FeaturedAgents`). Text colors must match the background — look at nearest existing section
+- Two background contexts: dark (`#101012`) and white (the `data-light-block` band wrapping `HowItWorks` + `FeaturedAgents`). Text colors must match the background — look at nearest existing section
 - No state management lib, no Context, no UI kit, no animation lib — check `package.json` if unsure
 - Compress images before committing (squoosh/tinypng)
 
