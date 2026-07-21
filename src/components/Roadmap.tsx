@@ -132,6 +132,11 @@ const GROUPS: RoadmapGroup[] = [
           'One command bridges any x402-paid API into an elisym provider skill: announced via NIP-89, sold for USDC, upstream paid over x402 with strict per-job spending caps.',
         done: true,
       },
+      {
+        title: 'Agent referrals',
+        description:
+          'Referral program for agents - earn a share of protocol fees for bringing new providers and customers into the network, tracked and paid out on-chain.',
+      },
     ],
   },
   {
@@ -200,9 +205,10 @@ const GROUPS: RoadmapGroup[] = [
         done: true,
       },
       {
-        title: 'Pipelines with agent memory',
+        title: 'Conversation memory',
         description:
-          'Agents remember which providers they worked with and how each job went — reuse trusted collaborators, skip re-discovery, and compose repeatable multi-agent pipelines.',
+          'Chats with providers carry context - follow-up jobs include prior turns, so agents remember the conversation and build on earlier answers.',
+        done: true,
       },
     ],
   },
@@ -248,6 +254,11 @@ const GROUPS: RoadmapGroup[] = [
         description:
           'Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.',
       },
+      {
+        title: 'Delegated execution',
+        description:
+          'SPL token approvals let customers delegate a bounded spending allowance to an agent - it executes deals within the budget with no per-transaction signing.',
+      },
     ],
   },
 ];
@@ -256,15 +267,15 @@ export function Roadmap() {
   return (
     <section
       id="roadmap"
-      className="pt-7.5 sm:pt-12.5 pb-20 px-4 sm:px-6 pointer-events-auto"
+      className="pointer-events-auto px-4 pt-7.5 pb-20 sm:px-6 sm:pt-12.5"
       style={{ scrollMarginTop: '100px' }}
     >
       <div className="mx-auto max-w-330">
-        <div className="text-[11px] font-medium tracking-widest text-accent mb-3">ROADMAP</div>
-        <h2 className="text-[28px] sm:text-[40px] text-white mb-3">
+        <div className="text-accent mb-3 text-[11px] font-medium tracking-widest">ROADMAP</div>
+        <h2 className="mb-3 text-[28px] text-white sm:text-[40px]">
           What we&rsquo;re building next
         </h2>
-        <p className="text-base text-[#888] mb-14">
+        <p className="mb-14 text-base text-[#888]">
           Live on Solana devnet. Mainnet is on the roadmap.
         </p>
 
@@ -272,28 +283,28 @@ export function Roadmap() {
           {GROUPS.map((group) => (
             <div key={group.label}>
               {/* Group header */}
-              <div className="flex items-center gap-3 mb-6">
+              <div className="mb-6 flex items-center gap-3">
                 <span className="text-[#888]">{GROUP_ICONS[group.icon]}</span>
                 <span className="text-[11px] font-medium tracking-widest text-[#888]">
                   {group.label}
                 </span>
-                <div className="flex-1 h-px bg-white/6" />
+                <div className="h-px flex-1 bg-white/6" />
               </div>
 
               {/* Cards grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                 {[...group.entries]
                   .sort((a, b) => (b.done ? 1 : 0) - (a.done ? 1 : 0))
                   .map((entry) => (
                     <div
                       key={entry.title}
-                      className="rounded-2xl px-7 py-9 flex flex-col"
+                      className="flex flex-col rounded-2xl px-7 py-9"
                       style={{
                         background: '#151517',
                         border: '1px solid rgba(255,255,255,0.06)',
                       }}
                     >
-                      <div className="flex items-start justify-between gap-3 mb-3">
+                      <div className="mb-3 flex items-start justify-between gap-3">
                         <h3
                           className="text-[19px] font-semibold text-white/90"
                           style={{ fontFamily: "'Inter', sans-serif" }}
@@ -301,7 +312,7 @@ export function Roadmap() {
                           {entry.title}
                         </h3>
                         {entry.done && (
-                          <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-accent/80 bg-accent/6">
+                          <span className="text-accent/80 bg-accent/6 inline-flex shrink-0 items-center gap-1.5 rounded-full py-1 pr-3 pl-2.5 text-[11px] font-medium tracking-wide">
                             <svg className="h-3 w-3" viewBox="0 0 12 12" fill="none">
                               <path
                                 d="M2.5 6.5L4.5 8.5L9.5 3.5"
@@ -315,7 +326,7 @@ export function Roadmap() {
                           </span>
                         )}
                         {entry.inProgress && (
-                          <span className="shrink-0 inline-flex items-center gap-1.5 rounded-full pl-2.5 pr-3 py-1 text-[11px] font-medium tracking-wide text-[#C8962E]/80 bg-[#C8962E]/6">
+                          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#C8962E]/6 py-1 pr-3 pl-2.5 text-[11px] font-medium tracking-wide text-[#C8962E]/80">
                             <span className="relative flex h-1.25 w-1.25">
                               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#C8962E]/40" />
                               <span className="relative inline-flex h-1.25 w-1.25 rounded-full bg-[#C8962E]/70" />
@@ -324,7 +335,7 @@ export function Roadmap() {
                           </span>
                         )}
                       </div>
-                      <p className="text-[14px] text-[#666] leading-[1.7]">{entry.description}</p>
+                      <p className="text-[14px] leading-[1.7] text-[#666]">{entry.description}</p>
                     </div>
                   ))}
               </div>
