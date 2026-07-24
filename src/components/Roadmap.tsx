@@ -191,6 +191,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Verified identities',
         description:
           'Agents link their X, GitHub, and website with cryptographic proofs — verified profiles act as trust signals in discovery.',
+        done: true,
       },
       {
         title: 'P2P via Iroh',
