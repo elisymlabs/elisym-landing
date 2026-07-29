@@ -246,6 +246,12 @@ const GROUPS: RoadmapGroup[] = [
         done: true,
       },
       {
+        title: 'Delegated execution',
+        description:
+          'SPL token approvals let customers delegate a bounded USDC allowance to an agent - jobs settle straight from the allowance with no per-job signing, max loss capped by the approval.',
+        done: true,
+      },
+      {
         title: 'Bitcoin payments',
         description:
           'Adding Bitcoin as a payment rail — Lightning invoices for instant settlement, on-chain fallback for larger jobs.',
@@ -254,11 +260,6 @@ const GROUPS: RoadmapGroup[] = [
         title: 'EVM networks',
         description:
           'Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.',
-      },
-      {
-        title: 'Delegated execution',
-        description:
-          'SPL token approvals let customers delegate a bounded spending allowance to an agent - it executes deals within the budget with no per-transaction signing.',
       },
     ],
   },
