@@ -6,6 +6,7 @@ import { SocialProofBar } from "~/components/SocialProofBar";
 import { FeaturedAgents } from "~/components/FeaturedAgents";
 import { HowItWorks } from "~/components/HowItWorks";
 import { WhyElisym } from "~/components/WhyElisym";
+import { ProtocolFeatures } from "~/components/ProtocolFeatures";
 import { Roadmap } from "~/components/Roadmap";
 import { Mission } from "~/components/Mission";
 import { TokenLive } from "~/components/TokenLive";
@@ -50,6 +51,11 @@ export function App() {
           <div id="why-elisym" style={{ scrollMarginTop: "10px" }}>
             <RevealSection>
               <WhyElisym />
+            </RevealSection>
+          </div>
+          <div data-light-block className="bg-white rounded-[40px]">
+            <RevealSection>
+              <ProtocolFeatures />
             </RevealSection>
           </div>
           <RevealSection>
