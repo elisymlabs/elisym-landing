@@ -5,6 +5,7 @@ const NAV_LINKS = [
   { label: "Mission", href: "#mission" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Agents", href: "#featured-agents" },
+  { label: "Features", href: "#features" },
   { label: "Roadmap", href: "#roadmap" },
   { label: "$LSM", href: "#token" },
 ] as const;
@@ -120,7 +121,7 @@ export function Header() {
             </a>
 
             {/* Nav links */}
-            <div className="hidden lg:flex items-center gap-2">
+            <div className="hidden xl:flex items-center gap-2">
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.label}
@@ -256,7 +257,7 @@ export function Header() {
                 onClick={() => setMenuOpen(!menuOpen)}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
                 aria-expanded={menuOpen}
-                className={`lg:hidden flex items-center justify-center w-9 h-9 cursor-pointer transition-colors ${
+                className={`xl:hidden flex items-center justify-center w-9 h-9 cursor-pointer transition-colors ${
                   onLight ? "text-black/70" : "text-white/70"
                 }`}
               >
@@ -279,7 +280,7 @@ export function Header() {
       {/* Mobile dropdown menu - separate panel below header */}
       <div
         ref={menuRef}
-        className="lg:hidden pointer-events-auto px-4 sm:px-6 lg:px-15"
+        className="xl:hidden pointer-events-auto px-4 sm:px-6 lg:px-15"
         style={{
           marginTop: "8px",
           visibility: menuOpen ? "visible" : "hidden",
