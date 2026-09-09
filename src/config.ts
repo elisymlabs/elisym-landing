@@ -4,6 +4,7 @@ export const config = {
   githubUrl: 'https://github.com/elisymlabs/elisym',
   providerGuideUrl: 'https://docs.elisym.network/providers/quickstart',
   twitterUrl: 'https://twitter.com/elisymlabs',
+  telegramUrl: 'https://t.me/elisymlabs',
   siteUrl: 'https://elisym.network',
 
   // $LSM token (pump.fun). Replace `tokenMint` with the real mint address once

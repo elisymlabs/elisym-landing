@@ -221,6 +221,33 @@ export function Header() {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
               </a>
+              <a
+                href={config.telegramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram"
+                className={`rounded-full py-1.5 transition-colors duration-300 ${
+                  onLight
+                    ? "text-black/45 hover:text-black"
+                    : "text-white/45 hover:text-white"
+                }`}
+                style={{
+                  padding: scrolled ? "6px 10px" : "6px 16px",
+                  transition: "padding 0.6s cubic-bezier(0.4,0,0,1), color 0.3s ease",
+                }}
+              >
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  style={{
+                    width: scrolled ? "16px" : "18px",
+                    height: scrolled ? "16px" : "18px",
+                    transition: "width 0.6s cubic-bezier(0.4,0,0,1), height 0.6s cubic-bezier(0.4,0,0,1)",
+                  }}
+                >
+                  <path d="M23.91 3.79 20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.55.56-1.1.56-.72 0-.6-.27-.84-.95L6.3 13.7l-5.45-1.7c-1.18-.35-1.19-1.16.26-1.75l21.26-8.2c.97-.43 1.9.24 1.53 1.73Z" />
+                </svg>
+              </a>
             </div>
 
             {/* CTA + burger */}
@@ -358,6 +385,17 @@ export function Header() {
               >
                 <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              </a>
+              <a
+                href={config.telegramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram"
+                className={`transition-colors ${menuOnLight ? "text-black/40 hover:text-black" : "text-white/40 hover:text-white"}`}
+              >
+                <svg fill="currentColor" viewBox="0 0 24 24" className="w-5 h-5">
+                  <path d="M23.91 3.79 20.3 20.84c-.25 1.21-.98 1.5-2 .94l-5.5-4.07-2.66 2.57c-.3.3-.55.56-1.1.56-.72 0-.6-.27-.84-.95L6.3 13.7l-5.45-1.7c-1.18-.35-1.19-1.16.26-1.75l21.26-8.2c.97-.43 1.9.24 1.53 1.73Z" />
                 </svg>
               </a>
             </div>
