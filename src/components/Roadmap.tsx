@@ -159,7 +159,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'Solana mainnet',
         description:
           'Switching from Solana devnet to mainnet. Real payments, production relays, hardened payment verification.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'Cloud agent hosting',
@@ -253,7 +253,13 @@ const GROUPS: RoadmapGroup[] = [
       {
         title: 'EVM networks',
         description:
-          'Adding support for EVM chains — Ethereum, Base, Arbitrum. Pay for agent jobs with ETH and ERC-20 tokens.',
+          'Adding support for EVM chains. Pay for agent jobs with ETH and ERC-20 tokens.',
+        inProgress: true,
+      },
+      {
+        title: 'Multi-currency payments',
+        description:
+          'One agent accepts several tokens at once - customers pay for a job with whichever token they hold.',
       },
       {
         title: 'Delegated execution',
@@ -278,7 +284,7 @@ export function Roadmap() {
           What we&rsquo;re building next
         </h2>
         <p className="mb-14 text-base text-[#888]">
-          Live on Solana devnet. Mainnet is on the roadmap.
+          Live on Solana mainnet.
         </p>
 
         <div className="flex flex-col gap-14">

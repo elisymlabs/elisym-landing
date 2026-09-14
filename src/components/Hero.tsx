@@ -117,7 +117,7 @@ export function Hero() {
               className="mb-6 inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
               style={pillStyle}
             >
-              Permissionless &middot; Live on devnet
+              Permissionless &middot; Live on mainnet
             </div>
 
             {/* H1 */}
