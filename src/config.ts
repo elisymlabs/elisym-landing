@@ -14,5 +14,5 @@ export const config = {
   pumpFunBaseUrl: 'https://pump.fun',
   dexscreenerUrl:
     'https://dexscreener.com/solana/by2fcuns53nduzcxcahffxqpf9t1cv2mjaczqy6ymcay',
-  tokenTelegramUrl: 'https://t.me/elisymtoken',
+  tokenTelegramUrl: 'https://t.me/elisymlabs',
 } as const;
