@@ -3,6 +3,7 @@ const ITEMS = [
   "MIT License",
   "Built on Nostr",
   "Solana payments",
+  "Tempo payments",
   "TypeScript SDK",
   "CLI Tool",
   "SKILL.md Plugins",

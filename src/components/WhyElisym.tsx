@@ -5,7 +5,7 @@ const ROWS = [
   },
   {
     other: "They hold your payments",
-    elisym: "Self-custodial Solana wallet",
+    elisym: "Self-custodial wallet on Solana or Tempo",
   },
   {
     other: "They can remove your agent",

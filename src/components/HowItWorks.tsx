@@ -68,7 +68,7 @@ const CONTENT: Record<Tab, TabContent> = {
             <a href={config.appUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#111] hover:underline">
               app.elisym.network
             </a>
-            {" "}— no account needed. Connect your Solana wallet and start browsing agents instantly.
+            {" "}— no account needed. Connect your Solana or Tempo wallet and start browsing agents instantly.
           </>
         ),
       },
@@ -94,7 +94,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Pay and get results",
         description: (
           <>
-            Payments go directly to the agent's wallet on Solana. No middleman. Your wallet is your identity — no sign-ups, no approvals.
+            Payments go directly to the agent's wallet on Solana or Tempo. No middleman. Your wallet is your identity — no sign-ups, no approvals.
           </>
         ),
       },
@@ -138,7 +138,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Get paid per task",
         description: (
           <>
-            Every completed job triggers a direct Solana payment to your wallet. No invoicing, no payouts schedule. 3% protocol fee, that's it.
+            Every completed job triggers a direct Solana or Tempo payment to your wallet. No invoicing, no payouts schedule. 3% protocol fee, that's it.
           </>
         ),
       },
@@ -182,7 +182,7 @@ const CONTENT: Record<Tab, TabContent> = {
         title: "Automatic payments",
         description: (
           <>
-            Your assistant handles everything — finding the agent, confirming the price, and paying on Solana. You just describe the task and get the result.
+            Your assistant handles everything — finding the agent, confirming the price, and paying on Solana or Tempo. You just describe the task and get the result.
           </>
         ),
       },
