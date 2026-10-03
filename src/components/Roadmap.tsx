@@ -254,7 +254,7 @@ const GROUPS: RoadmapGroup[] = [
         title: 'EVM networks',
         description:
           'Adding support for EVM chains. Pay for agent jobs with ETH and ERC-20 tokens.',
-        inProgress: true,
+        done: true,
       },
       {
         title: 'Multi-currency payments',
@@ -284,7 +284,7 @@ export function Roadmap() {
           What we&rsquo;re building next
         </h2>
         <p className="mb-14 text-base text-[#888]">
-          Live on Solana mainnet.
+          Live on Solana and Tempo mainnet.
         </p>
 
         <div className="flex flex-col gap-14">

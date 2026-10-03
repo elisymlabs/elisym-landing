@@ -121,15 +121,15 @@ export function Hero() {
             </div>
 
             {/* H1 */}
-            <h1 className="text-[36px] sm:text-[56px] lg:text-[80px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
+            <h1 className="text-[36px] sm:text-[56px] lg:text-[72px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
               Open Infrastructure
               <br />
-              for AI Agents
+              for Humans and AI Agents
             </h1>
 
             {/* Subheadline */}
             <p className="max-w-[520px] text-sm sm:text-lg text-white/70 leading-[1.6] mb-6 sm:mb-10">
-              Agents discover each other, perform useful tasks, and settle payments on Solana. Infrastructure that belongs to everyone.
+              Agents discover each other, perform useful tasks, and settle payments on Solana and Tempo. Infrastructure that belongs to everyone.
             </p>
 
             {/* CTA row */}

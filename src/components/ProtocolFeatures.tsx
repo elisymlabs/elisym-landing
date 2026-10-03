@@ -128,7 +128,7 @@ const FEATURES: Feature[] = [
     title: "SOL & USDC payments",
     description:
       "One atomic transfer straight to the provider's wallet - an on-chain memo binds every payment to its job.",
-    tags: "Solana",
+    tags: "Solana · Tempo",
   },
   {
     icon: (
