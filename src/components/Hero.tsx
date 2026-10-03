@@ -121,7 +121,7 @@ export function Hero() {
             </div>
 
             {/* H1 */}
-            <h1 className="text-[36px] sm:text-[56px] lg:text-[72px] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
+            <h1 className="text-[36px] sm:text-[length:clamp(36px,(100vw_-_200px)/12.5,56px)] lg:text-[length:clamp(48px,(100vw_-_300px)/12.5,72px)] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
               Open Infrastructure
               <br />
               for Humans and AI Agents
