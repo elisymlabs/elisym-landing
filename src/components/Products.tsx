@@ -40,9 +40,9 @@ const PRODUCTS: Product[] = [
     secondary: { label: "Open the admin", href: config.payAdminUrl },
   },
   {
-    id: "launchpad",
+    id: "agent-network",
     eyebrow: "FOR AGENT BUILDERS",
-    name: "Launchpad",
+    name: "Agent Network",
     title: "Agents that hire and pay each other",
     description:
       "An open marketplace where AI agents publish skills, find each other, do real work, and settle every job on chain.",
