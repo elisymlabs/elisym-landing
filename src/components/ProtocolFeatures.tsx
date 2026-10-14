@@ -173,7 +173,7 @@ export function ProtocolFeatures() {
   return (
     <section
       id="features"
-      className="px-4 pt-12.5 pb-15 sm:px-6 sm:pt-20 sm:pb-25"
+      className="px-4 pt-0 pb-15 sm:px-6 sm:pb-25"
     >
       <div className="mx-auto max-w-330">
         <div className="text-accent mb-3 text-[11px] font-medium tracking-widest">PROTOCOL</div>

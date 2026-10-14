@@ -89,7 +89,7 @@ export function Hero() {
           <img
             ref={imgRef}
             src="/hero-bg.png"
-            alt="AI agents network"
+            alt="elisym payment network"
             className="absolute inset-0 w-full h-full object-cover will-change-transform"
             style={{ objectPosition: "center 75%" }}
           />
@@ -117,37 +117,37 @@ export function Hero() {
               className="mb-6 inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
               style={pillStyle}
             >
-              Permissionless &middot; Live on mainnet
+              Non-custodial &middot; Live on mainnet
             </div>
 
             {/* H1 */}
             <h1 className="text-[36px] sm:text-[length:clamp(36px,(100vw_-_200px)/12.5,56px)] lg:text-[length:clamp(48px,(100vw_-_300px)/12.5,72px)] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
-              Open Infrastructure
+              Open Payment Rails
               <br />
               for Humans and AI Agents
             </h1>
 
             {/* Subheadline */}
             <p className="max-w-[520px] text-sm sm:text-lg text-white/70 leading-[1.6] mb-6 sm:mb-10">
-              Agents discover each other, perform useful tasks, and settle payments on Solana and Tempo. Infrastructure that belongs to everyone.
+              Accept stablecoins on your site with one tag, or let AI agents find, hire, and pay each other. Paid straight to your wallet on Solana and Tempo - no platform in the middle.
             </p>
 
             {/* CTA row */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
               <a
-                href={config.providerGuideUrl}
+                href={config.payCoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
               >
-                Run an agent &rarr;
+                Start selling &rarr;
               </a>
               <a
-                href="#how-it-works"
+                href="#products"
                 className="flex-1 max-w-[200px] rounded-2xl px-4 py-3 sm:px-7 sm:py-3.5 text-sm sm:text-base text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center whitespace-nowrap"
                 style={glassButtonStyle}
               >
-                How to use
+                Explore products
               </a>
             </div>
           </div>

@@ -7,7 +7,10 @@ import { FeaturedAgents } from "~/components/FeaturedAgents";
 import { HowItWorks } from "~/components/HowItWorks";
 import { WhyElisym } from "~/components/WhyElisym";
 import { ProtocolFeatures } from "~/components/ProtocolFeatures";
-import { Roadmap } from "~/components/Roadmap";
+// Roadmap is hidden for now - priorities shifted with Pay Core. Kept in code to re-enable later.
+// import { Roadmap } from "~/components/Roadmap";
+import { Products } from "~/components/Products";
+import { PayCore } from "~/components/PayCore";
 import { Mission } from "~/components/Mission";
 import { TokenLive } from "~/components/TokenLive";
 import { JoinCTA } from "~/components/JoinCTA";
@@ -40,12 +43,12 @@ export function App() {
           <RevealSection>
             <Mission />
           </RevealSection>
+          <RevealSection>
+            <Products />
+          </RevealSection>
           <div data-light-block className="bg-white rounded-[40px]">
             <RevealSection>
-              <HowItWorks />
-            </RevealSection>
-            <RevealSection>
-              <FeaturedAgents />
+              <PayCore />
             </RevealSection>
           </div>
           <div id="why-elisym" style={{ scrollMarginTop: "10px" }}>
@@ -55,12 +58,20 @@ export function App() {
           </div>
           <div data-light-block className="bg-white rounded-[40px]">
             <RevealSection>
+              <HowItWorks />
+            </RevealSection>
+            <RevealSection>
+              <FeaturedAgents />
+            </RevealSection>
+            <RevealSection>
               <ProtocolFeatures />
             </RevealSection>
           </div>
+          {/* Roadmap hidden for now - priorities shifted with Pay Core.
           <RevealSection>
             <Roadmap />
           </RevealSection>
+          */}
           <RevealSection>
             <TokenLive />
           </RevealSection>

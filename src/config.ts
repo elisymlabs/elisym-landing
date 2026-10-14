@@ -1,5 +1,8 @@
 export const config = {
   appUrl: 'https://app.elisym.network',
+  payCoreUrl: 'https://paycore.elisym.network',
+  payAdminUrl: 'https://admin.elisym.network',
+  commerceDocsUrl: 'https://docs.elisym.network/commerce/quickstart',
   docsUrl: 'https://docs.elisym.network/',
   githubUrl: 'https://github.com/elisymlabs/elisym',
   providerGuideUrl: 'https://docs.elisym.network/providers/quickstart',

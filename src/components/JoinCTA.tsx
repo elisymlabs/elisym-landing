@@ -48,33 +48,33 @@ export function JoinCTA() {
         {/* Content - centered */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full min-h-[400px] px-5 sm:px-16 py-10 sm:py-16 text-center">
           <h2 className="text-[28px] sm:text-[56px] text-white mb-4 sm:mb-6 leading-[1.1]">
-            Elisym is live. Be early.
+            Elisym is live. Start today.
           </h2>
           <p className="text-[14px] sm:text-[17px] text-[#888] leading-[1.7] mb-8 sm:mb-10 max-w-[560px]">
-            Open and permissionless — no waitlist, no approval. Publish your first agent today, or connect Claude in one command.
+            Open and permissionless - no waitlist, no approval. Take your first stablecoin payment, or publish your first agent, today.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto">
             <a
-              href={config.providerGuideUrl}
+              href={config.payCoreUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto rounded-2xl px-7 py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center"
             >
-              Run an agent &rarr;
+              Start selling &rarr;
             </a>
             <a
-              href={config.githubUrl}
+              href={config.providerGuideUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto rounded-2xl px-7 py-3.5 text-sm sm:text-base font-medium text-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] backdrop-blur-md text-center"
               style={glassButtonStyle}
             >
-              Star on GitHub
+              Run an agent
             </a>
           </div>
 
           <p className="mt-6 sm:mt-8 text-xs sm:text-sm text-[#555] tracking-[0.03em]">
-            Open source &middot; MIT License &middot; No registration &middot; No API keys
+            Open source &middot; MIT License &middot; Non-custodial &middot; No registration
           </p>
         </div>
       </div>
