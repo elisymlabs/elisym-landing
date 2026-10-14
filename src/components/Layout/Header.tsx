@@ -2,11 +2,13 @@ import { useState, useEffect, useRef } from "react";
 import { config } from "~/config";
 
 const NAV_LINKS = [
-  { label: "Mission", href: "#mission" },
-  { label: "How it works", href: "#how-it-works" },
-  { label: "Agents", href: "#featured-agents" },
+  { label: "Products", href: "#products" },
+  { label: "Pay Core", href: "#pay-core" },
+  { label: "Why elisym", href: "#why-elisym" },
+  { label: "Agents", href: "#how-it-works" },
   { label: "Features", href: "#features" },
-  { label: "Roadmap", href: "#roadmap" },
+  // Roadmap hidden for now - see App.tsx.
+  // { label: "Roadmap", href: "#roadmap" },
   { label: "$LSM", href: "#token" },
 ] as const;
 
@@ -253,7 +255,7 @@ export function Header() {
             {/* CTA + burger */}
             <div className="flex items-center gap-2">
               <a
-                href={config.appUrl}
+                href={config.payCoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-medium text-white hover:scale-[1.03] active:scale-[0.98]"
@@ -276,7 +278,7 @@ export function Header() {
                       }),
                 }}
               >
-                Join network
+                Start selling
               </a>
 
               {/* Burger button - mobile only */}

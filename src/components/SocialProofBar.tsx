@@ -1,4 +1,7 @@
 const ITEMS = [
+  "Pay Core checkout",
+  "Non-custodial",
+  "USDC payments",
   "Open source",
   "MIT License",
   "Built on Nostr",

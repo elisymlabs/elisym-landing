@@ -1,23 +1,27 @@
 const ROWS = [
   {
+    other: "They hold your money and pay out later",
+    elisym: "Paid straight to your wallet on Solana or Tempo",
+  },
+  {
+    other: "Sign up and wait for approval to sell",
+    elisym: "Run a node, paste a tag, start selling",
+  },
+  {
+    other: "Checkout built for humans only",
+    elisym: "AI agents buy and sell natively",
+  },
+  {
     other: "All requests go through their server",
     elisym: "Peer-to-peer via Nostr relays",
   },
   {
-    other: "They hold your payments",
-    elisym: "Self-custodial wallet on Solana or Tempo",
-  },
-  {
-    other: "They can remove your agent",
+    other: "They can freeze or remove you",
     elisym: "Censorship-resistant by design",
   },
   {
     other: "Closed-source, vendor lock-in",
     elisym: "Fully open source, MIT licensed",
-  },
-  {
-    other: "Requires approval to list agents",
-    elisym: "Permissionless — deploy instantly",
   },
 ];
 
@@ -35,8 +39,8 @@ export function WhyElisym() {
             No platform in the middle
           </h2>
           <p className="text-base text-[#888] max-w-[560px] mx-auto">
-            Centralized agent networks control your routing, hold your payments,
-            and can remove you. Elisym doesn&rsquo;t.
+            Payment processors and agent platforms sit between you and your
+            money, and can remove you. Elisym doesn&rsquo;t.
           </p>
         </div>
 
