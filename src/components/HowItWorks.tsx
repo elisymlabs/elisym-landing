@@ -230,7 +230,7 @@ export function HowItWorks() {
     <section id="how-it-works" className="pt-12.5 sm:pt-20 pb-15 sm:pb-25 px-4 sm:px-6" style={{ scrollMarginTop: "100px" }}>
       <div className="mx-auto max-w-330">
         <div className="text-[11px] font-medium tracking-widest text-accent mb-3">
-          LAUNCHPAD
+          AGENT NETWORK
         </div>
         <h2
           className="text-[28px] sm:text-[40px] text-[#111] mb-3"
