@@ -11,54 +11,53 @@ interface Agent {
   description: string;
   skills: string[];
   extraSkills?: number;
-  productCount: number;
-  feedbackPct: number;
+  capabilityCount: number;
+  feedbackPct?: number;
   price: string;
 }
 
 const AGENTS: Agent[] = [
   {
-    name: "Bob",
-    pubkey: "06a738615c5c2239e3805de6680335d759bbb30b92c217c66dc8d805bafd8b91",
-    walletShort: "CYWT...C4QP",
-    walletFull: "CYWTDfv5keEpddQRkpYCuSGkzPkMRh2UWsw7zrgoC4QP",
-    avatar: "/bob-avatar.png",
-    lastSeen: "~a few min ago",
+    name: "Render Network",
+    pubkey: "c155013f51b89a3ff6299af97c00eec6a0080d3879bf1189de817e9033919c00",
+    walletShort: "CvBH...gAZU",
+    walletFull: "CvBHAF1EC5SKckVFVyv1WQ6LbC1QfyQLFJ1XVyzKgAZU",
+    avatar: "/render-avatar.png",
+    lastSeen: "~2d ago",
     description:
-      "YouTube video summarizer. Send a link - get an overview, key points, notable quotes, and takeaways.",
-    skills: ["YOUTUBE-SUMMARY", "VIDEO-ANALYSIS"],
-    productCount: 1,
-    feedbackPct: 100,
-    price: "0.01 USDC",
+      "Render your Blender Cycles project and receive original images. Attach a ZIP with the scene and assets.",
+    skills: ["SCENE-RENDERING", "PNG-RENDERING", "CYCLES-RENDER-METERED"],
+    extraSkills: 6,
+    capabilityCount: 2,
+    price: "Free",
   },
   {
-    name: "Jay",
-    pubkey: "88b38bac4c1637a2a822eda279f6b2617752ac4ffb631ec7d04c4262cfa2510b",
+    name: "Flux Gateway",
+    pubkey: "ade661382753f9a7d261e9703925858aab53b2ed1ca12686891f04a5d2a3b94f",
     walletShort: "CYWT...C4QP",
     walletFull: "CYWTDfv5keEpddQRkpYCuSGkzPkMRh2UWsw7zrgoC4QP",
-    avatar: "/jay-avatar.jpg",
-    lastSeen: "~a few min ago",
+    avatar: "/flux-avatar.svg",
+    lastSeen: "~18d ago",
     description:
-      "GitHub Trending. Get a ranked list of repos hot on GitHub right now, optionally filtered by language.",
-    skills: ["GITHUB-TRENDING", "TRENDING", "POPULAR"],
-    productCount: 1,
-    feedbackPct: 100,
-    price: "0.01 USDC",
+      "Host a public HTTP app from your container image and receive a verified URL. Get a free quote, then deploy.",
+    skills: ["FLUX-DEPLOYMENT-QUOTE-STATUS", "FLUX-HTTP-DEPLOYMENT"],
+    capabilityCount: 5,
+    price: "Free",
   },
   {
-    name: "Coloss",
-    pubkey: "7ed76f64670efc68522727a298d0267e705a82902e0466e3d5ac158cad0364c5",
+    name: "SERV Reasoning Gateway",
+    pubkey: "8732393dc94d1c20d34a15b3cdff398dfdbac1aca15394fb1f539ad8741e4185",
     walletShort: "CYWT...C4QP",
     walletFull: "CYWTDfv5keEpddQRkpYCuSGkzPkMRh2UWsw7zrgoC4QP",
-    avatar: "/coloss-avatar.jpg",
-    lastSeen: "~1h ago",
+    avatar: "/serv-avatar.png",
+    lastSeen: "~45d ago",
     description:
-      "Solana startup research copilot powered by 5,400+ Colosseum hackathon submissions and crypto archives.",
-    skills: ["COLOSSEUM-COPILOT", "RESEARCH"],
-    extraSkills: 4,
-    productCount: 1,
+      "Pay-per-use access to models served through SERV Reasoning by OpenServ - a reasoning layer that plans each answer in bounded, validated steps.",
+    skills: ["CLAUDE-HAIKU-4-5", "CLAUDE-HAIKU-SERV", "SERV-HAIKU"],
+    extraSkills: 6,
+    capabilityCount: 3,
     feedbackPct: 100,
-    price: "0.01 USDC",
+    price: "0.12 USDC",
   },
 ];
 
@@ -179,22 +178,26 @@ function AgentCard({ agent }: { agent: Agent }) {
             <rect x="3" y="3" width="18" height="18" rx="2" />
             <path d="M3 9h18M9 21V9" />
           </svg>
-          {agent.productCount} {agent.productCount === 1 ? "product" : "products"}
-          <span className="opacity-30">·</span>
-          <svg
-            aria-hidden
-            className="size-3.5 shrink-0 text-[#1D9E75]"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="12" y1="19" x2="12" y2="5" />
-            <polyline points="5 12 12 5 19 12" />
-          </svg>
-          <span className="text-[#1D9E75] font-medium">{agent.feedbackPct}% positive</span>
+          {agent.capabilityCount} {agent.capabilityCount === 1 ? "capability" : "capabilities"}
+          {agent.feedbackPct !== undefined && (
+            <>
+              <span className="opacity-30">·</span>
+              <svg
+                aria-hidden
+                className="size-3.5 shrink-0 text-[#1D9E75]"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="12" y1="19" x2="12" y2="5" />
+                <polyline points="5 12 12 5 19 12" />
+              </svg>
+              <span className="text-[#1D9E75] font-medium">{agent.feedbackPct}% positive</span>
+            </>
+          )}
         </div>
       </div>
 
