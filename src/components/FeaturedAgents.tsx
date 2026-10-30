@@ -7,12 +7,11 @@ interface Agent {
   walletShort: string;
   walletFull: string;
   avatar: string;
-  lastSeen: string;
   description: string;
   skills: string[];
   extraSkills?: number;
   capabilityCount: number;
-  feedbackPct?: number;
+  feedbackPct: number;
   price: string;
 }
 
@@ -23,12 +22,12 @@ const AGENTS: Agent[] = [
     walletShort: "CvBH...gAZU",
     walletFull: "CvBHAF1EC5SKckVFVyv1WQ6LbC1QfyQLFJ1XVyzKgAZU",
     avatar: "/render-avatar.png",
-    lastSeen: "~2d ago",
     description:
       "Render your Blender Cycles project and receive original images. Attach a ZIP with the scene and assets.",
     skills: ["SCENE-RENDERING", "PNG-RENDERING", "CYCLES-RENDER-METERED"],
     extraSkills: 6,
     capabilityCount: 2,
+    feedbackPct: 100,
     price: "Free",
   },
   {
@@ -37,11 +36,11 @@ const AGENTS: Agent[] = [
     walletShort: "CYWT...C4QP",
     walletFull: "CYWTDfv5keEpddQRkpYCuSGkzPkMRh2UWsw7zrgoC4QP",
     avatar: "/flux-avatar.svg",
-    lastSeen: "~18d ago",
     description:
       "Host a public HTTP app from your container image and receive a verified URL. Get a free quote, then deploy.",
     skills: ["FLUX-DEPLOYMENT-QUOTE-STATUS", "FLUX-HTTP-DEPLOYMENT"],
     capabilityCount: 5,
+    feedbackPct: 100,
     price: "Free",
   },
   {
@@ -50,7 +49,6 @@ const AGENTS: Agent[] = [
     walletShort: "CYWT...C4QP",
     walletFull: "CYWTDfv5keEpddQRkpYCuSGkzPkMRh2UWsw7zrgoC4QP",
     avatar: "/serv-avatar.png",
-    lastSeen: "~45d ago",
     description:
       "Pay-per-use access to models served through SERV Reasoning by OpenServ - a reasoning layer that plans each answer in bounded, validated steps.",
     skills: ["CLAUDE-HAIKU-4-5", "CLAUDE-HAIKU-SERV", "SERV-HAIKU"],
@@ -142,7 +140,6 @@ function AgentCard({ agent }: { agent: Agent }) {
               </button>
             </div>
           </div>
-          <span className="text-[11px] text-[#999] shrink-0 mt-1">{agent.lastSeen}</span>
         </div>
 
         <p className="mt-3.5 text-[13px] text-[#555] leading-[1.55] line-clamp-2">
@@ -179,25 +176,21 @@ function AgentCard({ agent }: { agent: Agent }) {
             <path d="M3 9h18M9 21V9" />
           </svg>
           {agent.capabilityCount} {agent.capabilityCount === 1 ? "capability" : "capabilities"}
-          {agent.feedbackPct !== undefined && (
-            <>
-              <span className="opacity-30">·</span>
-              <svg
-                aria-hidden
-                className="size-3.5 shrink-0 text-[#1D9E75]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="12" y1="19" x2="12" y2="5" />
-                <polyline points="5 12 12 5 19 12" />
-              </svg>
-              <span className="text-[#1D9E75] font-medium">{agent.feedbackPct}% positive</span>
-            </>
-          )}
+          <span className="opacity-30">·</span>
+          <svg
+            aria-hidden
+            className="size-3.5 shrink-0 text-[#1D9E75]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="12" y1="19" x2="12" y2="5" />
+            <polyline points="5 12 12 5 19 12" />
+          </svg>
+          <span className="text-[#1D9E75] font-medium">{agent.feedbackPct}% positive</span>
         </div>
       </div>
 
