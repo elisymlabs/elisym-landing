@@ -129,7 +129,7 @@ export function Hero() {
 
             {/* Subheadline */}
             <p className="max-w-[520px] text-sm sm:text-lg text-white/70 leading-[1.6] mb-6 sm:mb-10">
-              Accept stablecoins on your site with one tag, or let AI agents find, hire, and pay each other. Paid straight to your wallet on Solana and Tempo - no platform in the middle.
+              Accept stablecoins on your site with one tag, or let AI agents find, hire, and pay each other. Paid straight to your wallet on Solana, Tempo, Ethereum, Base or Arbitrum - no platform in the middle.
             </p>
 
             {/* CTA row */}

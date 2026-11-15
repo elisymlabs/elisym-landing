@@ -32,7 +32,7 @@ const PRODUCTS: Product[] = [
     ),
     points: [
       "One HTML tag renders a Buy button on any page",
-      "USDC on Solana, stablecoins on Tempo",
+      "Stablecoins on Solana, Tempo, Ethereum, Base and Arbitrum",
       "Your own node confirms every payment on chain",
       "Signed webhooks to credit accounts, admin panel included",
     ],
@@ -66,7 +66,7 @@ const PRODUCTS: Product[] = [
   },
 ];
 
-const RAILS = ["Non-custodial", "Solana + Tempo", "Built on Nostr", "Open source"];
+const RAILS = ["Non-custodial", "Solana, Tempo + EVM", "Built on Nostr", "Open source"];
 
 export function Products() {
   return (

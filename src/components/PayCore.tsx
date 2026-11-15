@@ -96,7 +96,7 @@ export function PayCore() {
           A checkout that works like a protocol, not a platform
         </h2>
         <p className="mb-10 max-w-[640px] text-base text-[#888] sm:mb-14">
-          Add a Buy button to any page. Buyers pay in stablecoins straight to your wallet, your own
+          Add a Buy button to any page. Buyers pay in stablecoins on Solana, Tempo, Ethereum, Base or Arbitrum straight to your wallet, your own
           node confirms every payment on chain, and AI agents can buy from you too.
         </p>
 

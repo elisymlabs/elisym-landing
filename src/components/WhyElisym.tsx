@@ -1,7 +1,7 @@
 const ROWS = [
   {
     other: "They hold your money and pay out later",
-    elisym: "Paid straight to your wallet on Solana or Tempo",
+    elisym: "Paid straight to your wallet on Solana, Tempo or EVM chains",
   },
   {
     other: "Sign up and wait for approval to sell",
