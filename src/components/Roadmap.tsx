@@ -220,7 +220,7 @@ const GROUPS: RoadmapGroup[] = [
       {
         title: '$LSM token launch',
         description:
-          'Community token live on pump.fun under the ticker $LSM - fair launch, no presale, no team allocation.',
+          'Community token live on Solana under the ticker $LSM - fair launch, no presale, no team allocation.',
         done: true,
       },
       {

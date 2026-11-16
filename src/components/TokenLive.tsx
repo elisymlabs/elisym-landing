@@ -68,7 +68,7 @@ export function TokenLive() {
               />
             </span>
             <span className="text-[11px] font-medium tracking-[0.1em] text-[#1D9E75] uppercase">
-              Live on pump.fun
+              Live on Solana
             </span>
           </div>
           <h2 className="text-[28px] sm:text-[40px] text-white mb-3">
@@ -205,7 +205,7 @@ export function TokenLive() {
                 rel="noopener noreferrer"
                 className="flex-1 inline-flex items-center justify-center whitespace-nowrap rounded-2xl px-6 py-3.5 text-sm sm:text-base font-medium text-black bg-white cursor-pointer transition-all duration-200 hover:scale-[1.03] active:scale-[0.98] text-center"
               >
-                Buy on pump.fun &rarr;
+                Buy ${config.tokenTicker} &rarr;
               </a>
               <a
                 href={config.dexscreenerUrl}
