@@ -40,7 +40,8 @@ export function WhyElisym() {
           </h2>
           <p className="text-base text-[#888] max-w-[560px] mx-auto">
             Payment processors and agent platforms sit between you and your
-            money, and can remove you. Elisym doesn&rsquo;t.
+            money, and can remove you. Elisym is a decentralized network -
+            nobody can.
           </p>
         </div>
 

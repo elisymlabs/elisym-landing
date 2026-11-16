@@ -117,7 +117,8 @@ export function Hero() {
               className="mb-6 inline-flex items-center rounded-full px-4 py-1.5 text-[12px] font-medium tracking-[0.05em]"
               style={pillStyle}
             >
-              Non-custodial &middot; Live on mainnet
+              Decentralized &middot; Non-custodial
+              <span className="hidden sm:inline">&nbsp;&middot; Live on mainnet</span>
             </div>
 
             {/* H1 */}

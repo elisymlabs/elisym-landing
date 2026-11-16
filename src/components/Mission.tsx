@@ -17,7 +17,7 @@ export function Mission() {
           purchase services, hire other agents, and operate businesses autonomously.
         </p>
         <p className="mt-5 text-base sm:text-lg leading-[1.7] text-[#777] max-w-[660px] mx-auto">
-          We are building the open economic infrastructure for this new world - where any
+          We are building the open, decentralized economic infrastructure for this new world - where any
           agent can participate, any business can serve both humans and AI, and value flows
           freely without centralized intermediaries.
         </p>
