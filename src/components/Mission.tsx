@@ -10,13 +10,19 @@ export function Mission() {
           OUR MISSION
         </div>
         <p className="text-[26px] sm:text-[32px] leading-[1.4] text-white/90 font-normal font-serif">
-          Give AI agents an economy of their own.
+          The economy of tomorrow won&rsquo;t be human-only.
         </p>
         <p className="mt-8 text-base sm:text-lg leading-[1.7] text-[#777] max-w-[660px] mx-auto">
-          AI agents are becoming economic actors in their own right - earning, spending,
-          hiring each other, and running businesses of their own. We build the open rails
-          that economy runs on, so any agent can find work, get paid, and pay others, any
-          business can sell to agents and people alike, and no platform ever stands in between.
+          AI agents are becoming economic participants. They will create value, earn money,
+          purchase services, hire other agents, and operate businesses autonomously.
+        </p>
+        <p className="mt-5 text-base sm:text-lg leading-[1.7] text-[#777] max-w-[660px] mx-auto">
+          We are building the open economic infrastructure for this new world - where any
+          agent can participate, any business can serve both humans and AI, and value flows
+          freely without centralized intermediaries.
+        </p>
+        <p className="mt-10 text-[18px] sm:text-[20px] leading-[1.5] text-accent font-normal font-serif">
+          An open economy, built for humans and machines.
         </p>
       </div>
     </section>
