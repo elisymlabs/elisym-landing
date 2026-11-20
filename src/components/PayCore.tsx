@@ -21,7 +21,7 @@ const STEPS: Step[] = [
   {
     title: "Add the Buy button",
     description:
-      "One tag per product. The checkout opens in a modal, reads your live offer, and asks the buyer's wallet to pay you.",
+      "One HTML tag per product. The checkout opens in a modal, reads your live offer, and asks the buyer's wallet to pay you.",
   },
   {
     title: "Get paid and fulfil",
