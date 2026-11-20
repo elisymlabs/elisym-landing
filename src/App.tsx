@@ -7,7 +7,7 @@ import { FeaturedAgents } from "~/components/FeaturedAgents";
 import { HowItWorks } from "~/components/HowItWorks";
 import { WhyElisym } from "~/components/WhyElisym";
 import { ProtocolFeatures } from "~/components/ProtocolFeatures";
-// Roadmap is hidden for now - priorities shifted with Pay Core. Kept in code to re-enable later.
+// Roadmap is hidden for now - priorities shifted with PayCore. Kept in code to re-enable later.
 // import { Roadmap } from "~/components/Roadmap";
 import { Products } from "~/components/Products";
 import { PayCore } from "~/components/PayCore";
@@ -67,7 +67,7 @@ export function App() {
               <ProtocolFeatures />
             </RevealSection>
           </div>
-          {/* Roadmap hidden for now - priorities shifted with Pay Core.
+          {/* Roadmap hidden for now - priorities shifted with PayCore.
           <RevealSection>
             <Roadmap />
           </RevealSection>

@@ -1,5 +1,5 @@
 const ITEMS = [
-  "Pay Core checkout",
+  "PayCore checkout",
   "Non-custodial",
   "USDC payments",
   "Open source",

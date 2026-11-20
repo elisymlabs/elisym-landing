@@ -3,7 +3,7 @@ import { config } from "~/config";
 
 const NAV_LINKS = [
   { label: "Products", href: "#products" },
-  { label: "Pay Core", href: "#pay-core" },
+  { label: "PayCore", href: "#pay-core" },
   { label: "Why elisym", href: "#why-elisym" },
   { label: "Agents", href: "#how-it-works" },
   { label: "Features", href: "#features" },
