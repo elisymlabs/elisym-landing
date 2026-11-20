@@ -17,7 +17,7 @@ const PRODUCTS: Product[] = [
   {
     id: "pay-core",
     eyebrow: "FOR MERCHANTS",
-    name: "Pay Core",
+    name: "PayCore",
     title: "Accept stablecoins with one HTML tag",
     description:
       "A non-custodial checkout for any website. Buyers pay in stablecoins straight to your wallet - and AI agents can buy from you too.",
