@@ -70,7 +70,7 @@ export function Header() {
         {/* Inner container that morphs */}
         <div
           style={{
-            maxWidth: scrolled ? "960px" : "100%",
+            maxWidth: scrolled ? "1040px" : "100%",
             margin: "0 auto",
             marginTop: scrolled ? "16px" : "0",
             transition: "max-width 0.6s cubic-bezier(0.4, 0, 0, 1), margin-top 0.6s cubic-bezier(0.4, 0, 0, 1), border-radius 0.6s cubic-bezier(0.4, 0, 0, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
@@ -136,7 +136,7 @@ export function Header() {
                   }`}
                   style={{
                     fontSize: scrolled ? "14px" : "14px",
-                    padding: scrolled ? "6px 14px" : "6px 16px",
+                    padding: scrolled ? "6px 12px" : "6px 14px",
                     transition: "font-size 0.6s cubic-bezier(0.4,0,0,1), padding 0.6s cubic-bezier(0.4,0,0,1), color 0.3s ease",
                   }}
                 >
@@ -324,7 +324,7 @@ export function Header() {
         <div
           className="rounded-2xl mx-auto"
           style={{
-            maxWidth: scrolled ? "960px" : "100%",
+            maxWidth: scrolled ? "1040px" : "100%",
             ...(menuOnLight
               ? {
                   background: "rgba(255, 255, 255, 0.8)",
