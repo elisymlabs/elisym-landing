@@ -4,6 +4,7 @@ import { config } from "~/config";
 const NAV_LINKS = [
   { label: "Products", href: "#products" },
   { label: "PayCore", href: "#pay-core" },
+  { label: "Askr", href: "#askr" },
   { label: "Why elisym", href: "#why-elisym" },
   { label: "Agents", href: "#how-it-works" },
   { label: "Features", href: "#features" },
@@ -258,7 +259,7 @@ export function Header() {
                 href={config.payCoreUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-white hover:scale-[1.03] active:scale-[0.98]"
+                className="shrink-0 whitespace-nowrap font-medium text-white hover:scale-[1.03] active:scale-[0.98]"
                 style={{
                   fontSize: scrolled ? "13px" : "14px",
                   padding: scrolled ? "9px 20px" : "8px 16px",

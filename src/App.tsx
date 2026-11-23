@@ -11,6 +11,7 @@ import { ProtocolFeatures } from "~/components/ProtocolFeatures";
 // import { Roadmap } from "~/components/Roadmap";
 import { Products } from "~/components/Products";
 import { PayCore } from "~/components/PayCore";
+import { Askr } from "~/components/Askr";
 import { Mission } from "~/components/Mission";
 import { TokenLive } from "~/components/TokenLive";
 import { JoinCTA } from "~/components/JoinCTA";
@@ -49,6 +50,12 @@ export function App() {
           <div data-light-block className="bg-white rounded-[40px]">
             <RevealSection>
               <PayCore />
+            </RevealSection>
+            <div className="mx-auto max-w-330 px-4 sm:px-6">
+              <div className="h-px bg-black/[0.07]" />
+            </div>
+            <RevealSection>
+              <Askr />
             </RevealSection>
           </div>
           <div id="why-elisym" style={{ scrollMarginTop: "10px" }}>

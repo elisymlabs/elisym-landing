@@ -150,3 +150,162 @@ body {
   background: #101012;
   color: #e8e0d8;
 }
+
+/*
+ * The Askr widget, drawn as packages/askr-widget draws it (light theme) - ported from
+ * packages/askr-landing/src/app.css in the elisym monorepo. Nothing in it is live.
+ */
+.wgt {
+  --w-bg: #fbfbfc;
+  --w-surface: #f1f2f4;
+  --w-text: #121316;
+  --w-muted: #6b6e76;
+  --w-border: #e6e7eb;
+  font-family: system-ui, -apple-system, Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--w-text);
+}
+.wgt-panel {
+  display: flex;
+  flex-direction: column;
+  background: var(--w-bg);
+  border: 1px solid var(--w-border);
+  border-radius: 18px;
+  box-shadow: 0 24px 60px -18px rgb(18 19 22 / 0.35), 0 2px 6px rgb(18 19 22 / 0.08);
+  overflow: hidden;
+}
+.wgt-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--w-border);
+}
+.wgt-muted { color: var(--w-muted); }
+.wgt-log {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  gap: 12px;
+  padding: 16px;
+  overflow: hidden;
+}
+.wgt-log > * { flex-shrink: 0; }
+.wgt-mine {
+  align-self: flex-end;
+  max-width: 88%;
+  padding: 9px 13px;
+  border-radius: 16px 16px 4px 16px;
+  background: var(--w-text);
+  color: var(--w-bg);
+}
+.wgt-theirs { align-self: flex-start; max-width: 88%; }
+.wgt-cards { display: flex; gap: 10px; }
+.wgt-card {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--w-border);
+  border-radius: 18px;
+  background: var(--w-bg);
+}
+.wgt-card-media { height: 112px; background: var(--w-surface); }
+.wgt-card-media img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.wgt-card-body { display: flex; flex: 1; flex-direction: column; gap: 6px; padding: 10px; }
+.wgt-card-title { font-weight: 600; line-height: 1.3; font-size: 13px; }
+.wgt-reason { color: var(--w-muted); font-size: 12px; line-height: 1.4; }
+.wgt-price { margin-top: 2px; font-size: 14px; font-weight: 700; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.wgt-cart {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  border-radius: 999px;
+  background: var(--w-text);
+  color: var(--w-bg);
+  font-size: 12px;
+  font-weight: 600;
+}
+.wgt-table-scroll { min-width: 0; max-width: 100%; overflow: hidden; border: 1px solid var(--w-border); border-radius: 12px; background: var(--w-bg); }
+.wgt-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; }
+.wgt-table th, .wgt-table td {
+  padding: 7px 10px;
+  border-inline-end: 1px solid var(--w-border);
+  border-bottom: 1px solid var(--w-border);
+  text-align: start;
+  vertical-align: top;
+}
+.wgt-table tr > :last-child { border-inline-end: 0; }
+.wgt-table tbody tr:last-child > * { border-bottom: 0; }
+.wgt-table thead th, .wgt-table tr > th:first-child { background: var(--w-surface); font-weight: 600; }
+.wgt-table tbody tr > th:first-child { color: var(--w-muted); font-weight: 500; }
+.wgt-label {
+  display: block;
+  width: max-content;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--w-bg);
+  font-size: 11px;
+  font-weight: 600;
+}
+.wgt-status { display: flex; align-items: center; gap: 8px; min-height: 18px; padding: 0 16px 8px; color: var(--w-muted); font-size: 12.5px; }
+.wgt-chips { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; padding: 0 16px 8px; }
+.wgt-chip { padding: 5px 11px; border: 1px solid var(--w-border); border-radius: 999px; font-size: 12.5px; }
+.wgt-chip-pressed {
+  border-color: var(--w-text);
+  background: var(--w-surface);
+  transform: scale(0.96);
+  transition: transform 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+.wgt-composer { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--w-border); }
+.wgt-input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  border: 1px solid var(--w-border);
+  border-radius: 12px;
+  background: var(--w-surface);
+  color: var(--w-muted);
+}
+.wgt-send {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: var(--w-text);
+  color: var(--w-bg);
+  font-weight: 600;
+}
+.wgt-mark-ink { fill: var(--w-text); }
+.wgt-mark-paper { fill: var(--w-bg); }
+
+/* The widget's motion: same curves and lengths as packages/askr-widget. */
+@keyframes askr-panel-in { from { opacity: 0; transform: translateY(14px) scale(0.97); } }
+@keyframes askr-rise { from { opacity: 0; transform: translateY(8px); } }
+@keyframes askr-fade { from { opacity: 0; } }
+@keyframes askr-think { 50% { opacity: 0.35; } }
+.wgt-panel-in { transform-origin: bottom right; animation: askr-panel-in 0.32s cubic-bezier(0.2, 0.9, 0.25, 1) both; }
+.wgt-rise { animation: askr-rise 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.wgt-cards > .wgt-card { animation: askr-rise 0.42s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.wgt-cards > .wgt-card:nth-child(2) { animation-delay: 0.06s; }
+.wgt-chips > .wgt-chip { animation: askr-rise 0.36s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.wgt-chips > .wgt-chip:nth-child(2) { animation-delay: 0.05s; }
+.wgt-status > span { animation: askr-fade 0.3s ease both; }
+.wgt-thinking-mark { animation: askr-think 1.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wgt-panel-in,
+  .wgt-rise,
+  .wgt-cards > .wgt-card,
+  .wgt-chips > .wgt-chip,
+  .wgt-status > span,
+  .wgt-thinking-mark {
+    animation: none;
+  }
+}

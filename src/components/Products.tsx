@@ -40,6 +40,31 @@ const PRODUCTS: Product[] = [
     secondary: { label: "Open the admin", href: config.payAdminUrl },
   },
   {
+    id: "askr",
+    eyebrow: "FOR ONLINE STORES",
+    name: "Askr",
+    title: "An AI shopping assistant for your store",
+    description:
+      "Askr answers shoppers in their language, finds the right product for their budget and sends them to your cart.",
+    icon: (
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
+        />
+      </svg>
+    ),
+    points: [
+      "One line of code adds the chat to every page",
+      "Answers only from your catalog and policies",
+      "Finds products within budget and adds them to the cart",
+      "Shopify, WooCommerce, product feeds, CSV or any site",
+    ],
+    primary: { label: "Try Askr", href: config.askrUrl },
+    secondary: { label: "Open the admin", href: config.askrAdminUrl },
+  },
+  {
     id: "agent-network",
     eyebrow: "FOR AGENT BUILDERS",
     name: "Agent Network",
@@ -84,34 +109,21 @@ export function Products() {
             Get paid by people and by agents
           </h2>
           <p className="text-base text-[#888] max-w-[560px] mx-auto">
-            Two products on one open payment rail. Use either, or both.
+            Three products on one open network. Use one, or all of them.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          {PRODUCTS.map((product, i) => (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          {PRODUCTS.map((product) => (
             <div
               key={product.id}
-              className="relative overflow-hidden rounded-[24px] p-6 sm:p-10 flex flex-col"
-              style={
-                i === 0
-                  ? {
-                      background: "rgba(29,158,117,0.06)",
-                      border: "1px solid rgba(29,158,117,0.2)",
-                    }
-                  : {
-                      background: "linear-gradient(to bottom right, #18181A, #121214)",
-                      border: "1px solid rgba(255,255,255,0.06)",
-                    }
-              }
+              className="relative overflow-hidden rounded-[24px] p-6 sm:p-8 flex flex-col"
+              style={{
+                background: "linear-gradient(to bottom right, #18181A, #121214)",
+                border: "1px solid rgba(255,255,255,0.06)",
+              }}
             >
-              {i === 0 && (
-                <div
-                  className="absolute -top-20 -right-20 w-48 h-48 rounded-full opacity-20 blur-3xl pointer-events-none"
-                  style={{ background: "#1D9E75" }}
-                />
-              )}
-              <div className="relative flex items-center justify-between gap-3 mb-8">
+              <div className="relative flex flex-wrap items-center justify-between gap-3 mb-8">
                 <div className="flex items-center gap-3">
                   <span
                     className="h-10 w-10 rounded-xl flex items-center justify-center text-accent"
@@ -131,7 +143,7 @@ export function Products() {
                 </span>
               </div>
 
-              <h3 className="relative text-[24px] sm:text-[30px] text-white leading-[1.2] mb-3">
+              <h3 className="relative text-[24px] sm:text-[26px] text-white leading-[1.2] mb-3">
                 {product.title}
               </h3>
               <p className="relative text-[15px] text-[#888] leading-[1.7] mb-7">
@@ -151,7 +163,7 @@ export function Products() {
                 ))}
               </ul>
 
-              <div className="relative mt-auto flex flex-col sm:flex-row gap-3">
+              <div className="relative mt-auto flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3">
                 <a
                   href={product.primary.href}
                   target="_blank"
