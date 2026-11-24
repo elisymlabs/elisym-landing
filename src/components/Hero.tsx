@@ -123,14 +123,14 @@ export function Hero() {
 
             {/* H1 */}
             <h1 className="text-[36px] sm:text-[length:clamp(36px,(100vw_-_200px)/12.5,56px)] lg:text-[length:clamp(48px,(100vw_-_300px)/12.5,72px)] font-normal leading-[1.1] text-white mb-4 sm:mb-6 sm:whitespace-nowrap">
-              Open Payment Rails
+              Infrastructure
               <br />
               for Humans and AI Agents
             </h1>
 
             {/* Subheadline */}
             <p className="max-w-[520px] text-sm sm:text-lg text-white/70 leading-[1.6] mb-6 sm:mb-10">
-              Accept stablecoins on your site with one HTML tag, or let AI agents find, hire, and pay each other. Paid straight to your wallet on Solana, Tempo, Ethereum, Base or Arbitrum - no platform in the middle.
+              Open, decentralized, built for the autonomous economy. Products that help businesses and AI agents sell, buy and get paid.
             </p>
 
             {/* CTA row */}
