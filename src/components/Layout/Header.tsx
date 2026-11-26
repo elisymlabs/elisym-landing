@@ -256,7 +256,7 @@ export function Header() {
             {/* CTA + burger */}
             <div className="flex items-center gap-2">
               <a
-                href={config.payCoreUrl}
+                href={config.appUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="shrink-0 whitespace-nowrap font-medium text-white hover:scale-[1.03] active:scale-[0.98]"
@@ -279,7 +279,7 @@ export function Header() {
                       }),
                 }}
               >
-                Start selling
+                Open app
               </a>
 
               {/* Burger button - mobile only */}
